@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="mlmsystem" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="mlmsystem"
+	   version="1.1">
+
+
+	<object class="MlmSystemClient" table="mlmsystem_clients" extends="xPDOObject">
+		<field key="id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" index="pk" />
+		<field key="balance" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
+		<field key="incoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
+		<field key="outcoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
+		<field key="status" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" index="index" />
+		<field key="createdon" dbtype="datetime" phptype="datetime" null="true" index="index" />
+		<field key="updatedon" dbtype="datetime" phptype="datetime" null="true" index="index" />
+		<field key="properties" dbtype="text" phptype="json" null="true" />
+		<index alias="id" name="id" primary="true" unique="true" type="BTREE">
+			<column key="id" length="" collation="A" null="false" />
+		</index>
+		<index alias="status" name="status" primary="false" unique="false" type="BTREE" >
+			<column key="status" length="" collation="A" null="false" />
+		</index>
+		<index alias="createdon" name="createdon" primary="false" unique="false" type="BTREE">
+			<column key="createdon" length="" collation="A" null="false" />
+		</index>
+		<index alias="updatedon" name="updatedon" primary="false" unique="false" type="BTREE">
+			<column key="updatedon" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="User" class="modUser" local="id" foreign="id" cardinality="one" owner="local" />
+		<aggregate alias="UserProfile" class="modUserProfile" local="id" foreign="internalKey" owner="local" cardinality="one" />
+		<aggregate alias="Status" class="MlmSystemStatus" local="status" foreign="id" cardinality="one" owner="local">
+			<criteria target="local"><![CDATA[
+			{"class":"MlmSystemClient"}
+			]]></criteria>
+		</aggregate>
+		<aggregate alias="Log" class="MlmSystemLog" local="id" foreign="identifier" cardinality="many" owner="local">
+			<criteria target="local"><![CDATA[
+			{"class":"MlmSystemClient"}
+			]]></criteria>
+		</aggregate>
+	</object>
+
+
+	<object class="MlmSystemStatus" table="mlmsystem_statuses" extends="xPDOSimpleObject">
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="true" />
+		<field key="color" dbtype="char" precision="6" phptype="string" null="true" default="000000" />
+		<field key="email_user" dbtype="tinyint" precision="1" phptype="integer" null="true" default="0" />
+		<field key="email_manager" dbtype="tinyint" precision="1" phptype="integer" null="true" default="0" />
+		<field key="tpl_user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+		<field key="tpl_manager" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+		<field key="rank" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+		<field key="final" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+		<field key="fixed" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+		<field key="editable" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+		<index alias="unique_key" name="unique_key" primary="false" unique="true" type="BTREE">
+			<column key="class" length="" collation="A" null="false" />
+			<column key="name" length="" collation="A" null="false" />
+		</index>
+		<index alias="active" name="active" primary="false" unique="false" type="BTREE" >
+			<column key="active" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+
+	<object class="MlmSystemEmail" table="mlmsystem_emails" extends="xPDOSimpleObject">
+		<field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
+		<field key="uid" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+		<field key="subject" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="body" dbtype="text" phptype="string" null="true" default="" />
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<index alias="uid" name="uid" primary="false" unique="false" type="BTREE">
+			<column key="uid" length="" collation="A" null="false" />
+		</index>
+		<index alias="email" name="email" primary="false" unique="false" type="BTREE">
+			<column key="email" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="User" class="modUser" local="uid" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+
+	<object class="MlmSystemLog" table="mlmsystem_logs" extends="xPDOSimpleObject">
+		<field key="identifier" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" />
+		<field key="target" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="value" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="timestamp" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="ip" dbtype="text" phptype="json" null="false" />
+		<index alias="identifier" name="identifier" primary="false" unique="false" type="BTREE" >
+			<column key="identifier" length="" collation="A" null="false" />
+		</index>
+		<index alias="class" name="class" primary="false" unique="false" type="BTREE" >
+			<column key="class" length="" collation="A" null="false" />
+		</index>
+		<index alias="user" name="user" primary="false" unique="false" type="BTREE" >
+			<column key="user" length="" collation="A" null="false" />
+		</index>
+		<index alias="target" name="target" primary="false" unique="false" type="BTREE" >
+			<column key="target" length="" collation="A" null="false" />
+		</index>
+		<index alias="value" name="value" primary="false" unique="false" type="BTREE" >
+			<column key="value" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
+		<aggregate alias="UserProfile" class="modUserProfile" local="user" foreign="internalKey" owner="foreign" cardinality="one" />
+		<aggregate alias="Client" class="MlmSystemClient" local="user" foreign="id" owner="foreign" cardinality="one" />
+	</object>
+
+	
+</model>
