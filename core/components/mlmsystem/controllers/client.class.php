@@ -31,6 +31,9 @@ class MlmSystemClientManagerController extends MlmSystemMainController
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.utils.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.combo.js');
 
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/status/status.window.js');
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/status/status.grid.js');
+
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.window.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.grid.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.panel.js');

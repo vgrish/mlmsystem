@@ -9,14 +9,39 @@ $tmp = array(
 		'xtype' => 'combo-boolean',
 		'area' => 'mlmsystem_main',
 	),
-
+	'mail_notice' => array(
+		'value' => true,
+		'xtype' => 'combo-boolean',
+		'area' => 'mlmsystem_main'
+	),
 
 	'handler_class_tools' => array(
 		'value' => 'SystemTools',
 		'xtype' => 'textfield',
 		'area' => 'mlmsystem_handler'
 	),
+	'handler_class_client_validator' => array(
+		'value' => 'ClientValidator',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_handler'
+	),
+	'handler_class_email_validator' => array(
+		'value' => 'EmailValidator',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_handler'
+	),
 
+
+	'date_format' => array(
+		'xtype' => 'textfield',
+		'value' => '%d.%m.%y <small>%H:%M</small>',
+		'area' => 'mlmsystem_format',
+	),
+	'format_date' => array(
+		'value' => 'd F Y, H:i',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
 
 
 	//временные

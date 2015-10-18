@@ -1,48 +1,96 @@
 <?php
 
-/**
- * Create an MlmSystemClient
- */
-class modMlmSystemClientCreateProcessor extends modProcessor
+require_once MODX_CORE_PATH . 'model/modx/processors/security/user/create.class.php';
+
+class modMlmSystemClientCreateProcessor extends modUserCreateProcessor
 {
-	public $classKey = 'MlmSystemClient';
-	public $languageTopics = array('mlmsystem');
+	public $classKey = 'modUser';
+	public $languageTopics = array('core:default', 'core:user');
 	public $permission = '';
+	public $beforeSaveEvent = 'OnBeforeUserFormSave';
+	public $afterSaveEvent = 'OnUserFormSave';
 
 	public $MlmSystem;
 
+	/** {@inheritDoc} */
 	public function initialize()
 	{
-		/** @var MlmSystem $MlmSystem */
+		/** @var mlmsystem $mlmsystem */
 		$this->MlmSystem = $this->modx->getService('mlmsystem');
 		$this->MlmSystem->initialize($this->getProperty('context', $this->modx->context->key));
+
+		$this->setProperties(array(
+			'passwordnotifymethod' => 's',
+			'blocked' => false,
+			'active' => true,
+		));
 
 		return parent::initialize();
 	}
 
-	public function process()
+	/** {@inheritDoc} */
+	public function beforeSet()
 	{
-		$data = array();
-		$data['email'] = $this->getProperty('email', null);
-		$data['active'] = $this->getProperty('active', true);
-		$data['status'] = $this->getProperty('status');
-		$data['username'] = $this->getProperty('username');
-		$data['context'] = $this->modx->context->key;
-		if (empty($data['username'])) {
-			$data['username'] = $data['email'];
+		$email = $this->getProperty('email');
+		if ($this->modx->getCount('modUserProfile', array('email' => $email))) {
+			$this->addFieldError('email',$this->modx->lexicon('user_err_not_specified_email'));
 		}
 
-		if ($response = $this->modx->runProcessor('create',
-			$data,
-			array('processors_path' => dirname(dirname(__FILE__)) . '/misc/client/')
-		)
-		) {
-			if ($response->isError()) {
-				return $response->getResponse();
+		$username = $this->getProperty('username');
+		if (empty($username)) {
+			$this->setProperty('username', $email);
+		}
+
+		return parent::beforeSet();
+	}
+
+	public function afterSave()
+	{
+		if ($client = $this->modx->getObject('MlmSystemClient', $this->object->id)) {
+			$clientStatus = $this->getProperty('status', $client->getStatusCreate());
+			$this->MlmSystem->Tools->changeClientStatus($client, $clientStatus);
+		}
+
+		return parent::afterSave();
+	}
+
+	/**
+	 * Add User Group memberships to the User
+	 * @return array
+	 */
+	public function setUserGroups()
+	{
+		$memberships = array();
+		$groups = $this->getProperty('groups', '');
+		$groups .= ',' . $this->modx->getOption('mlmsystem_user_groups', null, '');
+		$groups = explode(',', $groups);
+		if (count($groups) > 0) {
+			$groupsAdded = array();
+			$idx = 0;
+			foreach ($groups as $tmp) {
+				@list($group, $role) = explode(':', $tmp);
+				if (in_array($group, $groupsAdded)) {
+					continue;
+				}
+				if (empty($role)) {
+					$role = 1;
+				}
+				if ($tmp = $this->modx->getObject('modUserGroup', array('name' => $group))) {
+					$gid = $tmp->get('id');
+					/** @var modUserGroupMember $membership */
+					$membership = $this->modx->newObject('modUserGroupMember');
+					$membership->set('user_group', $gid);
+					$membership->set('role', $role);
+					$membership->set('member', $this->object->get('id'));
+					$membership->set('rank', $idx);
+					$membership->save();
+					$memberships[] = $membership;
+					$groupsAdded[] = $group;
+					$idx++;
+				}
 			}
 		}
-
-		return $this->success();
+		return $memberships;
 	}
 
 }

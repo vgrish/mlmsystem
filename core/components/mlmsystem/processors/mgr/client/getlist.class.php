@@ -11,6 +11,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 	public $languageTopics = array('default', 'mlmsystem');
 	public $permission = '';
 
+	/** {@inheritDoc} */
 	public function initialize()
 	{
 		if (!$this->modx->hasPermission($this->permission)) {

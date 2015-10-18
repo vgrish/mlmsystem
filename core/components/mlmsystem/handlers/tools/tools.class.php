@@ -4,9 +4,21 @@
 interface MlmSystemToolsInterface
 {
 
+	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '');
+
+	public function processTags($html, $maxIterations = 10);
+
+	public function sendNotice(xPDOObject $instance, $sendStatus = 0);
+
+	public function changeClientStatus(MlmSystemClient $client, $status = 0);
+
 	public function getClientFields();
 
 	public function getMenuActions();
+
+	public function getClientStatus();
+
+	public function runProcessor($action = '', $data = array(), $json = false);
 
 	public function failure($message = '', $data = array(), $placeholders = array());
 
@@ -32,6 +44,199 @@ class SystemTools implements MlmSystemToolsInterface
 		$this->MlmSystem = &$MlmSystem;
 		$this->modx = &$MlmSystem->modx;
 		$this->config =& $config;
+	}
+
+	/* подготовка Обьекта... */
+	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '')
+	{
+		$pls = $instance->toArray();
+
+		switch (true) {
+			case $instance instanceof MlmSystemClient:
+				$pls['date_createdon'] = $pls['createdon'];
+				$pls['date_updatedon'] = $pls['updatedon'];
+				break;
+			case $instance instanceof MlmSystemStatus:
+				break;
+			case $instance instanceof MlmSystemEmail:
+				break;
+			case $instance instanceof MlmSystemLog:
+				break;
+			case $instance instanceof modUser:
+				unset(
+					$pls['cachepwd'],
+					$pls['class_key'],
+					$pls['remote_key'],
+					$pls['remote_data'],
+					$pls['hash_class'],
+					$pls['password'],
+					$pls['salt']
+				);
+				break;
+
+			default:
+				break;
+		}
+
+		/* TODO подготовка полей */
+
+		if ($format) {
+			while (list($key, $val) = each($pls)) {
+				$keyMethod = 'format' . ucfirst(str_replace('_', '', $key));
+				if (!method_exists($this, $keyMethod)) {
+					continue;
+				}
+				if ($replace) {
+					$pls[$key] = $this->$keyMethod($val);
+				} else {
+					$pls['format_' . $key] = $this->$keyMethod($val);
+				}
+			}
+		}
+
+		if (!empty($keyPrefix)) {
+			$plsPrefix = array();
+			foreach ($pls as $key => $value) {
+				$plsPrefix[$keyPrefix . $key] = $value;
+			}
+			$pls = $plsPrefix;
+		}
+
+		return $pls;
+	}
+
+	/**
+	 * Collects and processes any set of tags
+	 *
+	 * @param mixed $html Source code for parse
+	 * @param integer $maxIterations
+	 *
+	 * @return mixed $html Parsed html
+	 */
+	public function processTags($html, $maxIterations = 10)
+	{
+		if (strpos($html, '[[') !== false) {
+			$this->modx->getParser()->processElementTags('', $html, false, false, '[[', ']]', array(), $maxIterations);
+			$this->modx->getParser()->processElementTags('', $html, true, true, '[[', ']]', array(), $maxIterations);
+		}
+		return $html;
+	}
+
+	/** @inheritdoc} */
+	public function sendNotice(xPDOObject $instance, $status = 0)
+	{
+
+		$this->modx->log(1, print_r('sendNotice sendNotice', 1));
+
+		if (!$status) {
+			$status = $instance->getOne('Status');
+		} else {
+			$status = $this->modx->getObject('MlmSystemStatus', $status);
+		}
+		if (!$status OR !$this->MlmSystem->getOption('mail_notice', null, false)) {
+			return false;
+		}
+
+		/* get context */
+		if (!$context = $instance->get('context')) {
+			$context = !$this->modx->context->key || $this->modx->context->key == 'mgr' ? 'web' : $this->modx->context->key;
+		}
+
+		/* get users */
+		$user = array();
+		switch (true) {
+			case $instance instanceof MlmSystemClient:
+				$user[] = $instance->get('id');
+				break;
+			default:
+				break;
+		}
+
+		$pls = array(
+			'listUser' => '',
+			'listEmail' => '',
+			'subjectEmail' => '',
+			'bodyEmail' => '',
+			'queueEmail' => false,
+			'getUser' => false,
+			'formatField' => true,
+			'fastMode' => true,
+			'context' => $context,
+			'addPls' => array()
+		);
+
+		if ($status->get('email_user')) {
+			if ($chunk = $this->modx->getObject('modChunk', $status->get('tpl_user'))) {
+
+				$plsWork = $pls;
+				$plsWork['listUser'] = implode(',', $user);
+
+				if ($properties = $chunk->getProperties()) {
+					foreach ($properties as $k => $v) {
+						if (!isset($plsWork[$k])) {
+							$plsWork[$k] = $v;
+						} elseif (is_string($plsWork[$k]) AND !empty($plsWork[$k])) {
+							$plsWork[$k] .= ',' . $v;
+						} elseif (is_string($plsWork[$k]) AND empty($plsWork[$k])) {
+							$plsWork[$k] = $v;
+						} elseif (is_array($plsWork[$k])) {
+							$plsWork[$k] = array_merge($this->modx->fromJSON($v), $plsWork[$k]);
+						} elseif (is_bool($plsWork[$k])) {
+							$plsWork[$k] = $v;
+						}
+					}
+				}
+
+				$plsWork['addPls'] = array_merge($plsWork['addPls'], $this->processObject($instance, (int)$plsWork['formatField']));
+				$this->runProcessor('mgr/email/send', $plsWork);
+			}
+		}
+
+		if ($status->get('email_manager')) {
+			if ($chunk = $this->modx->getObject('modChunk', $status->get('tpl_manager'))) {
+
+				$plsWork = $pls;
+				$plsWork['listEmail'] = $this->MlmSystem->getOption('email_manager', null, $this->modx->getOption('emailsender'));
+
+				if ($properties = $chunk->getProperties()) {
+					foreach ($properties as $k => $v) {
+						if (!isset($plsWork[$k])) {
+							$plsWork[$k] = $v;
+						} elseif (is_string($plsWork[$k]) AND !empty($plsWork[$k])) {
+							$plsWork[$k] .= ',' . $v;
+						} elseif (is_string($plsWork[$k]) AND empty($plsWork[$k])) {
+							$plsWork[$k] = $v;
+						} elseif (is_array($plsWork[$k])) {
+							$plsWork[$k] = array_merge($this->modx->fromJSON($v), $plsWork[$k]);
+						} elseif (is_bool($plsWork[$k])) {
+							$plsWork[$k] = $v;
+						}
+					}
+				}
+
+				$plsWork['addPls'] = array_merge($plsWork['addPls'], $this->processObject($instance, (int)$plsWork['formatField']));
+				$this->runProcessor('mgr/email/send', $plsWork);
+			}
+		}
+
+		return true;
+	}
+
+	/** @inheritdoc} */
+	public function changeClientStatus(MlmSystemClient $client, $status = 0)
+	{
+		$data = array(
+			'id' => $client->get('id'),
+			'field_name' => 'status',
+			'field_value' => $status,
+		);
+
+		$response = $this->runProcessor('mgr/client/setproperty', $data, $json = false);
+		if (empty($response['success'])) {
+			return $this->MlmSystem->lexicon('err_change_status');
+		}
+
+		return !empty($response['success']);
 	}
 
 	/**
@@ -69,6 +274,25 @@ class SystemTools implements MlmSystemToolsInterface
 			$this->MlmSystem->setCache($actions, $options);
 		}
 		return (array)$actions;
+	}
+
+	/** @inheritdoc} */
+	public function getClientStatus()
+	{
+		$statuses = array();
+		$q = $this->modx->newQuery('MlmSystemStatus', array('class' => 'MlmSystemClient', 'active' => 1));
+		$q->sortby('rank', 'ASC');
+		$q->select('id');
+		if ($q->prepare() && $q->stmt->execute()) {
+			$statuses = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
+		}
+		return $statuses;
+	}
+
+	/** @inheritdoc} */
+	public function runProcessor($action = '', $data = array(), $json = false)
+	{
+		return $this->MlmSystem->runProcessor($action, $data, $json);
 	}
 
 	/** @inheritdoc} */

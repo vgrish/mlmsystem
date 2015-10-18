@@ -19,14 +19,19 @@ abstract class MlmSystemMainController extends modExtraManagerController {
 		$this->MlmSystem->initialize($this->modx->context->key);
 
 		$menuActions = $this->MlmSystem->Tools->getMenuActions();
+		$clientStatus = $this->MlmSystem->Tools->getClientStatus();
 
 		$this->addCss($this->MlmSystem->config['cssUrl'] . 'mgr/main.css');
+		$this->addCss($this->MlmSystem->config['cssUrl'] . 'mgr/bootstrap.buttons.css');
+		$this->addCss($this->MlmSystem->config['assetsUrl'] . 'vendor/fontawesome/css/font-awesome.min.css');
+
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/mlmsystem.js');
 		$this->addHtml('
 		<script type="text/javascript">
 			mlmsystem.config = ' . $this->modx->toJSON($this->MlmSystem->config) . ';
 			mlmsystem.config.connector_url = "' . $this->MlmSystem->config['connectorUrl'] . '";
 			mlmsystem.config.menu_actions = ' . $this->modx->toJSON($menuActions) . ';
+			mlmsystem.config.client_status = ' . $this->modx->toJSON($clientStatus) . ';
 		</script>
 		');
 

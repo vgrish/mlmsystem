@@ -3,7 +3,8 @@
 /**
  * The base class for mlmsystem.
  */
-class MlmSystem {
+class MlmSystem
+{
 
 	/* @var modX $modx */
 	public $modx;
@@ -27,7 +28,8 @@ class MlmSystem {
 	 * @param modX $modx
 	 * @param array $config
 	 */
-	function __construct(modX &$modx, array $config = array()) {
+	function __construct(modX &$modx, array $config = array())
+	{
 		$this->modx =& $modx;
 
 		$corePath = $this->modx->getOption('mlmsystem_core_path', $config, $this->modx->getOption('core_path') . 'components/mlmsystem/');
@@ -174,7 +176,79 @@ class MlmSystem {
 		}
 		return !empty($this->Tools) AND $this->Tools instanceof MlmSystemToolsInterface;
 	}
-	
+
+	/**
+	 * Shorthand for the call of processor
+	 *
+	 * @access public
+	 *
+	 * @param string $action Path to processor
+	 * @param array $data Data to be transmitted to the processor
+	 *
+	 * @return mixed The result of the processor
+	 */
+	public function runProcessor($action = '', $data = array(), $json = true)
+	{
+		if (empty($action)) {
+			return false;
+		}
+		$this->modx->error->reset();
+		/* @var modProcessorResponse $response */
+		$response = $this->modx->runProcessor($action, $data, array('processors_path' => $this->config['processorsPath']));
+
+		if (!$json) {
+			$this->setJsonResponse(false);
+		}
+		$result = $this->config['prepareResponse'] ? $this->prepareResponse($response) : $response;
+		$this->setJsonResponse();
+		return $result;
+	}
+
+	/**
+	 * This method returns prepared response
+	 *
+	 * @param mixed $response
+	 *
+	 * @return array|string $response
+	 */
+	public function prepareResponse($response)
+	{
+		if ($response instanceof modProcessorResponse) {
+			$output = $response->getResponse();
+		} else {
+			$message = $response;
+			if (empty($message)) {
+				$message = $this->lexicon('err_unknown');
+			}
+			$output = $this->failure($message);
+		}
+		if ($this->config['jsonResponse'] AND is_array($output)) {
+			$output = $this->modx->toJSON($output);
+		} elseif (!$this->config['jsonResponse'] AND !is_array($output)) {
+			$output = $this->modx->fromJSON($output);
+		}
+		return $output;
+	}
+
+	/**
+	 * return lexicon message if possibly
+	 * @param string $message
+	 * @return string $message
+	 */
+	public function lexicon($message, $placeholders = array())
+	{
+		$key = '';
+		if ($this->modx->lexicon->exists($message)) {
+			$key = $message;
+		} elseif ($this->modx->lexicon->exists($this->namespace . '_' . $message)) {
+			$key = $this->namespace . '_' . $message;
+		}
+		if ($key !== '') {
+			$message = $this->modx->lexicon->process($key, $placeholders);
+		}
+		return $message;
+	}
+
 	/**
 	 * Process and return the output from a Chunk by name.
 	 *
@@ -210,12 +284,12 @@ class MlmSystem {
 		}
 		return $this->pdoTools->setCache($data, $options);
 	}
-	
+
 	public function setJsonResponse($json = true)
 	{
 		return ($this->config['jsonResponse'] = $json);
 	}
-	
+
 	/**
 	 * @param string $message
 	 * @param array $data
@@ -260,5 +334,5 @@ class MlmSystem {
 		}
 		return true;
 	}
-	
+
 }

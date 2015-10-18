@@ -27,7 +27,7 @@ class modMlmSystemClientsUpdateProcessor extends modProcessor
 
 			foreach ($users as $id) {
 				$client = $this->modx->getObject('MlmSystemClient', $id);
-				if ($user = $client->getOne('User') AND $groups = $this->modx->getOption('mlmsystem_user_groups', null, false)) {
+				if ($client AND $user = $client->getOne('User') AND $groups = $this->modx->getOption('mlmsystem_user_groups', null, false)) {
 					$groups = array_map('trim', explode(',', $groups));
 					foreach ($groups as $group) {
 						$user->joinGroup($group);

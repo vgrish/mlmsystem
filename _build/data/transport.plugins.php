@@ -2,15 +2,15 @@
 
 $plugins = array();
 
-$tmp = array(/*
-	'mlmsystem' => array(
+$tmp = array(
+	'MlmSystem' => array(
 		'file' => 'mlmsystem',
 		'description' => '',
 		'events' => array(
-			'OnManagerPageInit' => array()
+			'OnUserRemove' => array()// mlmsystemOnUserRemove
 		)
 	)
-	*/
+
 );
 
 foreach ($tmp as $k => $v) {
