@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Update an PaymentSystemClient
+ * Update an MlmSystemClient
  */
-class modPaymentSystemClientUpdateProcessor extends modObjectUpdateProcessor
+class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 {
-	public $classKey = 'PaymentSystemClient';
-	public $languageTopics = array('paymentsystem');
+	public $classKey = 'MlmSystemClient';
+	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
-	public $PaymentSystem;
+	public $MlmSystem;
 	public $prop = array();
 	public $successMessage = '';
 	protected $status;
@@ -20,9 +20,9 @@ class modPaymentSystemClientUpdateProcessor extends modObjectUpdateProcessor
 		if (!$this->modx->hasPermission($this->permission)) {
 			return $this->modx->lexicon('access_denied');
 		}
-		/** @var paymentsystem $paymentsystem */
-		$this->PaymentSystem = $this->modx->getService('paymentsystem');
-		$this->PaymentSystem->initialize($this->getProperty('context', $this->modx->context->key));
+		/** @var mlmsystem $mlmsystem */
+		$this->MlmSystem = $this->modx->getService('mlmsystem');
+		$this->MlmSystem->initialize($this->getProperty('context', $this->modx->context->key));
 
 		return parent::initialize();
 	}
@@ -34,13 +34,6 @@ class modPaymentSystemClientUpdateProcessor extends modObjectUpdateProcessor
 			$this->$v = $this->object->get($v);
 		}
 
-		$valid = $this->object->validate();
-//		if (!$valid) {
-//			$this->modx->log(1, print_r('NOT VALID', 1));
-//		} else {
-//			$this->modx->log(1, print_r('VALID', 1));
-//		}
-
 		return parent::beforeSet();
 	}
 
@@ -51,14 +44,7 @@ class modPaymentSystemClientUpdateProcessor extends modObjectUpdateProcessor
 		if (
 			$this->object->get('status') != $this->status)
 		{
-			$this->PaymentSystem->Tools->sendNotice($this->object);
-		}
-
-		/* выполняем обработчики */
-		if (
-			$this->object->get('status') != $this->status
-		) {
-			$this->PaymentSystem->Tools->makeHandlers($this->object);
+			$this->MlmSystem->Tools->sendNotice($this->object);
 		}
 
 		return parent::afterSave();
@@ -75,4 +61,4 @@ class modPaymentSystemClientUpdateProcessor extends modObjectUpdateProcessor
 
 }
 
-return 'modPaymentSystemClientUpdateProcessor';
+return 'modMlmSystemClientUpdateProcessor';

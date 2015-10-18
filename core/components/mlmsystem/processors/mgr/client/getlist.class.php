@@ -1,17 +1,15 @@
 <?php
 
 /**
- * Get a list of PaymentSystemClient
+ * Get a list of MlmSystemClient
  */
-class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
+class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 {
-	public $classKey = 'PaymentSystemClient';
+	public $classKey = 'MlmSystemClient';
 	public $defaultSortField = 'id';
 	public $defaultSortDirection = 'DESC';
-	public $languageTopics = array('default', 'paymentsystem');
+	public $languageTopics = array('default', 'mlmsystem');
 	public $permission = '';
-
-	public $paymentsystem;
 
 	public function initialize()
 	{
@@ -25,18 +23,18 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 	/** {@inheritDoc} */
 	public function prepareQueryBeforeCount(xPDOQuery $c)
 	{
-		$c->leftJoin('modUser', 'modUser', 'modUser.id = PaymentSystemClient.id');
-		$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = PaymentSystemClient.id');
-		$c->leftJoin('PaymentSystemStatus', 'PaymentSystemStatus', 'PaymentSystemStatus.id = PaymentSystemClient.status');
+		$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
+		$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
+		$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
 
-		$c->select($this->modx->getSelectColumns('PaymentSystemClient', 'PaymentSystemClient'));
+		$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
 		$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
 		$c->select(array(
 			'username' => 'modUser.username',
 			'fullname' => 'modUserProfile.fullname',
 			'email' => 'modUserProfile.email',
-			'status_name' => 'PaymentSystemStatus.name',
-			'status_color' => 'PaymentSystemStatus.color',
+			'status_name' => 'MlmSystemStatus.name',
+			'status_color' => 'MlmSystemStatus.color',
 		));
 
 		$status = $this->getProperty('status');
@@ -75,7 +73,7 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 //		$array['actions'][] = array(
 //			'cls' => '',
 //			'icon' => "$icon $icon-edit green",
-//			'title' => $this->modx->lexicon('paymentsystem_action_edit'),
+//			'title' => $this->modx->lexicon('mlmsystem_action_edit'),
 //			'action' => 'editClient',
 //			'button' => true,
 //			'menu' => true,
@@ -85,7 +83,7 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 //			$array['actions'][] = array(
 //				'cls' => '',
 //				'icon' => "$icon $icon-toggle-on green",
-//				'title' => $this->modx->lexicon('paymentsystem_action_inactive'),
+//				'title' => $this->modx->lexicon('mlmsystem_action_inactive'),
 //				'action' => 'activeDisabled',
 //				'button' => true,
 //				'menu' => true,
@@ -96,7 +94,7 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 //			$array['actions'][] = array(
 //				'cls' => '',
 //				'icon' => "$icon $icon-toggle-off red",
-//				'title' => $this->modx->lexicon('paymentsystem_action_active'),
+//				'title' => $this->modx->lexicon('mlmsystem_action_active'),
 //				'action' => 'inactiveDisabled',
 //				'button' => true,
 //				'menu' => true,
@@ -106,7 +104,7 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => "$icon $icon-balance-scale",
-			'title' => $this->modx->lexicon('paymentsystem_action_correct_balance'),
+			'title' => $this->modx->lexicon('mlmsystem_action_correct_balance'),
 			'action' => 'correctBalance',
 			'button' => true,
 			'menu' => true,
@@ -125,7 +123,7 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => "$icon $icon-trash-o red",
-			'title' => $this->modx->lexicon('paymentsystem_action_remove'),
+			'title' => $this->modx->lexicon('mlmsystem_action_remove'),
 			'action' => 'remove',
 			'button' => false,
 			'menu' => true,
@@ -136,4 +134,4 @@ class modPaymentSystemClientGetListProcessor extends modObjectGetListProcessor
 
 }
 
-return 'modPaymentSystemClientGetListProcessor';
+return 'modMlmSystemClientGetListProcessor';

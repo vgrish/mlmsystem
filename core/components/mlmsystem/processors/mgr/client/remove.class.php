@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Remove a PaymentSystemClient
+ * Remove a MlmSystemClient
  */
-class modPaymentSystemClientRemoveProcessor extends modObjectRemoveProcessor
+class modMlmSystemClientRemoveProcessor extends modObjectRemoveProcessor
 {
-	public $classKey = 'PaymentSystemClient';
-	public $languageTopics = array('paymentsystem');
+	public $classKey = 'MlmSystemClient';
+	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
 	/** {@inheritDoc} */
@@ -28,4 +28,4 @@ class modPaymentSystemClientRemoveProcessor extends modObjectRemoveProcessor
 	}
 }
 
-return 'modPaymentSystemClientRemoveProcessor';
+return 'modMlmSystemClientRemoveProcessor';

@@ -1,18 +1,19 @@
 <?php
+
 require_once(dirname(__FILE__) . '/update.class.php');
 
 /**
- * Update FromGrid a PaymentSystemClient
+ * Update FromGrid a MlmSystemClient
  */
-class modPaymentSystemClientFromGridProcessor extends modPaymentSystemClientUpdateProcessor
+class modMlmSystemClientFromGridProcessor extends modMlmSystemClientUpdateProcessor
 {
-	public $classKey = 'PaymentSystemClient';
+	public $classKey = 'MlmSystemClient';
 
 	/** {@inheritDoc} */
 	public static function getInstance(modX &$modx, $className, $properties = array())
 	{
 		/** @var modProcessor $processor */
-		$processor = new modPaymentSystemClientFromGridProcessor($modx, $properties);
+		$processor = new modMlmSystemClientFromGridProcessor($modx, $properties);
 		return $processor;
 	}
 
@@ -33,4 +34,4 @@ class modPaymentSystemClientFromGridProcessor extends modPaymentSystemClientUpda
 	}
 }
 
-return 'modPaymentSystemClientFromGridProcessor';
+return 'modMlmSystemClientFromGridProcessor';

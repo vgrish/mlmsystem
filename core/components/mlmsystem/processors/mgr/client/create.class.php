@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Create an PaymentSystemClient
+ * Create an MlmSystemClient
  */
-class modPaymentSystemClientCreateProcessor extends modProcessor
+class modMlmSystemClientCreateProcessor extends modProcessor
 {
-	public $classKey = 'PaymentSystemClient';
-	public $languageTopics = array('paymentsystem');
+	public $classKey = 'MlmSystemClient';
+	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
-	public $PaymentSystem;
+	public $MlmSystem;
 
 	public function initialize()
 	{
-		/** @var paymentsystem $paymentsystem */
-		$this->PaymentSystem = $this->modx->getService('paymentsystem');
-		$this->PaymentSystem->initialize($this->getProperty('context', $this->modx->context->key));
+		/** @var MlmSystem $MlmSystem */
+		$this->MlmSystem = $this->modx->getService('mlmsystem');
+		$this->MlmSystem->initialize($this->getProperty('context', $this->modx->context->key));
 
 		return parent::initialize();
 	}
@@ -47,4 +47,4 @@ class modPaymentSystemClientCreateProcessor extends modProcessor
 
 }
 
-return 'modPaymentSystemClientCreateProcessor';
+return 'modMlmSystemClientCreateProcessor';

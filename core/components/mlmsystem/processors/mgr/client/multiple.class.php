@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Multiple a PaymentSystemClient
+ * Multiple a MlmSystemClient
  */
-class modPaymentSystemClientMultipleProcessor extends modProcessor
+class modMlmSystemClientMultipleProcessor extends modProcessor
 {
-	public $classKey = 'PaymentSystemClient';
+	public $classKey = 'MlmSystemClient';
 
 	public function process()
 	{
@@ -48,4 +48,4 @@ class modPaymentSystemClientMultipleProcessor extends modProcessor
 	}
 }
 
-return 'modPaymentSystemClientMultipleProcessor';
+return 'modMlmSystemClientMultipleProcessor';

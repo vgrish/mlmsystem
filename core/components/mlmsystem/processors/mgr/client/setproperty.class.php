@@ -3,15 +3,15 @@
 require_once dirname(__FILE__) . '/update.class.php';
 
 /**
- * SetProperty a PaymentSystemClient
+ * SetProperty a MlmSystemClient
  */
-class modPaymentSystemClientSetPropertyProcessor extends modPaymentSystemClientUpdateProcessor
+class modMlmSystemClientSetPropertyProcessor extends modMlmSystemClientUpdateProcessor
 {
-	/** @var PaymentSystemClient $object */
+	/** @var MlmSystemClient $object */
 	public $object;
-	public $objectType = 'PaymentSystemClient';
-	public $classKey = 'PaymentSystemClient';
-	public $languageTopics = array('paymentsystem');
+	public $objectType = 'MlmSystemClient';
+	public $classKey = 'MlmSystemClient';
+	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
 	/** {@inheritDoc} */
@@ -48,4 +48,4 @@ class modPaymentSystemClientSetPropertyProcessor extends modPaymentSystemClientU
 	}
 }
 
-return 'modPaymentSystemClientSetPropertyProcessor';
+return 'modMlmSystemClientSetPropertyProcessor';

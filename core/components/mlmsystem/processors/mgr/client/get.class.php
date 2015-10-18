@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Get an PaymentSystemClient
+ * Get an MlmSystemClient
  */
-class modPaymentSystemClientGetProcessor extends modObjectGetProcessor
+class modMlmSystemClientGetProcessor extends modObjectGetProcessor
 {
-	public $objectType = 'PaymentSystemClient';
-	public $classKey = 'PaymentSystemClient';
-	public $languageTopics = array('paymentsystem');
+	public $objectType = 'MlmSystemClient';
+	public $classKey = 'MlmSystemClient';
+	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
 	/**
@@ -22,4 +22,4 @@ class modPaymentSystemClientGetProcessor extends modObjectGetProcessor
 
 }
 
-return 'modPaymentSystemClientGetProcessor';
+return 'modMlmSystemClientGetProcessor';
