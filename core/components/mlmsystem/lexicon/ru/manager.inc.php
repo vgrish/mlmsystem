@@ -105,6 +105,8 @@ $_lang['mlmsystem_body_user'] = 'Чанк письма клиенту';
 $_lang['mlmsystem_body_manager'] = 'Чанк письма менеджеру';
 $_lang['mlmsystem_status_final'] = 'Итоговый';
 $_lang['mlmsystem_status_fixed'] = 'Фиксирует';
+$_lang['mlmsystem_leader_inactive'] = 'Клиент';
+$_lang['mlmsystem_leader_active'] = 'Руководитель';
 
 
 /* action */

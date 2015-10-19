@@ -8,7 +8,7 @@ class MlmSystemClient extends xPDOObject {
 	const STATUS_REMOVED = 4;
 
 	protected $logFields = array(
-		'balance', /*'incoming', 'outcoming', */'status',
+		'balance', 'leader', 'status',
 	);
 
 	protected $logFieldsToo = array(
@@ -193,6 +193,18 @@ class MlmSystemClient extends xPDOObject {
 	public function getStatusRemoved()
 	{
 		return self::STATUS_REMOVED;
+	}
+
+	/**
+	 * Set the leader field explicitly
+	 *
+	 * @param boolean $$leader
+	 * @return bool
+	 */
+	public function setLeader($leader) {
+		$this->_fields['leader'] = (boolean)$leader;
+		$this->setDirty('leader');
+		return true;
 	}
 
 	/** @inheritdoc} */

@@ -43,6 +43,11 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			$c->where(array('status' => $status));
 		}
 
+		$leader = $this->getProperty('leader');
+		if ($leader != '-') {
+			$c->where(array('leader' => $leader));
+		}
+
 		// query
 		if ($query = $this->getProperty('query')) {
 			$c->where(array(

@@ -9,6 +9,7 @@
 		<field key="balance" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
 		<field key="incoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
 		<field key="outcoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
+		<field key="leader" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
 		<field key="status" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" index="index" />
 		<field key="createdon" dbtype="datetime" phptype="datetime" null="true" index="index" />
 		<field key="updatedon" dbtype="datetime" phptype="datetime" null="true" index="index" />
@@ -18,6 +19,9 @@
 		</index>
 		<index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
 			<column key="parent" length="" collation="A" null="false" />
+		</index>
+		<index alias="leader" name="leader" primary="false" unique="false" type="BTREE">
+			<column key="leader" length="" collation="A" null="false" />
 		</index>
 		<index alias="status" name="status" primary="false" unique="false" type="BTREE" >
 			<column key="status" length="" collation="A" null="false" />
