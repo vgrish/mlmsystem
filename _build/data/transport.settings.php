@@ -48,7 +48,56 @@ $tmp = array(
 		'xtype' => 'textfield',
 		'area' => 'mlmsystem_format'
 	),
-
+	'format_date_now' => array(
+		'value' => '10',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_date_day' => array(
+		'value' => 'day H:i',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_date_minutes' => array(
+		'value' => '59',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_date_hours' => array(
+		'value' => '10',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_balance' => array(
+		'value' => '[2, ".", " "]',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_balance_no_zeros' => array(
+		'value' => true,
+		'xtype' => 'combo-boolean',
+		'area' => 'mlmsystem_format'
+	),
+	'format_incoming' => array(
+		'value' => '[2, ".", " "]',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_incoming_no_zeros' => array(
+		'value' => true,
+		'xtype' => 'combo-boolean',
+		'area' => 'mlmsystem_format'
+	),
+	'format_outcoming' => array(
+		'value' => '[2, ".", " "]',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_format'
+	),
+	'format_outcoming_no_zeros' => array(
+		'value' => true,
+		'xtype' => 'combo-boolean',
+		'area' => 'mlmsystem_format'
+	),
 
 	//временные
 

@@ -32,7 +32,18 @@ interface MlmSystemToolsInterface
 
 	public function printLog($message = '', $show = false);
 
+
+	public function declension($count, $forms, $lang = null);
+
+	public function dateFormat($date, $dateFormat = null);
+
+	public function sumFormat($sum = '0', array $pf = array(), $noZeros = true);
+
 	public function formatHashReferrer($id = 0);
+
+
+
+
 
 }
 
@@ -362,11 +373,163 @@ class SystemTools implements MlmSystemToolsInterface
 	}
 
 
+	/**
+	 * Declension of words
+	 * This algorithm taken from https://github.com/livestreet/livestreet/blob/eca10c0186c8174b774a2125d8af3760e1c34825/engine/modules/viewer/plugs/modifier.declension.php
+	 *
+	 * @param int $count
+	 * @param string $forms
+	 * @param string $lang
+	 *
+	 * @return string
+	 */
+	public function declension($count, $forms, $lang = null)
+	{
+		if (empty($lang)) {
+			$lang = $this->modx->getOption('cultureKey', null, 'en');
+		}
+		$forms = $this->modx->fromJSON($forms);
+		if ($lang == 'ru') {
+			$mod100 = $count % 100;
+			switch ($count % 10) {
+				case 1:
+					if ($mod100 == 11) {
+						$text = $forms[2];
+					} else {
+						$text = $forms[0];
+					}
+					break;
+				case 2:
+				case 3:
+				case 4:
+					if (($mod100 > 10) && ($mod100 < 20)) {
+						$text = $forms[2];
+					} else {
+						$text = $forms[1];
+					}
+					break;
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+				case 9:
+				case 0:
+				default:
+					$text = $forms[2];
+			}
+		} else {
+			if ($count == 1) {
+				$text = $forms[0];
+			} else {
+				$text = $forms[1];
+			}
+		}
+		return $text;
+	}
+
+	/**
+	 * Formats date to "10 minutes ago" or "Yesterday in 22:10"
+	 * This algorithm taken from https://github.com/livestreet/livestreet/blob/7a6039b21c326acf03c956772325e1398801c5fe/engine/modules/viewer/plugs/function.date_format.php
+	 *
+	 * @param string $date Timestamp to format
+	 * @param string $dateFormat
+	 *
+	 * @return string
+	 */
+	public function dateFormat($date, $dateFormat = null)
+	{
+
+		//print_r($date);die;
+
+		$date = preg_match('/^\d+$/', $date)
+			? $date
+			: strtotime($date);
+		$dateFormat = !empty($dateFormat)
+			? $dateFormat
+			: $this->MlmSystem->getOption('format_date');
+		$current = time();
+		$delta = $current - $date;
+		if ($this->MlmSystem->getOption('format_date_now')) {
+			if ($delta < $this->MlmSystem->getOption('format_date_now')) {
+				return $this->modx->lexicon('mlmsystem_date_now');
+			}
+		}
+		if ($this->MlmSystem->getOption('format_date_minutes')) {
+			$minutes = round(($delta) / 60);
+			if ($minutes < $this->MlmSystem->getOption('format_date_minutes')) {
+				if ($minutes > 0) {
+					return $this->declension($minutes, $this->modx->lexicon('mlmsystem_date_minutes_back', array('minutes' => $minutes)));
+				} else {
+					return $this->modx->lexicon('mlmsystem_date_minutes_back_less');
+				}
+			}
+		}
+		if ($this->MlmSystem->getOption('format_date_hours')) { //
+			$hours = round(($delta) / 3600);
+			if ($hours < $this->MlmSystem->getOption('format_date_hours')) {
+				if ($hours > 0) {
+					return $this->declension($hours, $this->modx->lexicon('mlmsystem_date_hours_back', array('hours' => $hours)));
+				} else {
+					return $this->modx->lexicon('mlmsystem_date_hours_back_less');
+				}
+			}
+		}
+		if ($this->MlmSystem->getOption('format_date_day')) {
+			switch (date('Y-m-d', $date)) {
+				case date('Y-m-d'):
+					$day = $this->modx->lexicon('mlmsystem_date_today');
+					break;
+				case date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - 1, date('Y'))):
+					$day = $this->modx->lexicon('mlmsystem_date_yesterday');
+					break;
+				case date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 1, date('Y'))):
+					$day = $this->modx->lexicon('mlmsystem_date_tomorrow');
+					break;
+				default:
+					$day = null;
+			}
+			if ($day) {
+				$format = str_replace("day", preg_replace("#(\w{1})#", '\\\${1}', $day), $this->MlmSystem->getOption('format_date_day'));
+				return date($format, $date);
+			}
+		}
+		$m = date("n", $date);
+		$month_arr = $this->modx->fromJSON($this->modx->lexicon('mlmsystem_date_months'));
+		$month = $month_arr[$m - 1];
+		$format = preg_replace("~(?<!\\\\)F~U", preg_replace('~(\w{1})~u', '\\\${1}', $month), $dateFormat);
+		return date($format, $date);
+	}
+
+	/**
+	 * Function for formatting sum
+	 *
+	 * @param string $sum
+	 * @param array $pf
+	 * @param bool $noZeros
+	 * @return mixed|string
+	 */
+	public function sumFormat($sum = '0', array $pf = array(), $noZeros = true)
+	{
+		if (empty($pf)) {
+			$pf = array(2, '.', ' ');
+		}
+		if (is_array($pf)) {
+			$sum = number_format($sum, $pf[0], $pf[1], $pf[2]);
+		}
+		if ($noZeros) {
+			if (preg_match('/\..*$/', $sum, $matches)) {
+				$tmp = rtrim($matches[0], '.0');
+				$sum = str_replace($matches[0], $tmp, $sum);
+			}
+		}
+		return $sum;
+	}
 
 
 	/*
 	 * FORMAT
 	 */
+
 
 	/** @inheritdoc} */
 	public function formatHashReferrer($id = 0)
@@ -376,4 +539,42 @@ class SystemTools implements MlmSystemToolsInterface
 
 		return md5(implode('#', $hashValues));
 	}
+	
+	/** @inheritdoc} */
+	public function formatBalance($sum = '0')
+	{
+		$pf = $this->modx->fromJSON($this->MlmSystem->getOption('format_balance', null, '[2, ".", " "]'));
+		$noZeros = $this->MlmSystem->getOption('format_balance_no_zeros', null, true);
+
+		return $this->sumFormat($sum, $pf, $noZeros);
+	}
+
+	/** @inheritdoc} */
+	public function formatIncoming($sum = '0')
+	{
+		$pf = $this->modx->fromJSON($this->MlmSystem->getOption('format_incoming', null, '[2, ".", " "]'));
+		$noZeros = $this->MlmSystem->getOption('format_incoming_no_zeros', null, true);
+
+		return $this->sumFormat($sum, $pf, $noZeros);
+	}
+
+	/** @inheritdoc} */
+	public function formatOutcoming($sum = '0')
+	{
+		$pf = $this->modx->fromJSON($this->MlmSystem->getOption('format_outcoming', null, '[2, ".", " "]'));
+		$noZeros = $this->MlmSystem->getOption('format_outcoming_no_zeros', null, true);
+
+		return $this->sumFormat($sum, $pf, $noZeros);
+	}
+
+	public function formatDateCreatedon($date)
+	{
+		return $this->dateFormat($date);
+	}
+
+	public function formatDateUpdatedon($date)
+	{
+		return $this->dateFormat($date);
+	}
+
 }

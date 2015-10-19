@@ -57,7 +57,7 @@ elseif (!empty($tplEmpty)) {
 		? $MlmSystem->pdoTools->getChunk('', $data)
 		: $MlmSystem->pdoTools->getChunk($tplEmpty, $data, $MlmSystem->pdoTools->config['fastMode']);
 }
-if (!empty($tplWrapper) && (!empty($wrapIfEmpty) || !empty($output))) {
+if (!empty($tplWrapper) AND (!empty($wrapIfEmpty) OR !empty($output))) {
 	$output = $MlmSystem->pdoTools->getChunk($tplWrapper, array('output' => $output), $MlmSystem->pdoTools->config['fastMode']);
 }
 if (!empty($toPlaceholder)) {
