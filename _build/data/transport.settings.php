@@ -53,6 +53,11 @@ $tmp = array(
 		'xtype' => 'textfield',
 		'area' => 'mlmsystem_handler'
 	),
+	'handler_class_paths' => array(
+		'value' => 'SystemPaths',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_handler'
+	),
 	'handler_class_client_validator' => array(
 		'value' => 'ClientValidator',
 		'xtype' => 'textfield',

@@ -8,7 +8,7 @@ class MlmSystemClient extends xPDOObject {
 	const STATUS_REMOVED = 4;
 
 	protected $logFields = array(
-		'balance', 'leader', 'status',
+		'parent', 'balance', 'leader', 'status',
 	);
 
 	protected $logFieldsToo = array(
@@ -99,7 +99,7 @@ class MlmSystemClient extends xPDOObject {
 	 *
 	 * @return bool
 	 */
-	public function save($cacheFlag = false)
+	public function save($cacheFlag= null)
 	{
 		$isNew = $this->isNew();
 

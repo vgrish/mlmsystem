@@ -5,7 +5,7 @@
 
 	<object class="MlmSystemClient" table="mlmsystem_clients" extends="xPDOObject">
 		<field key="id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" index="pk" />
-		<field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" index="pk" />
+		<field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" index="index" />
 		<field key="balance" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
 		<field key="incoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
 		<field key="outcoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />

@@ -67,6 +67,15 @@ class SystemTools implements MlmSystemToolsInterface
 		$this->config =& $config;
 	}
 
+	/**
+	 * @param $n
+	 * @param array $p
+	 */
+	public function __call($n, array$p)
+	{
+		echo __METHOD__ . ' says: ' . $n;
+	}
+
 	/* подготовка Обьекта... */
 	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '')
 	{
@@ -273,7 +282,7 @@ class SystemTools implements MlmSystemToolsInterface
 
 		$response = $this->runProcessor('mgr/client/setproperty', $data, $json = false);
 		if (empty($response['success'])) {
-			return $this->MlmSystem->lexicon('err_change_status');
+			return $this->MlmSystem->lexicon('err_change_parent');
 		}
 
 		return !empty($response['success']);

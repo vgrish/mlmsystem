@@ -46,7 +46,7 @@ class modMlmSystemClientCreateProcessor extends modUserCreateProcessor
 
 	public function afterSave()
 	{
-		if ($client = $this->modx->getObject('MlmSystemClient', $this->object->id)) {
+		if ($client = $this->modx->getObject('MlmSystemClient', array('id' => $this->object->get('id')))) {
 			$clientStatus = $this->getProperty('status', $client->getStatusCreate());
 			$this->MlmSystem->Tools->changeClientStatus($client, $clientStatus);
 		}

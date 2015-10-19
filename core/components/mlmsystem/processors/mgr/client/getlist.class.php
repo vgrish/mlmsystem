@@ -44,7 +44,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 		}
 
 		$leader = $this->getProperty('leader');
-		if ($leader != '-') {
+		if ($leader != '') {
 			$c->where(array('leader' => $leader));
 		}
 

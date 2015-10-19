@@ -96,6 +96,10 @@ class ClientValidator extends xPDOValidator
 		));
 
 		switch ($field) {
+			case 'parent':
+				$q = $this->xpdo->newQuery('modUser', array('id' => $value));
+				$value = ($this->xpdo->getCount('modUser', $q) AND ($this->object->get('id') != $value)) ? $value : false;
+				break;
 			case 'balance':
 			case 'incoming':
 			case 'outcoming':

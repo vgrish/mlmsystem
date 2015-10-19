@@ -24,9 +24,8 @@ class modMlmSystemClientsUpdateProcessor extends modProcessor
 		$q->select('id');
 		if ($q->prepare() && $q->stmt->execute()) {
 			$users = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
-
 			foreach ($users as $id) {
-				$client = $this->modx->getObject('MlmSystemClient', $id);
+				$client = $this->modx->getObject('MlmSystemClient', array('id' => $id));
 				if ($client AND $user = $client->getOne('User') AND $groups = $this->modx->getOption('mlmsystem_user_groups', null, false)) {
 					$groups = array_map('trim', explode(',', $groups));
 					foreach ($groups as $group) {

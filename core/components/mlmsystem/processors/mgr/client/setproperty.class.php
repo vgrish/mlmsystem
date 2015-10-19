@@ -27,7 +27,7 @@ class modMlmSystemClientSetPropertyProcessor extends modMlmSystemClientUpdatePro
 			$this->setProperty('field_value', $fieldValue);
 		}
 
-		return true;
+		return parent::beforeSet();
 	}
 
 	/** {@inheritDoc} */

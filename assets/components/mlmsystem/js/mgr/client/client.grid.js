@@ -156,7 +156,7 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
             clear: true,
             addall: true,
             class: config.class,
-            value: '-',
+            value: '',
             listeners: {
                 select: {
                     fn: this._filterByCombo,

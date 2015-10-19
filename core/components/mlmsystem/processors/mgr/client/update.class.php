@@ -13,6 +13,8 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 	public $prop = array();
 	public $successMessage = '';
 	protected $status;
+	protected $parent;
+
 
 	/** {@inheritDoc} */
 	public function initialize()
@@ -30,21 +32,33 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 	/** {@inheritDoc} */
 	public function beforeSet()
 	{
-		foreach (array('status') as $v) {
+		foreach (array('status', 'parent') as $v) {
 			$this->$v = $this->object->get($v);
 		}
+		//$valid = $this->object->validate();
 
 		return parent::beforeSet();
 	}
 
+	public function beforeSave()
+	{
+		return parent::beforeSave();
+	}
+
 	public function afterSave()
 	{
-
 		/* выполняем уведомления */
 		if (
-			$this->object->get('status') != $this->status)
-		{
+			$this->object->get('status') != $this->status
+		) {
 			$this->MlmSystem->Tools->sendNotice($this->object);
+		}
+
+		/* генерируем пути */
+		if (
+			$this->object->get('parent') != $this->parent
+		) {
+			$this->MlmSystem->Paths->GeneratePaths($this->object->get('id'));
 		}
 
 		return parent::afterSave();

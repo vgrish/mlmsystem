@@ -37,7 +37,7 @@ class modMlmSystemClientLeaderGetListProcessor extends modObjectProcessor
 		if ($this->getProperty('addall')) {
 			$array = array_merge_recursive(array(array(
 				'name' => $this->modx->lexicon('mlmsystem_all'),
-				'value' => '-'
+				'value' => ''
 			)), $array);
 		}
 		return parent::outputArray($array, $count);

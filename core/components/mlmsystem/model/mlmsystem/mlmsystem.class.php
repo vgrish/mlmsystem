@@ -17,6 +17,8 @@ class MlmSystem
 
 	/** @var SystemTools $Tools */
 	public $Tools;
+	/** @var SystemPaths $Paths */
+	public $Paths;
 
 	/* @var pdoTools $pdoTools */
 	public $pdoTools;
@@ -42,6 +44,7 @@ class MlmSystem
 			'jsUrl' => $assetsUrl . 'js/',
 			'imagesUrl' => $assetsUrl . 'images/',
 			'connectorUrl' => $connectorUrl,
+			'actionUrl' => $assetsUrl . 'action.php',
 
 			'corePath' => $corePath,
 			'modelPath' => $corePath . 'model/',
@@ -115,6 +118,9 @@ class MlmSystem
 
 		if (!$this->Tools) {
 			$this->loadTools();
+		}
+		if (!$this->Paths) {
+			$this->loadPaths();
 		}
 
 		if (!$this->pdoTools) {
@@ -239,6 +245,27 @@ class MlmSystem
 		}
 		return !empty($this->Tools) AND $this->Tools instanceof MlmSystemToolsInterface;
 	}
+
+	/**
+	 * Loads an instance of Paths
+	 * @return boolean
+	 */
+	public function loadPaths()
+	{
+		if (!is_object($this->Paths) OR !($this->Paths instanceof MlmSystemPathsInterface)) {
+			$pathsClass = $this->modx->loadClass('paths.Paths', $this->config['handlersPath'], true, true);
+			if ($derivedClass = $this->getOption('handler_class_paths', null, '')) {
+				if ($derivedClass = $this->modx->loadClass('paths.' . $derivedClass, $this->config['handlersPath'], true, true)) {
+					$pathsClass = $derivedClass;
+				}
+			}
+			if ($pathsClass) {
+				$this->Paths = new $pathsClass($this, $this->config);
+			}
+		}
+		return !empty($this->Paths) AND $this->Paths instanceof MlmSystemPathsInterface;
+	}
+
 
 	/**
 	 * Shorthand for the call of processor
