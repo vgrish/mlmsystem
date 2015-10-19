@@ -4,9 +4,11 @@ class MlmSystemOnWebPageInit extends MlmSystemPlugin
 {
 	public function run()
 	{
-		$this->MlmSystem->initialize($this->modx->context->key); 
+		$this->MlmSystem->initialize($this->modx->context->key);
 
 		$user = $this->modx->getOption('user', $this->scriptProperties, 0);
+		$userId = $user->get('id');
+
 		$clientKey = $this->MlmSystem->getOption('client_key', null, 'rclient');
 		$referrerKey = $this->MlmSystem->getOption('referrer_key', null, 'rhash');
 		$cookieTime = $this->MlmSystem->getOption('referrer_time', null, 365);
@@ -20,15 +22,15 @@ class MlmSystemOnWebPageInit extends MlmSystemPlugin
 			if ($parent = $this->modx->getObject('MlmSystemClient', (int)$_REQUEST[$clientKey])) {
 				$defaultReferrerId = $parent->get('id');
 			}
-			if ($client = $this->modx->getObject('MlmSystemClient', $user->get('id'))) {
-				if (!$client->get('parent') AND $defaultReferrerId != $this->modx->user->id) {
+			if ($client = $this->modx->getObject('MlmSystemClient', $userId)) {
+				if (!$client->get('parent') AND $defaultReferrerId != $userId) {
 					$this->MlmSystem->Tools->changeClientParent($client, $defaultReferrerId);
 				}
 			}
 			setcookie($clientKey, '', time() - $cookieTime);
 		} elseif ($this->modx->user->isAuthenticated() AND empty($_COOKIE[$clientKey]) AND !empty($defaultReferrerId)) {
-			if ($client = $this->modx->getObject('MlmSystemClient', $user->get('id'))) {
-				if (!$client->get('parent') AND $defaultReferrerId != $this->modx->user->id) {
+			if ($client = $this->modx->getObject('MlmSystemClient', $userId)) {
+				if (!$client->get('parent') AND $defaultReferrerId != $userId) {
 					$this->MlmSystem->Tools->changeClientParent($client, $defaultReferrerId);
 				}
 			}
