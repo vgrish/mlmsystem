@@ -14,10 +14,37 @@ $tmp = array(
 		'xtype' => 'combo-boolean',
 		'area' => 'mlmsystem_main'
 	),
+
+
 	'referrer_salt' => array(
 		'value' => 'ZsBE8HC8y*fV',
 		'xtype' => 'textfield',
-		'area' => 'mlmsystem_main'
+		'area' => 'mlmsystem_referrer'
+	),
+	'client_key' => array(
+		'value' => 'rclient',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_referrer'
+	),
+	'referrer_key' => array(
+		'value' => 'rhash',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_referrer'
+	),
+	'referrer_page' => array(
+		'value' => '',
+		'xtype' => 'numberfield',
+		'area' => 'mlmsystem_referrer'
+	),
+	'referrer_time' => array(
+		'value' => 365,
+		'xtype' => 'numberfield',
+		'area' => 'mlmsystem_referrer'
+	),
+	'referrer_default_client' => array(
+		'value' => 0,
+		'xtype' => 'numberfield',
+		'area' => 'mlmsystem_referrer'
 	),
 
 

@@ -75,6 +75,7 @@ class SystemTools implements MlmSystemToolsInterface
 				$pls['date_createdon'] = $pls['createdon'];
 				$pls['date_updatedon'] = $pls['updatedon'];
 				$pls['hash_referrer'] = $pls['id'];
+				$pls['url_referrer'] = $pls['id'];
 				break;
 			case $instance instanceof MlmSystemStatus:
 				break;
@@ -538,6 +539,26 @@ class SystemTools implements MlmSystemToolsInterface
 		$hashValues[] = $this->MlmSystem->getOption('referrer_salt', null, '');
 
 		return md5(implode('#', $hashValues));
+	}
+
+	/** @inheritdoc} */
+	public function formatUrlReferrer($id = 0)
+	{
+		$clientKey = $this->MlmSystem->getOption('client_key', null, 'rclient');
+		$referrerKey = $this->MlmSystem->getOption('referrer_key', null, 'rhash');
+		$contextKey = $this->MlmSystem->getOption('ctx', null, $this->MlmSystem->getOption('referrer_context'), true);
+		$referrerPage = $this->MlmSystem->getOption('referrer_page', null, $this->modx->getOption('site_start'));
+		if (empty($referrerPage)) {
+			$referrerPage = $this->modx->getOption('site_start');
+		}
+
+		$params = array(
+			$clientKey => $id,
+			$referrerKey => $this->formatHashReferrer($id)
+		);
+
+		$url = $this->modx->makeUrl($referrerPage, $contextKey, $params, 'full');
+		return $url;
 	}
 	
 	/** @inheritdoc} */

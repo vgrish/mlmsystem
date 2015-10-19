@@ -7,7 +7,8 @@ $tmp = array(
 		'file' => 'mlmsystem',
 		'description' => '',
 		'events' => array(
-			'OnUserRemove' => array()// mlmsystemOnUserRemove
+			'OnUserRemove' => array(),
+			'OnWebPageInit' => array(),
 		)
 	)
 

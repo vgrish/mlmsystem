@@ -9,6 +9,9 @@
 
         <br>
         [[+hash_referrer]]
+        <br>
+        [[+url_referrer]]
+
     </p>
 
 </div>
