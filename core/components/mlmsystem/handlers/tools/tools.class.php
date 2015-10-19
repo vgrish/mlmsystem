@@ -12,6 +12,8 @@ interface MlmSystemToolsInterface
 
 	public function changeClientStatus(MlmSystemClient $client, $status = 0);
 
+	public function changeClientParent(MlmSystemClient $client, $parent = 0);
+
 	public function getClientFields();
 
 	public function getMenuActions();
