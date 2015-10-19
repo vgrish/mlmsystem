@@ -6,9 +6,7 @@ class MlmSystemOnWebPageInit extends MlmSystemPlugin
 	{
 		$this->MlmSystem->initialize($this->modx->context->key);
 
-		$user = $this->modx->getOption('user', $this->scriptProperties, 0);
-		$userId = $user->get('id');
-
+		$userId = $this->modx->user->id;
 		$clientKey = $this->MlmSystem->getOption('client_key', null, 'rclient');
 		$referrerKey = $this->MlmSystem->getOption('referrer_key', null, 'rhash');
 		$cookieTime = $this->MlmSystem->getOption('referrer_time', null, 365);
