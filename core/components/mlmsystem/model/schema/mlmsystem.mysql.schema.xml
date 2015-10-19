@@ -5,6 +5,7 @@
 
 	<object class="MlmSystemClient" table="mlmsystem_clients" extends="xPDOObject">
 		<field key="id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" index="pk" />
+		<field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" index="pk" />
 		<field key="balance" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
 		<field key="incoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
 		<field key="outcoming" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
@@ -14,6 +15,9 @@
 		<field key="properties" dbtype="text" phptype="json" null="true" />
 		<index alias="id" name="id" primary="true" unique="true" type="BTREE">
 			<column key="id" length="" collation="A" null="false" />
+		</index>
+		<index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+			<column key="parent" length="" collation="A" null="false" />
 		</index>
 		<index alias="status" name="status" primary="false" unique="false" type="BTREE" >
 			<column key="status" length="" collation="A" null="false" />
@@ -106,6 +110,21 @@
 		<aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
 		<aggregate alias="UserProfile" class="modUserProfile" local="user" foreign="internalKey" owner="foreign" cardinality="one" />
 		<aggregate alias="Client" class="MlmSystemClient" local="user" foreign="id" owner="foreign" cardinality="one" />
+	</object>
+
+
+	<object class="MlmSystemPath" table="mlmsystem_paths" extends="xPDOObject">
+		<field key="id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" index="pk" />
+		<field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" index="pk" />
+		<field key="level" dbtype="tinyint" precision="3" phptype="string" null="true" default="0" index="pk" />
+		<field key="order" dbtype="tinyint" precision="3" phptype="string" null="true" default="0" index="pk" />
+
+		<index alias="unique_key" name="unique_key" primary="true" unique="true" type="BTREE">
+			<column key="id" length="" collation="A" null="false" />
+			<column key="parent" length="" collation="A" null="false" />
+			<column key="level" length="" collation="A" null="false" />
+			<column key="order" length="" collation="A" null="false" />
+		</index>
 	</object>
 
 	

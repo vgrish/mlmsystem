@@ -260,6 +260,23 @@ class SystemTools implements MlmSystemToolsInterface
 		return !empty($response['success']);
 	}
 
+	/** @inheritdoc} */
+	public function changeClientParent(MlmSystemClient $client, $parent = 0)
+	{
+		$data = array(
+			'id' => $client->get('id'),
+			'field_name' => 'parent',
+			'field_value' => $parent,
+		);
+
+		$response = $this->runProcessor('mgr/client/setproperty', $data, $json = false);
+		if (empty($response['success'])) {
+			return $this->MlmSystem->lexicon('err_change_status');
+		}
+
+		return !empty($response['success']);
+	}
+
 	/**
 	 * @return array Client fields
 	 */

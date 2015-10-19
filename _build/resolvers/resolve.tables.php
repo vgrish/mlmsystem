@@ -18,6 +18,8 @@ if ($object->xpdo) {
 				'MlmSystemStatus',
 				'MlmSystemEmail',
 				'MlmSystemLog',
+
+				'MlmSystemPath'
 			);
 
 			foreach ($objects as $tmp) {

@@ -6,26 +6,33 @@ class MlmSystemOnWebPageInit extends MlmSystemPlugin
 	{
 		$this->MlmSystem->initialize($this->modx->context->key);
 
+		$user = $this->modx->getOption('user', $this->scriptProperties, 0);
 		$clientKey = $this->MlmSystem->getOption('client_key', null, 'rclient');
 		$referrerKey = $this->MlmSystem->getOption('referrer_key', null, 'rhash');
 		$cookieTime = $this->MlmSystem->getOption('referrer_time', null, 365);
-		$defaultReferrerId = $this->MlmSystem->getOption('referrer_default_client',null, 0);
-
-
-		$this->modx->log(1, print_r( $_REQUEST,1));
+		$defaultReferrerId = $this->MlmSystem->getOption('referrer_default_client', null, 0);
 
 		if (!$this->modx->user->isAuthenticated() AND !empty($_REQUEST[$clientKey]) AND !empty($_REQUEST[$referrerKey])) {
 			if ($this->MlmSystem->Tools->formatHashReferrer($_REQUEST[$clientKey]) == $_REQUEST[$referrerKey]) {
 				setcookie($clientKey, $_REQUEST[$clientKey], time() + $cookieTime);
 			}
+		} elseif ($this->modx->user->isAuthenticated() AND !empty($_COOKIE[$clientKey])) {
+			if ($parent = $this->modx->getObject('MlmSystemClient', (int)$_REQUEST[$clientKey])) {
+				$defaultReferrerId = $parent->get('id');
+			}
+			if ($client = $this->modx->getObject('MlmSystemClient', $user->get('id'))) {
+				if (!$client->get('parent') AND $defaultReferrerId != $this->modx->user->id) {
+					$this->MlmSystem->Tools->changeClientParent($client, $defaultReferrerId);
+				}
+			}
+			setcookie($clientKey, '', time() - $cookieTime);
+		} elseif ($this->modx->user->isAuthenticated() AND empty($_COOKIE[$clientKey]) AND !empty($defaultReferrerId)) {
+			if ($client = $this->modx->getObject('MlmSystemClient', $user->get('id'))) {
+				if (!$client->get('parent') AND $defaultReferrerId != $this->modx->user->id) {
+					$this->MlmSystem->Tools->changeClientParent($client, $defaultReferrerId);
+				}
+			}
 		}
-		elseif ($this->modx->user->isAuthenticated() AND !empty($_COOKIE[$clientKey])) {
-
-		}
-		elseif ($this->modx->user->isAuthenticated() AND empty($_COOKIE[$clientKey]) AND !empty($defaultReferrerId)) {
-
-		}
-
 	}
 
 }
