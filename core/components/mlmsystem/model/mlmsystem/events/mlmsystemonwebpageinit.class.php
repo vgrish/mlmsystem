@@ -4,7 +4,7 @@ class MlmSystemOnWebPageInit extends MlmSystemPlugin
 {
 	public function run()
 	{
-		$this->MlmSystem->initialize($this->modx->context->key);
+		$this->MlmSystem->initialize($this->modx->context->key); 
 
 		$user = $this->modx->getOption('user', $this->scriptProperties, 0);
 		$clientKey = $this->MlmSystem->getOption('client_key', null, 'rclient');
