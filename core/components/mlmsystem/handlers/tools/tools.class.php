@@ -18,6 +18,12 @@ interface MlmSystemToolsInterface
 
 	public function getClientStatus();
 
+	public function getPropertiesKey(array $properties = array());
+
+	public function saveProperties(array $properties = array());
+
+	public function getProperties($key);
+
 	public function runProcessor($action = '', $data = array(), $json = false);
 
 	public function failure($message = '', $data = array(), $placeholders = array());
@@ -25,6 +31,8 @@ interface MlmSystemToolsInterface
 	public function success($message = '', $data = array(), $placeholders = array());
 
 	public function printLog($message = '', $show = false);
+
+	public function formatHashReferrer($id = 0);
 
 }
 
@@ -55,6 +63,7 @@ class SystemTools implements MlmSystemToolsInterface
 			case $instance instanceof MlmSystemClient:
 				$pls['date_createdon'] = $pls['createdon'];
 				$pls['date_updatedon'] = $pls['updatedon'];
+				$pls['hash_referrer'] = $pls['id'];
 				break;
 			case $instance instanceof MlmSystemStatus:
 				break;
@@ -289,6 +298,45 @@ class SystemTools implements MlmSystemToolsInterface
 		return $statuses;
 	}
 
+	
+	
+
+	/** @inheritdoc} */
+	public function getPropertiesKey(array $properties = array())
+	{
+		$fields = array('snippetName', 'context', 'class', 'frontendMainCss', 'frontendMainJs', 'frontendCss', 'frontendJs');
+
+		$hashValues = array();
+		foreach ($fields as $field) {
+			$hashValues[] = (isset($properties[$field])) ? $properties[$field] : '';
+		}
+		return md5(implode('#', $hashValues));
+	}
+
+	/** @inheritdoc} */
+	public function saveProperties(array $properties = array())
+	{
+		if (!isset($properties['form_key'])) {
+			$properties['form_key'] = $this->getPropertiesKey($properties);
+		}
+		$this->MlmSystem->config['form_key'] = $properties['form_key'];
+		$_SESSION[$this->MlmSystem->namespace][$properties['form_key']] = $properties;
+	}
+
+	/** @inheritdoc} */
+	public function getProperties($key)
+	{
+		$properties = array();
+		if (isset($_SESSION[$this->MlmSystem->namespace][$key])) {
+			$properties = $_SESSION[$this->MlmSystem->namespace][$key];
+		} else {
+			$this->printLog('Could not get properties for key: ' . $key, 1);
+		}
+		return $properties;
+	}
+	
+	
+	
 	/** @inheritdoc} */
 	public function runProcessor($action = '', $data = array(), $json = false)
 	{
@@ -313,4 +361,19 @@ class SystemTools implements MlmSystemToolsInterface
 		return $this->MlmSystem->printLog($message, $show);
 	}
 
+
+
+
+	/*
+	 * FORMAT
+	 */
+
+	/** @inheritdoc} */
+	public function formatHashReferrer($id = 0)
+	{
+		$hashValues[] = $id;
+		$hashValues[] = $this->MlmSystem->getOption('referrer_salt', null, '');
+
+		return md5(implode('#', $hashValues));
+	}
 }

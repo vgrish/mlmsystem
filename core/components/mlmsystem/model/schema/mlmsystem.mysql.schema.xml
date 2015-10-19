@@ -26,6 +26,7 @@
 		</index>
 		<aggregate alias="User" class="modUser" local="id" foreign="id" cardinality="one" owner="local" />
 		<aggregate alias="UserProfile" class="modUserProfile" local="id" foreign="internalKey" owner="local" cardinality="one" />
+		<aggregate alias="PaymentClient" class="PaymentSystemClient" local="id" foreign="user" owner="local" cardinality="one" />
 		<aggregate alias="Status" class="MlmSystemStatus" local="status" foreign="id" cardinality="one" owner="local">
 			<criteria target="local"><![CDATA[
 			{"class":"MlmSystemClient"}

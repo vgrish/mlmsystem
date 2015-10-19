@@ -15,7 +15,7 @@ class MlmSystem
 	/** @var array $initialized */
 	public $initialized = array();
 
-	/** @var Tools $Tools */
+	/** @var SystemTools $Tools */
 	public $Tools;
 
 	/* @var pdoTools $pdoTools */
@@ -42,6 +42,7 @@ class MlmSystem
 			'jsUrl' => $assetsUrl . 'js/',
 			'imagesUrl' => $assetsUrl . 'images/',
 			'connectorUrl' => $connectorUrl,
+			'actionUrl' => $assetsUrl . 'action.php',
 
 			'corePath' => $corePath,
 			'modelPath' => $corePath . 'model/',
@@ -127,7 +128,19 @@ class MlmSystem
 				break;
 			default:
 				if (!defined('MODX_API_MODE') OR !MODX_API_MODE) {
+					$this->setConfig();
 
+					$config = $this->modx->toJSON(array(
+						'assetsUrl' => $this->config['assetsUrl'],
+						'actionUrl' => $this->config['actionUrl'],
+
+					));
+					$script = '<script type="text/javascript">mlmsystemConfig=' . $config . '</script>';
+					if (!isset($this->modx->jscripts[$script])) {
+						$this->modx->regClientStartupScript($script, true);
+					}
+
+					$this->Tools->saveProperties($this->config);
 					$this->initialized[$ctx] = true;
 
 				}
@@ -135,6 +148,57 @@ class MlmSystem
 		}
 
 		return true;
+	}
+
+	public function setConfig($scriptProperties = array())
+	{
+		$this->config = array_merge(
+			$this->config,
+			$scriptProperties
+		);
+
+		if (!$this->pdoTools) {
+			$this->loadPdoTools();
+		}
+		$this->pdoTools->setConfig($this->config);
+		$pls = $this->pdoTools->makePlaceholders($this->config);
+
+		foreach ($this->config as $k => $v) {
+			if (is_string($v)) {
+				$this->config[$k] = str_replace($pls['pl'], $pls['vl'], $v);
+			}
+		}
+	}
+
+	/**
+	 * Independent registration of css and js
+	 *
+	 * @param string $objectName Name of object to initialize in javascript
+	 */
+	public function loadCustomJsCss($objectName = 'mlmsystem')
+	{
+		if (!isset($this->modx->jscripts[$objectName])) {
+			$this->setConfig();
+			if ($this->config['mainJsCss']) {
+				if ($this->config['frontendMainCss']) {
+					$this->modx->regClientCSS($this->config['frontendMainCss']);
+				}
+				if ($this->config['frontendMainJs']) {
+					$this->modx->regClientScript($this->config['frontendMainJs']);
+				}
+			}
+
+			if ($css = trim($this->config['frontendCss'])) {
+				if (preg_match('/\.css/i', $css)) {
+					$this->modx->regClientCSS($css);
+				}
+			}
+			if ($js = trim($this->config['frontendJs'])) {
+				if (preg_match('/\.js$/i', $js)) {
+					$this->modx->regClientScript($js);
+				}
+			}
+		}
 	}
 
 	/**

@@ -3,8 +3,9 @@
 $chunks = array();
 
 $tmp = array(
-	'tpl.mlmsystem.item' => array(
-		'file' => 'item',
+
+	'tpl.mlmClient.row' => array(
+		'file' => 'client_row',
 		'description' => '',
 	),
 );

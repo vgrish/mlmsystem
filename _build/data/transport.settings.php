@@ -14,6 +14,12 @@ $tmp = array(
 		'xtype' => 'combo-boolean',
 		'area' => 'mlmsystem_main'
 	),
+	'referrer_salt' => array(
+		'value' => 'ZsBE8HC8y*fV',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_main'
+	),
+
 
 	'handler_class_tools' => array(
 		'value' => 'SystemTools',

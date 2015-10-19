@@ -3,10 +3,12 @@
 $snippets = array();
 
 $tmp = array(
-	'mlmsystem' => array(
-		'file' => 'mlmsystem',
+
+	'mlm.GetClient' => array(
+		'file' => 'get_client',
 		'description' => '',
 	),
+
 );
 
 foreach ($tmp as $k => $v) {
