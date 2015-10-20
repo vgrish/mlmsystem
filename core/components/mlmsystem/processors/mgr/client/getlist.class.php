@@ -29,7 +29,8 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
 			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
 			$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
-
+			$c->leftJoin('MlmSystemPath', 'MlmSystemPath', 'MlmSystemPath.id = MlmSystemClient.id');
+			
 			$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
 			$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
 			$c->select(array(
@@ -38,6 +39,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 				'email' => 'modUserProfile.email',
 				'status_name' => 'MlmSystemStatus.name',
 				'status_color' => 'MlmSystemStatus.color',
+				'level' => 'MlmSystemPath.level',
 			));
 		}
 		else {

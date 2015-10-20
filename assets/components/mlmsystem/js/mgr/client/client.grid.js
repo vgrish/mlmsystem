@@ -246,6 +246,10 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                     return mlmsystem.utils.renderMoney(value);
                 }
             },
+            level: {
+                width: 15,
+                sortable: true
+            },
             createdon: {
                 width: 25,
                 sortable: true,

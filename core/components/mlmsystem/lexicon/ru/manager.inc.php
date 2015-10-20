@@ -31,7 +31,7 @@ $_lang['mlmsystem_header_balance'] = '<i class="fa fa-money"></i>';
 $_lang['mlmsystem_header_incoming'] = '<i class="fa fa-money green"></i>';
 $_lang['mlmsystem_header_outcoming'] = '<i class="fa fa-money red"></i>';
 $_lang['mlmsystem_header_handler'] = '<i class="fa fa-file-code-o"></i>';
-
+$_lang['mlmsystem_header_level'] = '<i class="fa fa-sort-amount-asc"></i>';
 
 /* tooltip */
 $_lang['mlmsystem_tooltip_id'] = 'Id';
@@ -64,7 +64,7 @@ $_lang['mlmsystem_tooltip_balance'] = 'Баланс';
 $_lang['mlmsystem_tooltip_incoming'] = 'Приход';
 $_lang['mlmsystem_tooltip_outcoming'] = 'Расход';
 $_lang['mlmsystem_tooltip_handler'] = 'Обработчик';
-
+$_lang['mlmsystem_tooltip_level'] = 'Уровень';
 
 /* fields */
 $_lang['mlmsystem_name'] = 'Имя';
@@ -108,6 +108,7 @@ $_lang['mlmsystem_status_fixed'] = 'Фиксирует';
 $_lang['mlmsystem_leader_inactive'] = 'Клиент';
 $_lang['mlmsystem_leader_active'] = 'Руководитель';
 $_lang['mlmsystem_parent'] = 'Родитель';
+$_lang['mlmsystem_level'] = 'Уровень';
 
 
 /* action */
