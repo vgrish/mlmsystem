@@ -205,4 +205,12 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-client-leader-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-client-leader-go:before {content: '\f21e' !important;}
 
+/* client-level field */
+.x-field-mlmsystem-client-level-clear,
+.x-field-mlmsystem-client-level-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-client-level-clear:hover,
+.x-field-mlmsystem-client-level-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-client-level-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-client-level-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-client-level-go:before {content: '\f160' !important;}
 

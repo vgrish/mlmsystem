@@ -30,7 +30,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
 			$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
 			$c->leftJoin('MlmSystemPath', 'MlmSystemPath', 'MlmSystemPath.id = MlmSystemClient.id');
-			
+
 			$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
 			$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
 			$c->select(array(
@@ -68,6 +68,11 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 		$status = $this->getProperty('status');
 		if (!empty($status)) {
 			$c->where(array('status' => $status));
+		}
+
+		$level = $this->getProperty('level');
+		if (!empty($level)) {
+			$c->where(array('MlmSystemPath.level' => $level));
 		}
 
 		$leader = $this->getProperty('leader');

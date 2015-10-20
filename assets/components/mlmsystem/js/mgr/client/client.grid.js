@@ -165,6 +165,22 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
             }
         });
 
+        tbar.push({
+            xtype: 'mlmsystem-combo-client-level',
+            width: 210,
+            custm: true,
+            clear: true,
+            addall: true,
+            class: config.class,
+            value: '',
+            listeners: {
+                select: {
+                    fn: this._filterByCombo,
+                    scope: this
+                }
+            }
+        });
+
         if (1 != MODx.config.mlmsystem_client_field_search_disable) {
             tbar.push({
                 xtype: 'mlmsystem-field-search',
