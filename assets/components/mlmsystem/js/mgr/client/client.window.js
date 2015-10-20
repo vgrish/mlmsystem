@@ -81,7 +81,7 @@ Ext.extend(mlmsystem.window.CreateClient, MODx.Window, {
             fieldLabel: _('mlmsystem_parent'),
             hiddenName: 'parent',
             anchor: '99%',
-            allowBlank: false
+            allowBlank: true
         }];
     },
 

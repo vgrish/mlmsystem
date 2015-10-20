@@ -24,19 +24,37 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 	/** {@inheritDoc} */
 	public function prepareQueryBeforeCount(xPDOQuery $c)
 	{
-		$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
-		$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
-		$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
+		if (!$this->getProperty('combo')) {
 
-		$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
-		$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
-		$c->select(array(
-			'username' => 'modUser.username',
-			'fullname' => 'modUserProfile.fullname',
-			'email' => 'modUserProfile.email',
-			'status_name' => 'MlmSystemStatus.name',
-			'status_color' => 'MlmSystemStatus.color',
-		));
+			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
+			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
+			$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
+
+			$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
+			$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
+			$c->select(array(
+				'username' => 'modUser.username',
+				'fullname' => 'modUserProfile.fullname',
+				'email' => 'modUserProfile.email',
+				'status_name' => 'MlmSystemStatus.name',
+				'status_color' => 'MlmSystemStatus.color',
+			));
+		}
+		else {
+
+			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
+			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
+
+			$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
+			$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
+
+			$c->select(array(
+				'username' => 'modUser.username',
+				'fullname' => 'modUserProfile.fullname',
+			));
+
+			$c->where(array('status:NOT IN' => array(4)));
+		}
 
 		$status = $this->getProperty('status');
 		if (!empty($status)) {
