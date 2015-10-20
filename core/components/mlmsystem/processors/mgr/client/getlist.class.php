@@ -103,36 +103,25 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 //			'menu' => true,
 //		);
 		// On
-//		if (empty($array['disabled'])) {
-//			$array['actions'][] = array(
-//				'cls' => '',
-//				'icon' => "$icon $icon-toggle-on green",
-//				'title' => $this->modx->lexicon('mlmsystem_action_inactive'),
-//				'action' => 'activeDisabled',
-//				'button' => true,
-//				'menu' => true,
-//			);
-//		}
-//		// Off
-//		if (!empty($array['disabled'])) {
-//			$array['actions'][] = array(
-//				'cls' => '',
-//				'icon' => "$icon $icon-toggle-off red",
-//				'title' => $this->modx->lexicon('mlmsystem_action_active'),
-//				'action' => 'inactiveDisabled',
-//				'button' => true,
-//				'menu' => true,
-//			);
-//		}
 
 		$array['actions'][] = array(
 			'cls' => '',
-			'icon' => "$icon $icon-balance-scale",
-			'title' => $this->modx->lexicon('mlmsystem_action_correct_balance'),
-			'action' => 'correctBalance',
+			'icon' => "$icon $icon-users",
+			'title' => $this->modx->lexicon('mlmsystem_action_change_parent'),
+			'action' => 'changeParent',
 			'button' => true,
 			'menu' => true,
 		);
+
+//
+//		$array['actions'][] = array(
+//			'cls' => '',
+//			'icon' => "$icon $icon-balance-scale",
+//			'title' => $this->modx->lexicon('mlmsystem_action_correct_balance'),
+//			'action' => 'correctBalance',
+//			'button' => true,
+//			'menu' => true,
+//		);
 
 		// sep
 		$array['actions'][] = array(
@@ -143,6 +132,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			'button' => false,
 			'menu' => true,
 		);
+
 		// Remove
 		$array['actions'][] = array(
 			'cls' => '',

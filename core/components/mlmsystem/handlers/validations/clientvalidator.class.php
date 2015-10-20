@@ -44,8 +44,7 @@ class ClientValidator extends xPDOValidator
 
 		if ($isNew) {
 			$validated = parent:: validate($parameters);
-		}
-		else {
+		} else {
 			$validated = (parent:: validate($parameters) AND $this->_validateObject());
 		}
 
@@ -99,6 +98,14 @@ class ClientValidator extends xPDOValidator
 			case 'parent':
 				$q = $this->xpdo->newQuery('modUser', array('id' => $value));
 				$value = ($this->xpdo->getCount('modUser', $q) AND ($this->object->get('id') != $value)) ? $value : false;
+				if ($value) {
+					if ($parentObject = $this->xpdo->getObject('MlmSystemClient', $value) AND
+						$parentObject->get('parent') == $this->object->get('id')
+					) {
+						$this->addCustomMessages($field, 'mlmsystem_err_parent');
+						$value = false;
+					}
+				}
 				break;
 			case 'balance':
 			case 'incoming':

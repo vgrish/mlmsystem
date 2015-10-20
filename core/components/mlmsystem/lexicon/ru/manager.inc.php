@@ -119,6 +119,8 @@ $_lang['mlmsystem_action_update'] = 'Обновить';
 $_lang['mlmsystem_action_edit'] = 'Редактировать';
 $_lang['mlmsystem_action_notice'] = 'Уведомить';
 $_lang['mlmsystem_action_correct_balance'] = 'Корректировать баланс';
+$_lang['mlmsystem_action_change_parent'] = 'Изменить родителя';
+
 
 
 /* confirm */

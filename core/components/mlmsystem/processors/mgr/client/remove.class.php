@@ -27,7 +27,7 @@ class modMlmSystemClientRemoveProcessor extends modObjectRemoveProcessor
 	/** {@inheritDoc} */
 	public function beforeRemove()
 	{
-		$this->failure($this->modx->lexicon('paymentsystem_err_lock'));
+		//$this->failure($this->modx->lexicon('paymentsystem_err_lock'));
 		return parent::beforeRemove();
 	}
 

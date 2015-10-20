@@ -106,3 +106,102 @@ Ext.extend(mlmsystem.window.CreateClient, MODx.Window, {
 
 });
 Ext.reg('mlmsystem-client-window-create', mlmsystem.window.CreateClient);
+
+
+
+mlmsystem.window.ChangeParent = function (config) {
+    config = config || {};
+    Ext.applyIf(config, {
+        title: _('create'),
+        width: 550,
+        autoHeight: true,
+        url: mlmsystem.config.connector_url,
+        action: 'mgr/client/update',
+        fields: this.getFields(config),
+        keys: this.getKeys(config),
+        buttons: this.getButtons(config)
+    });
+    mlmsystem.window.ChangeParent.superclass.constructor.call(this, config);
+
+    if (!config.update) {
+        config.update = false;
+    }
+};
+Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
+
+    getKeys: function (config) {
+        return [{
+            key: Ext.EventObject.ENTER,
+            shift: true,
+            fn: this.submit,
+            scope: this
+        }];
+    },
+
+    getButtons: function (config) {
+        return [{
+            text: !config.update ? _('create') : _('save'),
+            scope: this,
+            handler: function () {
+                this.submit();
+            }
+        }];
+    },
+
+    getFields: function (config) {
+
+        return [/*{
+            xtype: 'hidden',
+            name: 'id'
+        },*/ {
+            items: [{
+                layout: 'form',
+                cls: 'modx-panel',
+                items: [{
+                    layout: 'column',
+                    border: false,
+                    items: [{
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        items: this.getLeftFields(config)
+                    }, {
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        cls: 'right-column',
+                        items: this.getRightFields(config)
+                    }]
+                }]
+            }]
+        }];
+    },
+
+    getLeftFields: function(config) {
+        return [{
+            xtype: 'mlmsystem-combo-client',
+            custm: true,
+            clear: true,
+            class: config.class,
+            fieldLabel: _('mlmsystem_client'),
+            hiddenName: 'id',
+            anchor: '99%',
+            allowBlank: true
+        }];
+    },
+
+    getRightFields: function(config) {
+        return [{
+            xtype: 'mlmsystem-combo-client',
+            custm: true,
+            clear: true,
+            class: config.class,
+            fieldLabel: _('mlmsystem_parent'),
+            hiddenName: 'parent',
+            anchor: '99%',
+            allowBlank: true
+        }];
+    }
+
+});
+Ext.reg('mlmsystem-client-window-change-parent', mlmsystem.window.ChangeParent);

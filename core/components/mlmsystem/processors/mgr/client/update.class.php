@@ -58,6 +58,7 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 		if (
 			$this->object->get('parent') != $this->parent
 		) {
+			$this->MlmSystem->Paths->removePathItem($this->object->get('id'));
 			$this->MlmSystem->Paths->GeneratePaths($this->object->get('id'));
 		}
 

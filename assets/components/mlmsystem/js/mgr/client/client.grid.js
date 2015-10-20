@@ -395,6 +395,38 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
 
     },
 
+    changeParent: function(btn, e, row) {
+        var record = typeof(row) != 'undefined' ? row.data : this.menu.record;
+        MODx.Ajax.request({
+            url: mlmsystem.config.connector_url,
+            params: {
+                action: 'mgr/client/get',
+                id: record.id
+            },
+            listeners: {
+                success: {
+                    fn: function(r) {
+                        var record = r.object;
+                        var w = MODx.load({
+                            xtype: 'mlmsystem-client-window-change-parent',
+                            record: record,
+                            listeners: {
+                                success: {
+                                    fn: this.refresh,
+                                    scope: this
+                                }
+                            }
+                        });
+                        w.reset();
+                        w.setValues(record);
+                        w.show(e.target);
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
     _filterByCombo: function (cb) {
         this.getStore().baseParams[cb.name] = cb.value;
         this.getBottomToolbar().changePage(1);
