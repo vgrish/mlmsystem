@@ -107,6 +107,7 @@ $_lang['mlmsystem_status_final'] = 'Итоговый';
 $_lang['mlmsystem_status_fixed'] = 'Фиксирует';
 $_lang['mlmsystem_leader_inactive'] = 'Клиент';
 $_lang['mlmsystem_leader_active'] = 'Руководитель';
+$_lang['mlmsystem_parent'] = 'Родитель';
 
 
 /* action */

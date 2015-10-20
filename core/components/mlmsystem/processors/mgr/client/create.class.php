@@ -49,6 +49,11 @@ class modMlmSystemClientCreateProcessor extends modUserCreateProcessor
 		if ($client = $this->modx->getObject('MlmSystemClient', array('id' => $this->object->get('id')))) {
 			$clientStatus = $this->getProperty('status', $client->getStatusCreate());
 			$this->MlmSystem->Tools->changeClientStatus($client, $clientStatus);
+
+			$parent = $this->getProperty('parent', $this->MlmSystem->getOption('referrer_default_client', null, 0));
+			if (!empty($parent)) {
+				$this->MlmSystem->Tools->changeClientParent($client, $parent);
+			}
 		}
 
 		return parent::afterSave();

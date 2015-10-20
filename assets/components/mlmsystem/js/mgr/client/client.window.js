@@ -43,12 +43,50 @@ Ext.extend(mlmsystem.window.CreateClient, MODx.Window, {
             xtype: 'hidden',
             name: 'id'
         }, {
+            items: [{
+                layout: 'form',
+                cls: 'modx-panel',
+                items: [{
+                    layout: 'column',
+                    border: false,
+                    items: [{
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        items: this.getLeftFields(config)
+                    }, {
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        cls: 'right-column',
+                        items: this.getRightFields(config)
+                    }]
+                }]
+            }]
+        }];
+    },
+
+    getLeftFields: function(config) {
+        return [{
             xtype: 'textfield',
             fieldLabel: _('mlmsystem_name'),
             name: 'username',
             anchor: '99%',
             allowBlank: true
         }, {
+            xtype: 'mlmsystem-combo-client',
+            custm: true,
+            clear: true,
+            class: config.class,
+            fieldLabel: _('mlmsystem_parent'),
+            hiddenName: 'parent',
+            anchor: '99%',
+            allowBlank: false
+        }];
+    },
+
+    getRightFields: function(config) {
+        return [{
             xtype: 'textfield',
             fieldLabel: _('mlmsystem_email'),
             name: 'email',
