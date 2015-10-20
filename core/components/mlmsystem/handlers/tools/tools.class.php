@@ -14,6 +14,8 @@ interface MlmSystemToolsInterface
 
 	public function changeClientParent(MlmSystemClient $client, $parent = 0);
 
+	public function checkClientParent(MlmSystemClient $client, $parent = 0);
+
 	public function getClientFields();
 
 	public function getMenuActions();
@@ -42,9 +44,6 @@ interface MlmSystemToolsInterface
 	public function sumFormat($sum = '0', array $pf = array(), $noZeros = true);
 
 	public function formatHashReferrer($id = 0);
-
-
-
 
 
 }
@@ -288,6 +287,16 @@ class SystemTools implements MlmSystemToolsInterface
 		return !empty($response['success']);
 	}
 
+	/** @inheritdoc} */
+	public function checkClientParent(MlmSystemClient $client, $parent = 0)
+	{
+		if (!$this->MlmSystem->Paths) {
+			$this->MlmSystem->loadPaths();
+		}
+
+		return $this->MlmSystem->Paths->checkParent($client->get('id'), $parent);
+	}
+
 	/**
 	 * @return array Client fields
 	 */
@@ -338,8 +347,6 @@ class SystemTools implements MlmSystemToolsInterface
 		return $statuses;
 	}
 
-	
-	
 
 	/** @inheritdoc} */
 	public function getPropertiesKey(array $properties = array())
@@ -374,9 +381,8 @@ class SystemTools implements MlmSystemToolsInterface
 		}
 		return $properties;
 	}
-	
-	
-	
+
+
 	/** @inheritdoc} */
 	public function runProcessor($action = '', $data = array(), $json = false)
 	{
@@ -588,7 +594,7 @@ class SystemTools implements MlmSystemToolsInterface
 		$url = $this->modx->makeUrl($referrerPage, $contextKey, $params, 'full');
 		return $url;
 	}
-	
+
 	/** @inheritdoc} */
 	public function formatBalance($sum = '0')
 	{

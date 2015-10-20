@@ -200,8 +200,8 @@ mlmsystem.combo.Client = function(config) {
         url: mlmsystem.config.connector_url,
         baseParams: {
             action: 'mgr/client/getlist',
-            client_status: 1,
-            combo: true
+            combo: true,
+            client: config.client || 0
         },
         tpl: new Ext.XTemplate(
             '<tpl for="."><div class="x-combo-list-item">',

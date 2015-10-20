@@ -21,6 +21,9 @@ interface MlmSystemPathsInterface
 	/** Get tree */
 	public static function getTree();
 
+	/** Get check parent */
+	public static function checkParent($id = 0, $parent = 0);
+
 	/** Build tree id => parent */
 	public static function buildTree($arr, $pid = 0);
 
@@ -111,6 +114,19 @@ class SystemPaths implements MlmSystemPathsInterface
 		$sql = "SELECT id,parent FROM " . self::$ClientTable;
 		$stmt = self::query($sql);
 		return ($stmt) ? self::buildTree($stmt) : false;
+	}
+
+	/** Get check parent */
+	public static function checkParent($id = 0, $parent = 0)
+	{
+		if ($id == $parent) {
+			return false;
+		}
+		$sql = "SELECT c.*, p.level, p.order "
+			. "FROM " . self::$PathTable . " p "
+			. "JOIN " . self::$ClientTable . " c ON c.`id`=p.`id` "
+			. "WHERE p.`parent`={$id} AND c.`parent`={$parent} ORDER BY p.`level`, p.`order`";
+		return self::query($sql) ? false : true;
 	}
 
 	/** Build tree id => parent */

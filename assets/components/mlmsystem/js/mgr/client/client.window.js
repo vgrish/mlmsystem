@@ -186,7 +186,16 @@ Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
             fieldLabel: _('mlmsystem_client'),
             hiddenName: 'id',
             anchor: '99%',
-            allowBlank: true
+            allowBlank: false,
+            listeners: {
+                select: {
+                    fn: function(f) {
+                        this.handleClient(f.getValue());
+                    },
+                    scope: this
+                }
+            }
+
         }];
     },
 
@@ -196,11 +205,22 @@ Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
             custm: true,
             clear: true,
             class: config.class,
+            client: config.record.id,
             fieldLabel: _('mlmsystem_parent'),
             hiddenName: 'parent',
             anchor: '99%',
             allowBlank: true
         }];
+    },
+
+    handleClient: function(value) {
+        var f = this.fp.getForm();
+        var parent = f.findField('parent');
+
+        parent.setValue('');
+        parent.fireEvent('select');
+        parent.store.baseParams.client = value;
+        parent.store.load();
     }
 
 });

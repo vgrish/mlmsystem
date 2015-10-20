@@ -42,6 +42,16 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 
 	public function beforeSave()
 	{
+
+		/* проверка на кружева */
+		if (
+			$this->parent != $this->getProperty('parent')
+		) {
+			if (!$this->MlmSystem->Tools->checkClientParent($this->object, $this->getProperty('parent'))) {
+				$this->addFieldError('parent',$this->MlmSystem->lexicon('err_parent'));
+			}
+		}
+
 		return parent::beforeSave();
 	}
 

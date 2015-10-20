@@ -54,6 +54,13 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			));
 
 			$c->where(array('status:NOT IN' => array(4)));
+
+			$client = $this->getProperty('client', 0);
+			if (!empty($client)) {
+				$c->where(array('id:!=' => $client));
+
+			}
+
 		}
 
 		$status = $this->getProperty('status');

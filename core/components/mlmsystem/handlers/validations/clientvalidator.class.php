@@ -97,7 +97,7 @@ class ClientValidator extends xPDOValidator
 		switch ($field) {
 			case 'parent':
 				$q = $this->xpdo->newQuery('modUser', array('id' => $value));
-				$value = ($this->xpdo->getCount('modUser', $q) AND ($this->object->get('id') != $value)) ? $value : false;
+				$value = ($this->xpdo->getCount('modUser', $q) AND ($this->object->get('id') != $value) OR empty($value)) ? $value : false;
 				if ($value) {
 					if ($parentObject = $this->xpdo->getObject('MlmSystemClient', $value) AND
 						$parentObject->get('parent') == $this->object->get('id')
