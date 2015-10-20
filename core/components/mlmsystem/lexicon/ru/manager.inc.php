@@ -109,6 +109,7 @@ $_lang['mlmsystem_leader_inactive'] = 'Клиент';
 $_lang['mlmsystem_leader_active'] = 'Руководитель';
 $_lang['mlmsystem_parent'] = 'Родитель';
 $_lang['mlmsystem_level'] = 'Уровень';
+$_lang['mlmsystem_type_change'] = 'Тип изменений';
 
 
 /* action */
@@ -119,7 +120,7 @@ $_lang['mlmsystem_action_create'] = 'Создать';
 $_lang['mlmsystem_action_update'] = 'Обновить';
 $_lang['mlmsystem_action_edit'] = 'Редактировать';
 $_lang['mlmsystem_action_notice'] = 'Уведомить';
-$_lang['mlmsystem_action_correct_balance'] = 'Корректировать баланс';
+$_lang['mlmsystem_action_change_balance'] = 'Изменить баланс';
 $_lang['mlmsystem_action_change_parent'] = 'Изменить родителя';
 
 
@@ -127,3 +128,7 @@ $_lang['mlmsystem_action_change_parent'] = 'Изменить родителя';
 /* confirm */
 $_lang['mlmsystem_confirm_remove'] = 'Вы уверены, что хотите удалить это?';
 $_lang['mlmsystem_confirm_send'] = 'Вы уверены, что хотите отправить?';
+
+
+$_lang['mlmsystem_balance_take'] = 'Списать';
+$_lang['mlmsystem_balance_put'] = 'Пополнить';

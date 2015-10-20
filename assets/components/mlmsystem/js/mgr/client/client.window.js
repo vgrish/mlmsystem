@@ -50,12 +50,12 @@ Ext.extend(mlmsystem.window.CreateClient, MODx.Window, {
                     layout: 'column',
                     border: false,
                     items: [{
-                        columnWidth: .5,
+                        columnWidth: .49,
                         border: false,
                         layout: 'form',
                         items: this.getLeftFields(config)
                     }, {
-                        columnWidth: .5,
+                        columnWidth: .505,
                         border: false,
                         layout: 'form',
                         cls: 'right-column',
@@ -122,11 +122,9 @@ mlmsystem.window.ChangeParent = function (config) {
         buttons: this.getButtons(config)
     });
     mlmsystem.window.ChangeParent.superclass.constructor.call(this, config);
-
     if (!config.update) {
         config.update = false;
     }
-
 };
 Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
 
@@ -162,12 +160,12 @@ Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
                     layout: 'column',
                     border: false,
                     items: [{
-                        columnWidth: .5,
+                        columnWidth: .49,
                         border: false,
                         layout: 'form',
                         items: this.getLeftFields(config)
                     }, {
-                        columnWidth: .5,
+                        columnWidth: .505,
                         border: false,
                         layout: 'form',
                         cls: 'right-column',
@@ -226,3 +224,146 @@ Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
 
 });
 Ext.reg('mlmsystem-client-window-change-parent', mlmsystem.window.ChangeParent);
+
+
+mlmsystem.window.CorrectBalance = function (config) {
+    config = config || {};
+    Ext.applyIf(config, {
+        title: _('create'),
+        width: 550,
+        autoHeight: true,
+        url: mlmsystem.config.connector_url,
+        action: 'mgr/misc/balance/update',
+        fields: this.getFields(config),
+        keys: this.getKeys(config),
+        buttons: this.getButtons(config)
+    });
+    mlmsystem.window.CorrectBalance.superclass.constructor.call(this, config);
+    if (!config.update) {
+        config.update = false;
+    }
+};
+Ext.extend(mlmsystem.window.CorrectBalance, MODx.Window, {
+
+    getKeys: function () {
+        return [{
+            key: Ext.EventObject.ENTER,
+            shift: true,
+            fn: this.submit,
+            scope: this
+        }];
+    },
+
+    getButtons: function (config) {
+        return [{
+            text: !config.update ? _('create') : _('save'),
+            scope: this,
+            handler: function () {
+                this.submit();
+            }
+        }];
+    },
+
+    getFields: function (config) {
+
+        return [/*{
+         xtype: 'hidden',
+         name: 'id'
+         }, */{
+            items: [{
+                layout: 'form',
+                cls: 'modx-panel',
+                items: [{
+                    layout: 'column',
+                    border: false,
+                    items: [{
+                        columnWidth: .49,
+                        border: false,
+                        layout: 'form',
+                        items: this.getLeftFields(config)
+                    }, {
+                        columnWidth: .505,
+                        border: false,
+                        layout: 'form',
+                        cls: 'right-column',
+                        items: this.getRightFields(config)
+                    }]
+                }]
+            }]
+        }];
+    },
+
+    getLeftFields: function(config) {
+        return [{
+            xtype: 'mlmsystem-combo-client',
+            custm: true,
+            clear: true,
+            class: config.class,
+            fieldLabel: _('mlmsystem_client'),
+            hiddenName: 'id',
+            anchor: '99%',
+            allowBlank: false,
+            listeners: {
+                select: {
+                    fn: function(f) {
+                        this.handleClient(f.getValue());
+                    },
+                    scope: this
+                }
+            }
+
+        }, {
+            xtype: 'numberfield',
+            class: config.class,
+            fieldLabel: _('mlmsystem_sum'),
+            name: 'change_balance_sum',
+            anchor: '99%',
+            allowBlank: false
+        }];
+    },
+
+    getRightFields: function(config) {
+        return [{
+            xtype: 'numberfield',
+            fieldLabel: _('mlmsystem_balance'),
+            msgTarget: 'under',
+            name: 'balance',
+            anchor: '99%',
+            allowBlank: true,
+            disabled: true
+        }, {
+            xtype: 'mlmsystem-combo-type-change-balance',
+            custm: true,
+            clear: true,
+            class: config.class,
+            fieldLabel: _('mlmsystem_type_change'),
+            name: 'change_balance_type',
+            anchor: '99%',
+            allowBlank: false
+        }];
+    },
+
+    handleClient: function(value) {
+        var f = this.fp.getForm();
+        var balance = f.findField('balance');
+
+        MODx.Ajax.request({
+            url: mlmsystem.config.connector_url,
+            params: {
+                action: 'mgr/client/get',
+                id: value
+            },
+            listeners: {
+                success: {
+                    fn: function(r) {
+                        var record = r.object;
+                        balance.setValue(record.balance);
+                    },
+                    scope: this
+                }
+            }
+        });
+    }
+
+});
+Ext.reg('mlmsystem-client-window-change-balance', mlmsystem.window.CorrectBalance);

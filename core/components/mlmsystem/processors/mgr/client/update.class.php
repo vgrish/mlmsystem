@@ -5,10 +5,13 @@
  */
 class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 {
+	/** @var MlmSystemClient $object */
+	public $object;
 	public $classKey = 'MlmSystemClient';
 	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
+	/** @var MlmSystem $MlmSystem */
 	public $MlmSystem;
 	public $prop = array();
 	public $successMessage = '';
@@ -45,7 +48,7 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 
 		/* проверка на кружева */
 		if (
-			$this->parent != $this->getProperty('parent')
+			$this->parent != $this->getProperty('parent', $this->object->get('parent'))
 		) {
 			if (!$this->MlmSystem->Tools->checkClientParent($this->object, $this->getProperty('parent'))) {
 				$this->addFieldError('parent',$this->MlmSystem->lexicon('err_parent'));

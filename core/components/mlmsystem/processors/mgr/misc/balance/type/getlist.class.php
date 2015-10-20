@@ -1,6 +1,6 @@
 <?php
 
-class modMlmSystemClientLeaderGetListProcessor extends modObjectProcessor
+class modMlmSystemClientBalanceTypeGetListProcessor extends modObjectProcessor
 {
 	public $languageTopics = array('mlmsystem');
 
@@ -9,12 +9,12 @@ class modMlmSystemClientLeaderGetListProcessor extends modObjectProcessor
 	{
 		$array = array(
 			0 => array(
-				'name' => $this->modx->lexicon('mlmsystem_leader_inactive'),
-				'value' => 0
+				'name' => $this->modx->lexicon('mlmsystem_balance_take'),
+				'value' => 1
 			),
 			1 => array(
-				'name' => $this->modx->lexicon('mlmsystem_leader_active'),
-				'value' => 1
+				'name' => $this->modx->lexicon('mlmsystem_balance_put'),
+				'value' => 2
 			),
 		);
 
@@ -34,15 +34,15 @@ class modMlmSystemClientLeaderGetListProcessor extends modObjectProcessor
 	/** {@inheritDoc} */
 	public function outputArray(array $array, $count = false)
 	{
-		if ($this->getProperty('addall')) {
-			$array = array_merge_recursive(array(array(
-				'name' => $this->modx->lexicon('mlmsystem_all'),
-				'value' => ''
-			)), $array);
-		}
+//		if ($this->getProperty('addall')) {
+//			$array = array_merge_recursive(array(array(
+//				'name' => $this->modx->lexicon('mlmsystem_all'),
+//				'value' => ''
+//			)), $array);
+//		}
 		return parent::outputArray($array, $count);
 	}
 
 }
 
-return 'modMlmSystemClientLeaderGetListProcessor';
+return 'modMlmSystemClientBalanceTypeGetListProcessor';

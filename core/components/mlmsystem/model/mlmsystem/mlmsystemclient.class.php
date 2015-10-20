@@ -208,6 +208,32 @@ class MlmSystemClient extends xPDOObject {
 	}
 
 	/** @inheritdoc} */
+	public function putSum($sum = 0)
+	{
+		$sum = abs($sum);
+		$balance = $this->get('balance');
+		$incoming = abs($this->get('incoming'));
+		$balance += $sum;
+		$incoming += $sum;
+		$this->set('put', $sum);
+		$this->set('incoming', $incoming);
+		return $this->set('balance', $balance);
+	}
+
+	/** @inheritdoc} */
+	public function takeSum($sum = 0)
+	{
+		$sum = abs($sum);
+		$balance = $this->get('balance');
+		$outcoming = abs($this->get('outcoming'));
+		$balance -= $sum;
+		$outcoming += $sum;
+		$this->set('take', $sum);
+		$this->set('outcoming', $outcoming);
+		return $this->set('balance', $balance);
+	}
+
+	/** @inheritdoc} */
 	public function log($target = '', $value = '')
 	{
 		$this->Log = $this->xpdo->newObject('MlmSystemLog', array(

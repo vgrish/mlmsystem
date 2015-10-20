@@ -126,16 +126,14 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			'button' => true,
 			'menu' => true,
 		);
-
-//
-//		$array['actions'][] = array(
-//			'cls' => '',
-//			'icon' => "$icon $icon-balance-scale",
-//			'title' => $this->modx->lexicon('mlmsystem_action_correct_balance'),
-//			'action' => 'correctBalance',
-//			'button' => true,
-//			'menu' => true,
-//		);
+		$array['actions'][] = array(
+			'cls' => '',
+			'icon' => "$icon $icon-balance-scale",
+			'title' => $this->modx->lexicon('mlmsystem_action_change_balance'),
+			'action' => 'changeBalance',
+			'button' => true,
+			'menu' => true,
+		);
 
 		// sep
 		$array['actions'][] = array(

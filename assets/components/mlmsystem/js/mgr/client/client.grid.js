@@ -242,21 +242,21 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                 }
             },
             balance: {
-                width: 15,
+                width: 25,
                 sortable: true,
                 renderer: function(value, metaData, record){
                     return mlmsystem.utils.renderMoney(value);
                 }
             },
             incoming: {
-                width: 15,
+                width: 25,
                 sortable: true,
                 renderer: function(value, metaData, record){
                     return mlmsystem.utils.renderMoney(value);
                 }
             },
             outcoming: {
-                width: 15,
+                width: 25,
                 sortable: true,
                 renderer: function(value, metaData, record){
                     return mlmsystem.utils.renderMoney(value);
@@ -416,12 +416,18 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
     },
 
     changeParent: function(btn, e, row) {
-        var record = typeof(row) != 'undefined' ? row.data : this.menu.record;
+        if (typeof(row) != 'undefined') {
+            this.menu.record = row.data;
+        }
+        else if (!this.menu.record) {
+            return false;
+        }
+        var id = this.menu.record.id;
         MODx.Ajax.request({
             url: mlmsystem.config.connector_url,
             params: {
                 action: 'mgr/client/get',
-                id: record.id
+                id: id
             },
             listeners: {
                 success: {
@@ -430,6 +436,7 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                         var w = MODx.load({
                             xtype: 'mlmsystem-client-window-change-parent',
                             title: _('mlmsystem_action_update'),
+                            class: this.config.class,
                             record: record,
                             update: true,
                             listeners: {
@@ -444,6 +451,48 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                         w.show(e.target);
                     },
                     scope: this
+                }
+            }
+        });
+    },
+
+    changeBalance: function (btn, e, row) {
+        if (typeof(row) != 'undefined') {
+            this.menu.record = row.data;
+        }
+        else if (!this.menu.record) {
+            return false;
+        }
+        var id = this.menu.record.id;
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'mgr/client/get',
+                id: id
+            },
+            listeners: {
+                success: {
+                    fn: function (r) {
+                        var record = r.object;
+                        record.correct_type = 1;
+                        var w = MODx.load({
+                            xtype: 'mlmsystem-client-window-change-balance',
+                            title: _('mlmsystem_action_update'),
+                            class: this.config.class,
+                            record: record,
+                            update: true,
+                            listeners: {
+                                success: {
+                                    fn: function () {
+                                        this.refresh();
+                                    }, scope: this
+                                }
+                            }
+                        });
+                        w.reset();
+                        w.setValues(record);
+                        w.show(e.target);
+                    }, scope: this
                 }
             }
         });

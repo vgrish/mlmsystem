@@ -41,6 +41,7 @@ $_lang['mlmsystem_err_status'] = 'Неправильный статус.';
 $_lang['mlmsystem_err_context'] = 'Неправильный контекст.';
 $_lang['mlmsystem_err_purpose'] = 'Неправильное назначение.';
 $_lang['mlmsystem_err_balance'] = 'Неправильное значение баланса.';
+$_lang['mlmsystem_err_parent'] = 'Неправильный родитель.';
 
 
 /* error */
