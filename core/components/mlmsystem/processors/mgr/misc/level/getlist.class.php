@@ -42,7 +42,7 @@ class modMlmSystemPathLevelGetListProcessor extends modObjectGetListProcessor
 		}
 		return parent::outputArray($array, $count);
 	}
-	
+
 }
 
 return 'modMlmSystemPathLevelGetListProcessor';

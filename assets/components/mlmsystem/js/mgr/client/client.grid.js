@@ -429,7 +429,9 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                         var record = r.object;
                         var w = MODx.load({
                             xtype: 'mlmsystem-client-window-change-parent',
+                            title: _('mlmsystem_action_update'),
                             record: record,
+                            update: true,
                             listeners: {
                                 success: {
                                     fn: this.refresh,

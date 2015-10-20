@@ -126,6 +126,7 @@ mlmsystem.window.ChangeParent = function (config) {
     if (!config.update) {
         config.update = false;
     }
+
 };
 Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
 
