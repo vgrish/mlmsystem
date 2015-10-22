@@ -96,6 +96,7 @@ $_lang['mlmsystem_incoming'] = 'Приход';
 $_lang['mlmsystem_outcoming'] = 'Расход';
 $_lang['mlmsystem_handler'] = 'Обработчик';
 $_lang['mlmsystem_user'] = 'Пользователь';
+$_lang['mlmsystem_client'] = 'Клиент';
 $_lang['mlmsystem_num'] = 'Номер';
 $_lang['mlmsystem_email_user'] = 'Письмо клиенту';
 $_lang['mlmsystem_email_manager'] = 'Письмо менеджеру';

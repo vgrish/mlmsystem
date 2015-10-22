@@ -4,7 +4,7 @@
 interface MlmSystemToolsInterface
 {
 
-	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '');
+	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '', $autoPrefix = false);
 
 	public function processTags($html, $maxIterations = 10);
 
@@ -76,7 +76,7 @@ class SystemTools implements MlmSystemToolsInterface
 	}
 
 	/* подготовка Обьекта... */
-	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '')
+	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '', $autoPrefix = false)
 	{
 		$pls = $instance->toArray();
 
@@ -86,12 +86,22 @@ class SystemTools implements MlmSystemToolsInterface
 				$pls['date_updatedon'] = $pls['updatedon'];
 				$pls['hash_referrer'] = $pls['id'];
 				$pls['url_referrer'] = $pls['id'];
+
+				if ($autoPrefix AND empty($keyPrefix)) {
+					$keyPrefix = 'client_';
+				}
 				break;
 			case $instance instanceof MlmSystemStatus:
+				if ($autoPrefix AND empty($keyPrefix)) {
+					$keyPrefix = 'status_';
+				}
 				break;
 			case $instance instanceof MlmSystemEmail:
 				break;
 			case $instance instanceof MlmSystemLog:
+				if ($autoPrefix AND empty($keyPrefix)) {
+					$keyPrefix = 'log_';
+				}
 				break;
 			case $instance instanceof modUser:
 				unset(
@@ -103,8 +113,15 @@ class SystemTools implements MlmSystemToolsInterface
 					$pls['password'],
 					$pls['salt']
 				);
+				if ($autoPrefix AND empty($keyPrefix)) {
+					$keyPrefix = 'user_';
+				}
 				break;
-
+			case $instance instanceof modUserProfile:
+				if ($autoPrefix AND empty($keyPrefix)) {
+					$keyPrefix = 'profile_';
+				}
+				break;
 			default:
 				break;
 		}

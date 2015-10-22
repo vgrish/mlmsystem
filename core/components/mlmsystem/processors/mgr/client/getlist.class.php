@@ -108,22 +108,21 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			'type' => 'menu',
 		);
 		// Edit
-//		$array['actions'][] = array(
-//			'cls' => '',
-//			'icon' => "$icon $icon-edit green",
-//			'title' => $this->modx->lexicon('mlmsystem_action_edit'),
-//			'action' => 'editClient',
-//			'button' => true,
-//			'menu' => true,
-//		);
-		// On
+		$array['actions'][] = array(
+			'cls' => '',
+			'icon' => "$icon $icon-edit green",
+			'title' => $this->modx->lexicon('mlmsystem_action_edit'),
+			'action' => 'update',
+			'button' => true,
+			'menu' => true,
+		);
 
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => "$icon $icon-users",
 			'title' => $this->modx->lexicon('mlmsystem_action_change_parent'),
 			'action' => 'changeParent',
-			'button' => true,
+			'button' => false,
 			'menu' => true,
 		);
 		$array['actions'][] = array(

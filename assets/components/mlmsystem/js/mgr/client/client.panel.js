@@ -28,7 +28,7 @@ mlmsystem.panel.Client = function(config) {
 		 */
 		hideMode: 'offclient',
 		items: [{
-			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_client') + '</h2>',
+			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_clients') + '</h2>',
 			cls: '',
 			style: {
 				margin: '15px 0'
@@ -42,10 +42,10 @@ mlmsystem.panel.Client = function(config) {
 			border: true,
 			hideMode: 'offclient',
 			items: [{
-				title: _('mlmsystem_client'),
+				title: _('mlmsystem_clients'),
 				layout: 'anchor',
 				items: [{
-					html: _('mlmsystem_client_intro'),
+					html: _('mlmsystem_clients_intro'),
 					cls: 'panel-desc'
 				}, {
 					xtype: 'mlmsystem-grid-client',
@@ -53,10 +53,10 @@ mlmsystem.panel.Client = function(config) {
 					cls: 'main-wrapper'
 				}]
 			}, {
-				title: _('mlmsystem_status_client'),
+				title: _('mlmsystem_statuses_client'),
 				layout: 'anchor',
 				items: [{
-					html: _('mlmsystem_status_client_intro'),
+					html: _('mlmsystem_statuses_client_intro'),
 					cls: 'panel-desc'
 				}, {
 					xtype: 'mlmsystem-grid-status',

@@ -9,8 +9,8 @@ $tmp = array(
 			'controller' => 'index',
 		),
 	),
-	'mlmsystem_client' => array(
-		'description' => 'mlmsystem_client_desc',
+	'mlmsystem_clients' => array(
+		'description' => 'mlmsystem_clients_desc',
 		'parent' => 'mlmsystem',
 		'menuindex' => 1,
 		'action' => array(
