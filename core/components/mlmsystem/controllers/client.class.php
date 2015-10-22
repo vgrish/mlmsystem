@@ -39,11 +39,13 @@ class MlmSystemClientManagerController extends MlmSystemMainController
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.panel.js');
 
 		$gridFields = $this->MlmSystem->Tools->getClientFields();
+		$windowUpdateTabs = $this->MlmSystem->Tools->getClientWindowUpdateTabs();
 
 		$this->addHtml(str_replace('			', '', '
 			<script type="text/javascript">
 				Ext.onReady(function() {
 					mlmsystem.config.client_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
+					mlmsystem.config.client_window_update_tabs = ' . $this->modx->toJSON($windowUpdateTabs) . ';
 					MODx.load({ xtype: "mlmsystem-page-client"});
 				});
 			</script>'

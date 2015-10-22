@@ -18,6 +18,8 @@ interface MlmSystemToolsInterface
 
 	public function getClientFields();
 
+	public function getClientWindowUpdateTabs();
+
 	public function getMenuActions();
 
 	public function getClientStatus();
@@ -313,9 +315,7 @@ class SystemTools implements MlmSystemToolsInterface
 		return $this->MlmSystem->Paths->checkParent($client->get('id'), $parent);
 	}
 
-	/**
-	 * @return array Client fields
-	 */
+	/** @return array Client fields */
 	public function getClientFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('client_grid_fields', null,
@@ -325,9 +325,17 @@ class SystemTools implements MlmSystemToolsInterface
 		return $gridFields;
 	}
 
-	/**
-	 * @return array Menu Actions fields
-	 */
+	/** @return array Client Window Update Tabs */
+	public function getClientWindowUpdateTabs()
+	{
+		$windowTabs = array_map('trim', explode(',', $this->MlmSystem->getOption('client_window_update_tabs', null,
+			'client,history_client,history_balance,history_operation', true)));
+		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
+			'client'))));
+		return $windowTabs;
+	}
+
+	/** @return array Menu Actions fields */
 	public function getMenuActions()
 	{
 		$key = $this->MlmSystem->namespace;

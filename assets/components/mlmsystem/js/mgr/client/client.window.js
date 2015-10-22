@@ -38,49 +38,74 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
     },
 
     getFields: function (config) {
-
         return [{
             xtype: 'hidden',
             name: 'id'
         }, {
             xtype: 'modx-tabs',
-            defaults: { border: false, autoHeight: true },
+            defaults: {border: false, autoHeight: true},
             border: true,
             activeTab: 0,
             autoHeight: true,
-            items: [{
-                title: _('mlmsystem_client'),
-                layout: 'form',
-                items: this.getClientFields(config)
-            }, {
+            items: this.getTabs(config)
+            //[{
+            //        title: _('mlmsystem_client'),
+            //        layout: 'form',
+            //        items: this.getClient(config)
+            //    }, {
+            //        title: _('mlmsystem_history_client'),
+            //        layout: 'form',
+            //        items: this.getClientHistory(config)
+            //    }, {
+            //        title: _('mlmsystem_history_balance'),
+            //        layout: 'form',
+            //        items: this.getBalanceHistory(config)
+            //    }, {
+            //        title: _('mlmsystem_history_operation'),
+            //        layout: 'form',
+            //        items: this.getOperationHistory(config)
+            //    }]
 
-            }]
-        }/*{
-            items: [{
-                layout: 'form',
-                cls: 'modx-panel',
-                items: [{
-                    layout: 'column',
-                    border: false,
-                    items: [{
-                        columnWidth: .49,
-                        border: false,
-                        layout: 'form',
-                        items: this.getLeftFields(config)
-                    }, {
-                        columnWidth: .505,
-                        border: false,
-                        layout: 'form',
-                        cls: 'right-column',
-                        items: this.getRightFields(config)
-                    }]
-                }]
-            }]
-        }*/];
+        }]
     },
 
 
-    getClientFields: function(config) {
+    getTabs: function (config) {
+
+        var tabs = [];
+        var add = {
+            client: {
+                layout: 'form',
+                items: this.getClient(config)
+            },
+            history_client: {
+                layout: 'form',
+                items: this.getClientHistory(config)
+            },
+            history_balance: {
+                layout: 'form',
+                items: this.getBalanceHistory(config)
+            },
+            history_operation: {
+                layout: 'form',
+                items: this.getOperationHistory(config)
+            }
+        };
+
+        for (var i = 0; i < mlmsystem.config.client_window_update_tabs.length; i++) {
+            var tab = mlmsystem.config.client_window_update_tabs[i];
+            if (add[tab]) {
+                Ext.applyIf(add[tab], {
+                    title: _('mlmsystem_' + tab)
+                });
+                tabs.push(add[tab]);
+            }
+        }
+
+        return tabs;
+    },
+
+    getClient: function(config) {
         return [{
             layout: 'column',
             defaults: {
@@ -174,7 +199,7 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
                     anchor: '100%'
                 }]
             }]
-        }, {
+        }, /*{
             xtype: 'textfield',
             fieldLabel: _('mlmsystem_name'),
             name: 'username',
@@ -189,46 +214,19 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
             hiddenName: 'parent',
             anchor: '99%',
             allowBlank: true
-        }];
+        }*/];
     },
 
+    getClientHistory: function(config) {
 
-    getLeftFields: function(config) {
-        return [{
-            xtype: 'textfield',
-            fieldLabel: _('mlmsystem_name'),
-            name: 'username',
-            anchor: '99%',
-            allowBlank: true
-        }, {
-            xtype: 'mlmsystem-combo-client',
-            custm: true,
-            clear: true,
-            class: config.class,
-            fieldLabel: _('mlmsystem_parent'),
-            hiddenName: 'parent',
-            anchor: '99%',
-            allowBlank: true
-        }];
     },
 
-    getRightFields: function(config) {
-        return [{
-            xtype: 'textfield',
-            fieldLabel: _('mlmsystem_email'),
-            name: 'email',
-            anchor: '99%',
-            allowBlank: false
-        }, {
-            xtype: 'mlmsystem-combo-status',
-            custm: true,
-            clear: true,
-            class: config.class,
-            fieldLabel: _('mlmsystem_status'),
-            hiddenName: 'status',
-            anchor: '99%',
-            allowBlank: false
-        }];
+    getBalanceHistory: function(config) {
+
+    },
+
+    getOperationHistory: function(config) {
+
     }
 
 });

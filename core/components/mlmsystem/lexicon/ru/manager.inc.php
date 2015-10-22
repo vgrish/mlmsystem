@@ -115,7 +115,9 @@ $_lang['mlmsystem_createdon'] = 'Дата создания';
 $_lang['mlmsystem_updatedon'] = 'Дата обновления';
 $_lang['mlmsystem_url_referrer'] = 'Реферальная ссылка';
 $_lang['mlmsystem_url'] = 'Cсылка';
-
+$_lang['mlmsystem_history_client'] = 'История';
+$_lang['mlmsystem_history_balance'] = 'Баланс';
+$_lang['mlmsystem_history_operation'] = 'Операции';
 
 /* action */
 $_lang['mlmsystem_action_active'] = 'Включить';
