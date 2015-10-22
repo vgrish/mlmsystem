@@ -419,7 +419,7 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                 action: 'mgr/client/get',
                 id: id,
                 process: true,
-                aliases: Ext.util.JSON.encode(['User', 'UserProfile'])
+                aliases: Ext.util.JSON.encode(['User', 'UserProfile', 'ParentUser'])
             },
             listeners: {
                 success: {

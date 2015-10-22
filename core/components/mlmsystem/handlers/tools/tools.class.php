@@ -79,6 +79,7 @@ class SystemTools implements MlmSystemToolsInterface
 	public function processObject(xPDOObject $instance, $format = false, $replace = true, $keyPrefix = '', $autoPrefix = false)
 	{
 		$pls = $instance->toArray();
+		$prefix = '';
 
 		switch (true) {
 			case $instance instanceof MlmSystemClient:
@@ -87,21 +88,17 @@ class SystemTools implements MlmSystemToolsInterface
 				$pls['hash_referrer'] = $pls['id'];
 				$pls['url_referrer'] = $pls['id'];
 
-				if ($autoPrefix AND empty($keyPrefix)) {
-					$keyPrefix = 'client_';
-				}
+				$prefix = 'client_';
 				break;
 			case $instance instanceof MlmSystemStatus:
-				if ($autoPrefix AND empty($keyPrefix)) {
-					$keyPrefix = 'status_';
-				}
+
+				$prefix = 'status_';
 				break;
 			case $instance instanceof MlmSystemEmail:
 				break;
 			case $instance instanceof MlmSystemLog:
-				if ($autoPrefix AND empty($keyPrefix)) {
-					$keyPrefix = 'log_';
-				}
+
+				$prefix = 'log_';
 				break;
 			case $instance instanceof modUser:
 				unset(
@@ -113,14 +110,12 @@ class SystemTools implements MlmSystemToolsInterface
 					$pls['password'],
 					$pls['salt']
 				);
-				if ($autoPrefix AND empty($keyPrefix)) {
-					$keyPrefix = 'user_';
-				}
+
+				$prefix = 'user_';
 				break;
 			case $instance instanceof modUserProfile:
-				if ($autoPrefix AND empty($keyPrefix)) {
-					$keyPrefix = 'profile_';
-				}
+
+				$prefix = 'profile_';
 				break;
 			default:
 				break;
@@ -140,6 +135,10 @@ class SystemTools implements MlmSystemToolsInterface
 					$pls['format_' . $key] = $this->$keyMethod($val);
 				}
 			}
+		}
+
+		if ($autoPrefix) {
+			$keyPrefix .= $prefix;
 		}
 
 		if (!empty($keyPrefix)) {

@@ -2,7 +2,7 @@ mlmsystem.window.CreateUpdate = function (config) {
     config = config || {};
     Ext.applyIf(config, {
         title: _('create'),
-        width: 550,
+        width: 750,
         autoHeight: true,
         url: mlmsystem.config.connector_url,
         action: 'mgr/client/create',
@@ -87,15 +87,16 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
                 msgTarget: 'under',
                 border: false
             },
-            style: 'padding:15px 5px;text-align:center;',
+            style: 'padding:10px 0px 0px 0px;text-align:center;',
             items: [{
                 columnWidth: .25,
                 layout: 'form',
                 items: [{
                     xtype: 'displayfield',
-                    name: 'user_username',
+                    /*name: 'user_username',*/
                     fieldLabel: _('mlmsystem_user'),
-                    anchor: '100%'
+                    anchor: '100%',
+                    html: mlmsystem.utils.userLink(config.record.user_username, config.record.user_id)
                 }]
             }, {
                 columnWidth: .25,
@@ -113,7 +114,8 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
                     xtype: 'displayfield',
                     name: 'client_incoming',
                     fieldLabel: _('mlmsystem_incoming'),
-                    anchor: '100%'
+                    anchor: '100%',
+                    cls: 'green'
                 }]
             }, {
                 columnWidth: .25,
@@ -122,6 +124,53 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
                     xtype: 'displayfield',
                     name: 'client_outcoming',
                     fieldLabel: _('mlmsystem_outcoming'),
+                    anchor: '100%',
+                    cls: 'red'
+                }]
+            }]
+        }, {
+            layout: 'column',
+            defaults: {
+                msgTarget: 'under',
+                border: false
+            },
+            style: 'padding:10px 0px 0px 0px;text-align:center;',
+            items: [{
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    /* name: 'parent_user_username',*/
+                    fieldLabel: _('mlmsystem_parent'),
+                    anchor: '100%',
+                    html: mlmsystem.utils.userLink(config.record.parent_user_username, config.record.parent_user_id)
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    /* name: 'client_url_referrer',*/
+                    fieldLabel: _('mlmsystem_url_referrer'),
+                    anchor: '100%',
+                    html: mlmsystem.utils.Link(config.record.client_url_referrer)
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    name: 'client_date_createdon',
+                    fieldLabel: _('mlmsystem_createdon'),
+                    anchor: '100%'
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    name: 'client_date_updatedon',
+                    fieldLabel: _('mlmsystem_updatedon'),
                     anchor: '100%'
                 }]
             }]

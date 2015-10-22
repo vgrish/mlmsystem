@@ -438,6 +438,18 @@ mlmsystem.utils.userLink = function(value, id) {
 };
 
 
+mlmsystem.utils.Link = function(url, value) {
+    if (!url) {
+        return '';
+    }
+    if (!value) {
+        value = _('mlmsystem_url');
+    }
+
+    return String.format('<a href="{0}" target="_blank" class="easy-link green">{1}</a>', url, value);
+};
+
+
 mlmsystem.utils.renderColor = function(value, props, row) {
     return String.format('<span class="mlmsystem-grid-color" style="background: #{0}"></span>', value);
 };
@@ -453,5 +465,4 @@ mlmsystem.utils.renderReplace = function(value, replace, color) {
         return String.format('<span>{0}</span>', replace);
     }
     return String.format('<span class="mlmsystem-render-color" style="color: #{1}">{0}</span>', replace, color);
-
 };

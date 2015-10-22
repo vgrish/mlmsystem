@@ -45,6 +45,9 @@
 			{"class":"MlmSystemClient"}
 			]]></criteria>
 		</aggregate>
+		<aggregate alias="ParentUser" class="modUser" local="parent" foreign="id" cardinality="one" owner="local" />
+		<aggregate alias="ParentUserProfile" class="modUserProfile" local="parent" foreign="internalKey" owner="local" cardinality="one" />
+
 	</object>
 
 

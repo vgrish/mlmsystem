@@ -37,8 +37,12 @@ class modMlmSystemClientGetProcessor extends modObjectGetProcessor
 		$aliases = $this->modx->fromJSON($this->getProperty('aliases', ''));
 		if (!empty($aliases)) {
 			foreach ($aliases as $alias) {
+				$keyPrefix = '';
+				if (in_array($alias, array('ParentUser', 'ParentUserProfile'))) {
+					$keyPrefix = 'parent_';
+				}
 				if ($o = $this->object->getOne($alias)) {
-					$set = array_merge($this->MlmSystem->Tools->processObject($o, true, true, '', true), $set);
+					$set = array_merge($this->MlmSystem->Tools->processObject($o, true, true, $keyPrefix, true), $set);
 				}
 			}
 		}

@@ -111,6 +111,10 @@ $_lang['mlmsystem_leader_active'] = 'Руководитель';
 $_lang['mlmsystem_parent'] = 'Родитель';
 $_lang['mlmsystem_level'] = 'Уровень';
 $_lang['mlmsystem_type_change'] = 'Тип изменений';
+$_lang['mlmsystem_createdon'] = 'Дата создания';
+$_lang['mlmsystem_updatedon'] = 'Дата обновления';
+$_lang['mlmsystem_url_referrer'] = 'Реферальная ссылка';
+$_lang['mlmsystem_url'] = 'Cсылка';
 
 
 /* action */
