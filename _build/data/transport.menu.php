@@ -17,6 +17,14 @@ $tmp = array(
 			'controller' => 'controllers/client'
 		)
 	),
+	'mlmsystem_stories' => array(
+		'description' => 'mlmsystem_stories_desc',
+		'parent' => 'mlmsystem',
+		'menuindex' => 3,
+		'action' => array(
+			'controller' => 'controllers/story'
+		)
+	),
 
 );
 

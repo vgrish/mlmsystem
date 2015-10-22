@@ -18,6 +18,8 @@ interface MlmSystemToolsInterface
 
 	public function getClientFields();
 
+	public function getStoryFields();
+
 	public function getClientWindowUpdateTabs();
 
 	public function getMenuActions();
@@ -324,6 +326,18 @@ class SystemTools implements MlmSystemToolsInterface
 			'id', 'username', 'disabled', 'deleted', 'properties', 'actions'))));
 		return $gridFields;
 	}
+
+	/** @return array Story fields */
+	public function getStoryFields()
+	{
+		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('story_grid_fields', null,
+			'id,identifier,class,username,target,value,timestamp,ip', true)));
+		$gridFields = array_values(array_unique(array_merge($gridFields, array(
+			'id', 'username', 'identifier', 'class', 'user', 'target', 'actions'))));
+		return $gridFields;
+	}
+
+
 
 	/** @return array Client Window Update Tabs */
 	public function getClientWindowUpdateTabs()

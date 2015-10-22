@@ -9,12 +9,17 @@ $tmp = array(
 		'xtype' => 'combo-boolean',
 		'area' => 'mlmsystem_main',
 	),
+
 	'mail_notice' => array(
 		'value' => true,
 		'xtype' => 'combo-boolean',
 		'area' => 'mlmsystem_main'
 	),
-
+	'allow_remove_story' => array(
+		'value' => true,
+		'xtype' => 'combo-boolean',
+		'area' => 'mlmsystem_main',
+	),
 
 	'referrer_salt' => array(
 		'value' => 'ZsBE8HC8y*fV',

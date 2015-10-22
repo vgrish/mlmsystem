@@ -48,24 +48,6 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
             activeTab: 0,
             autoHeight: true,
             items: this.getTabs(config)
-            //[{
-            //        title: _('mlmsystem_client'),
-            //        layout: 'form',
-            //        items: this.getClient(config)
-            //    }, {
-            //        title: _('mlmsystem_history_client'),
-            //        layout: 'form',
-            //        items: this.getClientHistory(config)
-            //    }, {
-            //        title: _('mlmsystem_history_balance'),
-            //        layout: 'form',
-            //        items: this.getBalanceHistory(config)
-            //    }, {
-            //        title: _('mlmsystem_history_operation'),
-            //        layout: 'form',
-            //        items: this.getOperationHistory(config)
-            //    }]
-
         }]
     },
 
@@ -78,17 +60,17 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
                 layout: 'form',
                 items: this.getClient(config)
             },
-            history_client: {
+            story_client: {
                 layout: 'form',
-                items: this.getClientHistory(config)
+                items: this.getClientStory(config)
             },
-            history_balance: {
+            story_balance: {
                 layout: 'form',
-                items: this.getBalanceHistory(config)
+                items: this.getBalanceStory(config)
             },
-            history_operation: {
+            story_operation: {
                 layout: 'form',
-                items: this.getOperationHistory(config)
+                items: this.getOperationStory(config)
             }
         };
 
@@ -217,15 +199,15 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
         }*/];
     },
 
-    getClientHistory: function(config) {
+    getClientStory: function(config) {
 
     },
 
-    getBalanceHistory: function(config) {
+    getBalanceStory: function(config) {
 
     },
 
-    getOperationHistory: function(config) {
+    getOperationStory: function(config) {
 
     }
 
