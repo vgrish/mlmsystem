@@ -49,6 +49,12 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 			$c->where(array('class' => $class));
 		}
 
+		$target = $this->getProperty('target');
+		if ($target) {
+			$c->where(array('target' => $target));
+		}
+
+
 //		if ($this->getProperty('combo')) {
 //			$c->select('id,name');
 //			if ($instance_id = $this->getProperty('instance_id')) {

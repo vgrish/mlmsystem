@@ -128,6 +128,44 @@ Ext.extend(mlmsystem.grid.Story, MODx.grid.Grid, {
             }]
         });
 
+        tbar.push({
+            text: '<i class="fa fa-refresh"></i>',
+            handler: this._updateRow,
+            scope: this
+        });
+
+        tbar.push('->');
+        tbar.push({
+            xtype: 'mlmsystem-combo-log-class',
+            width: 210,
+            custm: true,
+            clear: true,
+            addall: true,
+            value: 0,
+            target: '',
+            listeners: {
+                select: {
+                    fn: this._filterByCombo,
+                    scope: this
+                }
+            }
+        });
+        tbar.push({
+            xtype: 'mlmsystem-combo-log-target',
+            width: 210,
+            custm: true,
+            clear: true,
+            addall: true,
+            value: 0,
+            class: '',
+            listeners: {
+                select: {
+                    fn: this._filterByCombo,
+                    scope: this
+                }
+            }
+        });
+
         return tbar;
     },
 
@@ -296,6 +334,11 @@ Ext.extend(mlmsystem.grid.Story, MODx.grid.Grid, {
                 }
             }
         });
+    },
+
+    _filterByCombo: function (cb) {
+        this.getStore().baseParams[cb.name] = cb.value;
+        this.getBottomToolbar().changePage(1);
     },
 
     _doSearch: function(tf) {

@@ -141,3 +141,10 @@ $_lang['mlmsystem_confirm_send'] = 'Вы уверены, что хотите о�
 
 $_lang['mlmsystem_balance_take'] = 'Списать';
 $_lang['mlmsystem_balance_put'] = 'Пополнить';
+
+$_lang['mlmsystem_class_MlmSystemClient'] = 'Клиент';
+$_lang['mlmsystem_class_MlmSystemStatus'] = 'Статус';
+
+$_lang['mlmsystem_target_balance'] = 'Баланс';
+$_lang['mlmsystem_target_put'] = 'Пополнение';
+$_lang['mlmsystem_target_take'] = 'Списание';
