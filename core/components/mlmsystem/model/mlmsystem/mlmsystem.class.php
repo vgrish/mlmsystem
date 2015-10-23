@@ -150,7 +150,7 @@ class MlmSystem
 						$this->modx->regClientStartupScript($script, true);
 					}
 
-					$this->Tools->saveProperties($this->config);
+					//$this->Tools->saveProperties($this->config);
 					$this->initialized[$ctx] = true;
 
 				}
