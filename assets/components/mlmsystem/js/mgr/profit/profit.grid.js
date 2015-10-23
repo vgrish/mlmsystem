@@ -88,8 +88,8 @@ mlmsystem.grid.Profit = function(config) {
     });
     mlmsystem.grid.Profit.superclass.constructor.call(this, config);
     this.getStore().sortInfo = {
-        field: 'id',
-        direction: 'DESC'
+        field: 'rank',
+        direction: 'ASC'
     };
 };
 Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
@@ -128,44 +128,6 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
             }]
         });
 
-        tbar.push({
-            text: '<i class="fa fa-refresh"></i>',
-            handler: this._updateRow,
-            scope: this
-        });
-
-        tbar.push('->');
-        tbar.push({
-            xtype: 'mlmsystem-combo-log-class',
-            width: 210,
-            custm: true,
-            clear: true,
-            addall: true,
-            value: 0,
-            target: '',
-            listeners: {
-                select: {
-                    fn: this._filterByCombo,
-                    scope: this
-                }
-            }
-        });
-        tbar.push({
-            xtype: 'mlmsystem-combo-log-target',
-            width: 210,
-            custm: true,
-            clear: true,
-            addall: true,
-            value: 0,
-            class: '',
-            listeners: {
-                select: {
-                    fn: this._filterByCombo,
-                    scope: this
-                }
-            }
-        });
-
         return tbar;
     },
 
@@ -176,28 +138,23 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
                 width: 15,
                 sortable: true
             },
-            username: {
-                width: 50,
-                sortable: true,
-                renderer: function (value, metaData, record) {
-                    return mlmsystem.utils.userLink(value, record['data']['user'])
-                }
+            event: {
+                width: 30,
+                sortable: true
             },
-            target: {
+            name: {
+                width: 30,
+                sortable: true
+            },
+            profit: {
                 width: 15,
                 sortable: true
             },
-            value: {
+            class: {
                 width: 15,
                 sortable: true
             },
 
-            timestamp: {
-                width: 25,
-                sortable: true,
-                renderer: mlmsystem.utils.formatDate
-
-            },
             actions: {
                 width: 25,
                 sortable: false,
@@ -295,6 +252,26 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
             },
             this
         );
+    },
+
+    create: function(btn, e) {
+        var record = {
+            active: 1,
+        };
+
+        w = MODx.load({
+            xtype: 'mlmsystem-profit-window-create',
+            record: record,
+            listeners: {
+                success: {
+                    fn: this.refresh,
+                    scope: this
+                }
+            }
+        });
+        w.reset();
+        w.setValues(record);
+        w.show(e.target);
     },
 
     update: function(btn, e, row) {

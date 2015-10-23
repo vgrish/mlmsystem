@@ -33,6 +33,8 @@ $_lang['mlmsystem_header_outcoming'] = '<i class="fa fa-money red"></i>';
 $_lang['mlmsystem_header_handler'] = '<i class="fa fa-file-code-o"></i>';
 $_lang['mlmsystem_header_level'] = '<i class="fa fa-sort-amount-asc"></i>';
 $_lang['mlmsystem_header_children'] = '<i class="fa fa-users"></i>';
+$_lang['mlmsystem_header_event'] = '<i class="fa fa-fire"></i>';
+$_lang['mlmsystem_header_profit'] = '<i class="fa fa-money"></i>';
 
 /* tooltip */
 $_lang['mlmsystem_tooltip_id'] = 'Id';
@@ -67,6 +69,9 @@ $_lang['mlmsystem_tooltip_outcoming'] = 'Расход';
 $_lang['mlmsystem_tooltip_handler'] = 'Обработчик';
 $_lang['mlmsystem_tooltip_level'] = 'Уровень';
 $_lang['mlmsystem_tooltip_children'] = 'Дети';
+$_lang['mlmsystem_tooltip_event'] = 'События';
+$_lang['mlmsystem_tooltip_profit'] = 'Начисления';
+
 
 /* fields */
 $_lang['mlmsystem_name'] = 'Имя';
@@ -119,7 +124,8 @@ $_lang['mlmsystem_updatedon'] = 'Дата обновления';
 $_lang['mlmsystem_url_referrer'] = 'Реферальная ссылка';
 $_lang['mlmsystem_url'] = 'Cсылка';
 $_lang['mlmsystem_timestamp'] = 'Метка';
-
+$_lang['mlmsystem_event'] = 'Событие';
+$_lang['mlmsystem_profit'] = 'Начисления';
 
 
 $_lang['mlmsystem_story_client'] = 'История';

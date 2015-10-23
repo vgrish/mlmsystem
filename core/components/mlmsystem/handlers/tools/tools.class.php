@@ -334,9 +334,9 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getProfitFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('profit_grid_fields', null,
-			'id,username,balance,status,level,children,createdon,updatedon,disabled', true)));
+			'id,name,event,profit,class', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
-			'id', 'username', 'disabled', 'deleted', 'properties', 'actions'))));
+			'id', 'event', 'class', 'active', 'description', 'properties', 'actions'))));
 		return $gridFields;
 	}
 
@@ -349,8 +349,6 @@ class SystemTools implements MlmSystemToolsInterface
 			'id', 'username', 'identifier', 'class', 'user', 'target', 'actions'))));
 		return $gridFields;
 	}
-
-
 
 	/** @return array Client Window Update Tabs */
 	public function getClientWindowUpdateTabs()

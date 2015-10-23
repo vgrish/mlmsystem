@@ -31,22 +31,6 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
             anchor: '99%',
             allowBlank: false
         }, {
-            xtype: 'colorpalette',
-            cls: 'mlmsystem-colorpalette',
-            itemCls: 'x-color-palette mlmsystem-colorpalette-main',
-            fieldLabel: _('mlmsystem_color'),
-            colors: mlmsystem.utils.colors,
-/*            tpl: new Ext.XTemplate(
-                '<tpl for="."><a href="#" class="color-{.}" hidefocus="on"><em><span style="background:#{.}" unselectable="on">&#160;</span></em></a></tpl>'
-            ),*/
-            listeners: {
-                select: mlmsystem.utils.handleColor,
-                beforerender: mlmsystem.utils.handleColor
-            }
-        }, {
-            xtype: 'hidden',
-            name: 'color'
-        }, {
             xtype: 'xcheckbox',
             hideLabel: true,
             boxLabel: _('mlmsystem_email_user'),
