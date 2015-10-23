@@ -241,3 +241,11 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-log-target-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-log-target-go:before {content: '\f0dc' !important;}
 
+/* mlmsystem-balance-change-type field */
+.x-field-mlmsystem-event-clear,
+.x-field-mlmsystem-event-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-event-clear:hover,
+.x-field-mlmsystem-event-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-event-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-event-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-event-go:before {content: '\f06d' !important;}

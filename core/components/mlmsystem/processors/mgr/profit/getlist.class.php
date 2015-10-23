@@ -32,26 +32,12 @@ class modMlmSystemProfitGetListProcessor extends modObjectGetListProcessor {
 			$c->where(array('class' => $class));
 		}
 
-		if ($this->getProperty('combo')) {
-			$c->select('id,name');
-			if ($instance_id = $this->getProperty('instance_id')) {
-				if ($instance = $this->modx->getObject($class, $instance_id)) {
-					$status = $instance->getOne('Status');
-					if ($status->get('final') == 1) {
-						$c->where(array('id' => $status->get('id')));
-					}
-					else if ($status->get('fixed') == 1) {
-						$c->where(array('rank:>=' => $status->get('rank')));
-					}
-				}
-			}
-		}
-
 		$query = trim($this->getProperty('query'));
 		if ($query) {
 			$c->where(array(
 				'name:LIKE' => "%{$query}%",
 				'OR:description:LIKE' => "%{$query}%",
+				'OR:event:LIKE' => "%{$query}%",
 			));
 		}
 

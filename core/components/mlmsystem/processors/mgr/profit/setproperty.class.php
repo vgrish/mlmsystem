@@ -1,9 +1,11 @@
 <?php
 
+require_once dirname(__FILE__) . '/update.class.php';
+
 /**
  * SetProperty a MlmSystemProfit
  */
-class modMlmSystemProfitSetPropertyProcessor extends modObjectUpdateProcessor
+class modMlmSystemProfitSetPropertyProcessor extends modMlmSystemProfitUpdateProcessor
 {
 	/** @var MlmSystemProfit $object */
 	public $object;

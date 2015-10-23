@@ -125,7 +125,13 @@ $_lang['mlmsystem_url_referrer'] = 'Реферальная ссылка';
 $_lang['mlmsystem_url'] = 'Cсылка';
 $_lang['mlmsystem_timestamp'] = 'Метка';
 $_lang['mlmsystem_event'] = 'Событие';
+$_lang['mlmsystem_properties'] = 'Свойства';
 $_lang['mlmsystem_profit'] = 'Начисления';
+$_lang['mlmsystem_add_profit'] = 'Начисления доп.';
+$_lang['mlmsystem_order_profit'] = 'Начисления заказа';
+$_lang['mlmsystem_initiator_profit'] = 'Начисления иниц.';
+$_lang['mlmsystem_tree_profit'] = 'Начисления дерева';
+
 
 
 $_lang['mlmsystem_story_client'] = 'История';

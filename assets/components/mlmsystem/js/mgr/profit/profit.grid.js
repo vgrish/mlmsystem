@@ -96,7 +96,7 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
     windows: {},
 
     getFields: function (config) {
-        var fields = mlmsystem.config.story_grid_fields;
+        var fields = mlmsystem.config.profit_grid_fields;
 
         return fields;
     },
@@ -140,19 +140,37 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
             },
             event: {
                 width: 30,
-                sortable: true
+                sortable: true,
+                editor: {
+                    xtype: 'mlmsystem-combo-event',
+                    custm: true,
+                    clear: true,
+                    allowBlank: false
+                }
             },
             name: {
                 width: 30,
-                sortable: true
+                sortable: true,
+                editor: {
+                    xtype: 'textfield',
+                    allowBlank: false
+                }
             },
             profit: {
                 width: 15,
-                sortable: true
+                sortable: true,
+                editor: {
+                    xtype: 'numberfield',
+                    allowBlank: false
+                }
             },
             class: {
                 width: 15,
-                sortable: true
+                sortable: true,
+                editor: {
+                    xtype: 'textfield',
+                    allowBlank: false
+                }
             },
 
             actions: {
@@ -162,7 +180,9 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
                 id: 'actions'
             }
         };
-        for (var field in add) {
+
+        for (var i = 0; i < mlmsystem.config.profit_grid_fields.length; i++) {
+            var field = mlmsystem.config.profit_grid_fields[i];
             if (add[field]) {
                 Ext.applyIf(add[field], {
                     header: _('mlmsystem_header_' + field),
@@ -257,6 +277,12 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
     create: function(btn, e) {
         var record = {
             active: 1,
+            profit: 0,
+            add_profit: 0,
+            order_profit: 0,
+            initiator_profit: 0,
+            tree_active: 1,
+            tree_profit: '{}'
         };
 
         w = MODx.load({
@@ -293,9 +319,12 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
                     fn: function(r) {
                         var record = r.object;
                         var w = MODx.load({
-                            xtype: 'mlmsystem-profit-window-view',
-                            title: _('mlmsystem_action_view'),
+                            xtype: 'mlmsystem-profit-window-create',
+                            title: _('mlmsystem_action_update'),
+                            action: 'mgr/profit/update',
+                            class: this.config.class,
                             record: record,
+                            update: true,
                             listeners: {
                                 success: {
                                     fn: this.refresh,

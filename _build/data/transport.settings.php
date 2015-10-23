@@ -21,6 +21,13 @@ $tmp = array(
 		'area' => 'mlmsystem_main',
 	),
 
+	'exclude_event_groupname' => array(
+		'xtype' => 'textarea',
+		'value' => 'Categories,Chunks,Contexts,Internationalization,Media Sources,Plugin Events,Plugins,Property Sets,Resources,RichText Editor,Security,Snippets,Template Variables,Templates,User Groups,Users',
+		'area' => 'mlmsystem_main',
+	),
+
+
 	'referrer_salt' => array(
 		'value' => 'ZsBE8HC8y*fV',
 		'xtype' => 'textfield',
