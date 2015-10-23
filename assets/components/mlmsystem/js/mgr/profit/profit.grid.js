@@ -261,6 +261,14 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
         })
     },
 
+    active: function(btn, e) {
+        this.setAction('setproperty', 'active', 1);
+    },
+
+    inactive: function(btn, e) {
+        this.setAction('setproperty', 'active', 0);
+    },
+
     remove: function() {
         Ext.MessageBox.confirm(
             _('mlmsystem_action_remove'),

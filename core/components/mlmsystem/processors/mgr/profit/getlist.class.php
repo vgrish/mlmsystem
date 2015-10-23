@@ -98,6 +98,15 @@ class modMlmSystemProfitGetListProcessor extends modObjectGetListProcessor {
 		}
 
 		if ($array['editable']) {
+			// sep
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => '',
+				'title' => '',
+				'action' => 'sep',
+				'button' => false,
+				'menu' => true,
+			);
 			// Remove
 			$array['actions'][] = array(
 				'cls' => '',

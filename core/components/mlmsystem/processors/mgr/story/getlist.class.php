@@ -112,7 +112,15 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 			'button' => true,
 			'menu' => true,
 		);
-
+		// sep
+		$array['actions'][] = array(
+			'cls' => '',
+			'icon' => '',
+			'title' => '',
+			'action' => 'sep',
+			'button' => false,
+			'menu' => true,
+		);
 		// Remove
 		$array['actions'][] = array(
 			'cls' => '',

@@ -67,7 +67,7 @@ class modMlmSystemProfitUpdateProcessor extends modObjectUpdateProcessor {
 				$this->setProperty('tree_profit', $this->modx->toJSON($treeProfit));
 			}
 		}
-		
+
 		return parent::beforeSet();
 	}
 }
