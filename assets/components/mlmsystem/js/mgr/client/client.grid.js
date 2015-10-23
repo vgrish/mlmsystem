@@ -266,6 +266,10 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                 width: 15,
                 sortable: true
             },
+            children: {
+                width: 15,
+                sortable: true
+            },
             createdon: {
                 width: 25,
                 sortable: true,

@@ -20,17 +20,20 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 
 		return parent::initialize();
 	}
-
+    
 	/** {@inheritDoc} */
 	public function prepareQueryBeforeCount(xPDOQuery $c)
 	{
 		if (!$this->getProperty('combo')) {
 
+			$c->groupby('MlmSystemClient.id');
+			
 			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
 			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
 			$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
 			$c->leftJoin('MlmSystemPath', 'MlmSystemPath', 'MlmSystemPath.id = MlmSystemClient.id');
-
+			$c->leftJoin('MlmSystemClient', 'MlmSystemClientParent', 'MlmSystemClientParent.parent = MlmSystemClient.id');
+		
 			$c->select($this->modx->getSelectColumns('MlmSystemClient', 'MlmSystemClient'));
 			$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
 			$c->select(array(
@@ -40,6 +43,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 				'status_name' => 'MlmSystemStatus.name',
 				'status_color' => 'MlmSystemStatus.color',
 				'level' => 'MlmSystemPath.level',
+				'children' =>'COUNT(MlmSystemClientParent.parent)'
 			));
 		}
 		else {
