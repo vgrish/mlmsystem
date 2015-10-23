@@ -37,25 +37,11 @@ class modMlmSystemProfitUpdateProcessor extends modObjectUpdateProcessor {
 			$this->modx->error->addField('event', $this->modx->lexicon('mlmsystem_err_ae'));
 		}
 
-		$class = trim($this->getProperty('class'));
-		if (empty($class)) {
-			$this->modx->error->addField('class', $this->modx->lexicon('mlmsystem_err_ae'));
-		}
-
 		if ($this->modx->getCount($this->classKey, array(
-			'name' => $name,
 			'event' => $event,
 			'id:!=' => $id
 		))) {
 			$this->modx->error->addField('name', $this->modx->lexicon('mlmsystem_err_ae'));
-		}
-
-		if ($this->modx->getCount($this->classKey, array(
-			'class' => $class,
-			'event' => $event,
-			'id:!=' => $id
-		))) {
-			$this->modx->error->addField('event', $this->modx->lexicon('mlmsystem_err_ae'));
 		}
 
 		if ($this->getProperty('tree_active')) {

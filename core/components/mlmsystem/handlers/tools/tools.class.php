@@ -334,9 +334,9 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getProfitFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('profit_grid_fields', null,
-			'id,name,event,profit,class', true)));
+			'id,name,event,profit', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
-			'id', 'event', 'class', 'active', 'description', 'properties', 'actions'))));
+			'id', 'event', 'active', 'description', 'properties', 'actions'))));
 		return $gridFields;
 	}
 

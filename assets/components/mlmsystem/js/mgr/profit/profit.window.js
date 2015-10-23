@@ -78,21 +78,6 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                             anchor: '99%',
                             allowBlank: false
                         }]
-                    }]
-                },{
-                    layout: 'column',
-                    border: false,
-                    items: [{
-                        columnWidth: .5,
-                        border: false,
-                        layout: 'form',
-                        items: [{
-                            xtype: 'textfield',
-                            fieldLabel: _('mlmsystem_class'),
-                            name: 'class',
-                            anchor: '99%',
-                            allowBlank: false
-                        }]
                     }, {
                         columnWidth: .5,
                         border: false,

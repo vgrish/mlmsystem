@@ -164,15 +164,6 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
                     allowBlank: false
                 }
             },
-            class: {
-                width: 15,
-                sortable: true,
-                editor: {
-                    xtype: 'textfield',
-                    allowBlank: false
-                }
-            },
-
             actions: {
                 width: 25,
                 sortable: false,

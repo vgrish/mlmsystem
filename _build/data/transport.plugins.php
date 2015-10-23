@@ -3,12 +3,19 @@
 $plugins = array();
 
 $tmp = array(
-	'MlmSystem' => array(
-		'file' => 'mlmsystem',
+	'MlmSystemSystems' => array(
+		'file' => 'systems',
 		'description' => '',
 		'events' => array(
 			'OnUserRemove' => array(),
 			'OnWebPageInit' => array(),
+		)
+	),
+	'MlmSystemEvents' => array(
+		'file' => 'events',
+		'description' => '',
+		'locked' => 1,
+		'events' => array(
 		)
 	)
 
