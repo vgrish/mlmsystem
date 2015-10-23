@@ -19,6 +19,8 @@ class MlmSystem
 	public $Tools;
 	/** @var SystemPaths $Paths */
 	public $Paths;
+	/** @var SystemProfits $Profits */
+	public $Profits;
 
 	/* @var pdoTools $pdoTools */
 	public $pdoTools;
@@ -121,6 +123,9 @@ class MlmSystem
 		}
 		if (!$this->Paths) {
 			$this->loadPaths();
+		}
+		if (!$this->Profits) {
+			$this->loadProfits();
 		}
 
 		if (!$this->pdoTools) {
@@ -233,7 +238,7 @@ class MlmSystem
 	public function loadTools()
 	{
 		if (!is_object($this->Tools) OR !($this->Tools instanceof MlmSystemToolsInterface)) {
-			$toolsClass = $this->modx->loadClass('tools.Tools', $this->config['handlersPath'], true, true);
+			$toolsClass = $this->modx->loadClass('tools.SystemTools', $this->config['handlersPath'], true, true);
 			if ($derivedClass = $this->getOption('handler_class_tools', null, '')) {
 				if ($derivedClass = $this->modx->loadClass('tools.' . $derivedClass, $this->config['handlersPath'], true, true)) {
 					$toolsClass = $derivedClass;
@@ -253,7 +258,7 @@ class MlmSystem
 	public function loadPaths()
 	{
 		if (!is_object($this->Paths) OR !($this->Paths instanceof MlmSystemPathsInterface)) {
-			$pathsClass = $this->modx->loadClass('paths.Paths', $this->config['handlersPath'], true, true);
+			$pathsClass = $this->modx->loadClass('paths.SystemPaths', $this->config['handlersPath'], true, true);
 			if ($derivedClass = $this->getOption('handler_class_paths', null, '')) {
 				if ($derivedClass = $this->modx->loadClass('paths.' . $derivedClass, $this->config['handlersPath'], true, true)) {
 					$pathsClass = $derivedClass;
@@ -266,6 +271,25 @@ class MlmSystem
 		return !empty($this->Paths) AND $this->Paths instanceof MlmSystemPathsInterface;
 	}
 
+	/**
+	 * Loads an instance of Paths
+	 * @return boolean
+	 */
+	public function loadProfits()
+	{
+		if (!is_object($this->Profits) OR !($this->Profits instanceof MlmSystemProfitsInterface)) {
+			$profitsClass = $this->modx->loadClass('profits.SystemProfits', $this->config['handlersPath'], true, true);
+			if ($derivedClass = $this->getOption('handler_class_profits', null, '')) {
+				if ($derivedClass = $this->modx->loadClass('profits.' . $derivedClass, $this->config['handlersPath'], true, true)) {
+					$profitsClass = $derivedClass;
+				}
+			}
+			if ($profitsClass) {
+				$this->Profits = new $profitsClass($this, $this->config);
+			}
+		}
+		return !empty($this->Profits) AND $this->Profits instanceof MlmSystemProfitsInterface;
+	}
 
 	/**
 	 * Shorthand for the call of processor
@@ -427,9 +451,7 @@ class MlmSystem
 			'message' => $this->lexicon($message, $placeholders),
 			'data' => $data,
 		);
-		return $this->config['jsonResponse']
-			? $this->modx->toJSON($response)
-			: $response;
+		return $this->config['jsonResponse'] ? $this->modx->toJSON($response) : $response;
 	}
 
 	/**
@@ -445,9 +467,7 @@ class MlmSystem
 			'message' => $this->lexicon($message, $placeholders),
 			'data' => $data,
 		);
-		return $this->config['jsonResponse']
-			? $this->modx->toJSON($response)
-			: $response;
+		return $this->config['jsonResponse'] ? $this->modx->toJSON($response) : $response;
 	}
 
 	public function printLog($message = '', $show = false)

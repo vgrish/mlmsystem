@@ -70,6 +70,13 @@ $tmp = array(
 		'xtype' => 'textfield',
 		'area' => 'mlmsystem_handler'
 	),
+	'handler_class_profits' => array(
+		'value' => 'SystemProfits',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_handler'
+	),
+
+
 	'handler_class_client_validator' => array(
 		'value' => 'ClientValidator',
 		'xtype' => 'textfield',
@@ -80,6 +87,8 @@ $tmp = array(
 		'xtype' => 'textfield',
 		'area' => 'mlmsystem_handler'
 	),
+
+
 
 
 	'date_format' => array(
