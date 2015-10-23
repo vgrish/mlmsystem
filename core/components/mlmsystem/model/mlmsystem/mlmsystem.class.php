@@ -381,6 +381,40 @@ class MlmSystem
 	}
 
 	/**
+	 * set/remove Event to Plugin
+	 *
+	 * @param string $action
+	 * @param string $nameEvent
+	 * @param string $namePlugin
+	 * @param int $priority
+	 * @return bool
+	 */
+	public function setPluginEvent($nameEvent = '', $action = 'create', $namePlugin = 'MlmSystemEvents', $priority = 10)
+	{
+		if (
+			empty($nameEvent) OR !$plugin = $this->modx->getObject('modPlugin', array('name' => $namePlugin))
+		) {
+			return false;
+		}
+		$id = $plugin->get('id');
+		if (!$event = $this->modx->getObject('modPluginEvent', array('pluginid' => $id, 'event' => $nameEvent))) {
+			$event = $this->modx->newObject('modPluginEvent');
+		}
+		switch ($action) {
+			case 'update':
+			case 'create':
+				$event->set('pluginid', $id);
+				$event->set('event', $nameEvent);
+				$event->set('priority', $priority);
+				return $event->save();
+				break;
+			default:
+				return $event->remove();
+				break;
+		}
+	}
+
+	/**
 	 * @param string $message
 	 * @param array $data
 	 * @param array $placeholders

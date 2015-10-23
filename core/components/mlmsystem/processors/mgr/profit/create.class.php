@@ -3,14 +3,29 @@
 /**
  * Create an MlmSystemProfit
  */
-class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor {
+class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor
+{
 	public $objectType = 'MlmSystemProfit';
 	public $classKey = 'MlmSystemProfit';
 	public $languageTopics = array('mlmsystem');
 	public $permission = '';
 
+	/** @var MlmSystem $MlmSystem */
+	public $MlmSystem;
+
 	/** {@inheritDoc} */
-	public function beforeSet() {
+	public function initialize()
+	{
+		/** @var mlmsystem $mlmsystem */
+		$this->MlmSystem = $this->modx->getService('mlmsystem');
+		$this->MlmSystem->initialize($this->getProperty('context', $this->modx->context->key));
+
+		return parent::initialize();
+	}
+
+	/** {@inheritDoc} */
+	public function beforeSet()
+	{
 		$name = trim($this->getProperty('name'));
 		if (empty($name)) {
 			$this->modx->error->addField('name', $this->modx->lexicon('mlmsystem_err_ae'));
@@ -23,7 +38,8 @@ class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor {
 
 		if ($this->modx->getCount($this->classKey, array(
 			'event' => $event,
-		))) {
+		))
+		) {
 			$this->modx->error->addField('event', $this->modx->lexicon('mlmsystem_err_ae'));
 		}
 
@@ -31,8 +47,7 @@ class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor {
 			$treeProfit = $this->modx->fromJSON(trim($this->getProperty('tree_profit', '{}')));
 			if (empty($treeProfit)) {
 				$this->modx->error->addField('tree_profit', $this->modx->lexicon('mlmsystem_err_ns'));
-			}
-			else {
+			} else {
 				$this->setProperty('tree_profit', $this->modx->toJSON($treeProfit));
 			}
 		}
@@ -41,12 +56,22 @@ class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor {
 	}
 
 	/** {@inheritDoc} */
-	public function beforeSave() {
+	public function beforeSave()
+	{
 		$this->object->fromArray(array(
 			'rank' => $this->modx->getCount($this->classKey),
 			'editable' => true
 		));
+
 		return parent::beforeSave();
+	}
+
+	/** {@inheritDoc} */
+	public function afterSave()
+	{
+		$this->MlmSystem->setPluginEvent($this->object->get('event'), 'create');
+
+		return true;
 	}
 
 }
