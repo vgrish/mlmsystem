@@ -28,7 +28,7 @@ mlmsystem.panel.Profit = function(config) {
 		 */
 		hideMode: 'offclient',
 		items: [{
-			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_profit') + '</h2>',
+			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_profits') + '</h2>',
 			cls: '',
 			style: {
 				margin: '15px 0'
@@ -42,10 +42,10 @@ mlmsystem.panel.Profit = function(config) {
 			border: true,
 			hideMode: 'offclient',
 			items: [{
-				title: _('mlmsystem_profit'),
+				title: _('mlmsystem_profits'),
 				layout: 'anchor',
 				items: [{
-					html: _('mlmsystem_profit_intro'),
+					html: _('mlmsystem_profits_intro'),
 					cls: 'panel-desc'
 				}, {
 					xtype: 'mlmsystem-grid-profit',

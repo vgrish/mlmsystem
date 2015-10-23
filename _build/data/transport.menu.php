@@ -17,8 +17,8 @@ $tmp = array(
 			'controller' => 'controllers/client'
 		)
 	),
-	'mlmsystem_profit' => array(
-		'description' => 'mlmsystem_profit_desc',
+	'mlmsystem_profits' => array(
+		'description' => 'mlmsystem_profits_desc',
 		'parent' => 'mlmsystem',
 		'menuindex' => 2,
 		'action' => array(

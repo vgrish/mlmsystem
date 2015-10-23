@@ -17,7 +17,7 @@ class MlmSystemProfitManagerController extends MlmSystemMainController
 
 	public function getPageTitle()
 	{
-		return $this->modx->lexicon('mlmsystem') . ' :: ' . $this->modx->lexicon('mlmsystem_profit');
+		return $this->modx->lexicon('mlmsystem') . ' :: ' . $this->modx->lexicon('mlmsystem_profits');
 	}
 
 	public function getLanguageTopics()
