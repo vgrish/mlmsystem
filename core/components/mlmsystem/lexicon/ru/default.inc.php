@@ -15,6 +15,10 @@ $_lang['mlmsystem_clients_intro'] = 'Панель управления Клие�
 $_lang['mlmsystem_statuses_client'] = 'Статусы';
 $_lang['mlmsystem_statuses_client_intro'] = 'Панель управления Статусами Клиентов. ';
 
+$_lang['mlmsystem_profit'] = 'Начисления';
+$_lang['mlmsystem_profit_desc'] = 'Управление Начислениями';
+$_lang['mlmsystem_profit_intro'] = 'Панель управления Начислениями MLM Cистемы.';
+
 $_lang['mlmsystem_stories'] = 'История';
 $_lang['mlmsystem_stories_desc'] = 'История Изменений';
 $_lang['mlmsystem_stories_intro'] = 'Панель управления Историей MLM Cистемы.';

@@ -27,7 +27,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 		if (!$this->getProperty('combo')) {
 
 			$c->groupby('MlmSystemClient.id');
-			
+
 			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
 			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
 			$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');

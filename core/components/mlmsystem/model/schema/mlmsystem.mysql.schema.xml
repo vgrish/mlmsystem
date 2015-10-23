@@ -134,5 +134,32 @@
 		</index>
 	</object>
 
-	
+
+	<object class="MlmSystemProfit" table="mlmsystem_profit" extends="xPDOSimpleObject">
+		<field key="event" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="true" />
+
+		<field key="profit" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
+		<field key="add_profit" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
+		<field key="tree_profit" dbtype="varchar" phptype="string" precision="500" null="true" />
+		<field key="product_profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
+		<field key="initiator_profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
+
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="rank" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+		<field key="properties" dbtype="text" phptype="json" null="true" />
+
+		<index alias="event" name="event" primary="false" unique="false" type="BTREE" >
+			<column key="event" length="" collation="A" null="false" />
+		</index>
+		<index alias="active" name="active" primary="false" unique="false" type="BTREE" >
+			<column key="active" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="Event" class="modEvent" local="event" foreign="name" cardinality="one" owner="local" />
+
+	</object>
+
+
 </model>

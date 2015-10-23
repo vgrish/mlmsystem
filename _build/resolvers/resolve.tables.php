@@ -19,6 +19,7 @@ if ($object->xpdo) {
 				'MlmSystemEmail',
 				'MlmSystemLog',
 
+				'MlmSystemProfit',
 				'MlmSystemPath'
 			);
 
