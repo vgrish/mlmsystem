@@ -12,5 +12,6 @@ $xpdo_meta_map = array (
     1 => 'MlmSystemEmail',
     2 => 'MlmSystemLog',
     3 => 'MlmSystemProfit',
+    4 => 'MlmSystemProfitGroup',
   ),
 );
