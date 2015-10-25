@@ -150,7 +150,7 @@ class MlmSystem
 						$this->modx->regClientStartupScript($script, true);
 					}
 
-					//$this->Tools->saveProperties($this->config);
+					$this->Tools->saveProperties($this->config);
 					$this->initialized[$ctx] = true;
 
 				}
@@ -275,11 +275,15 @@ class MlmSystem
 	 * Loads an instance of Paths
 	 * @return boolean
 	 */
-	public function loadProfits()
+	public function loadProfits($class = '')
 	{
+		$config = array();
+		if (!empty($class)) {
+			$config['handler_class_profits'] = $class;
+		}
 		if (!is_object($this->Profits) OR !($this->Profits instanceof MlmSystemProfitsInterface)) {
 			$profitsClass = $this->modx->loadClass('profits.SystemProfits', $this->config['handlersPath'], true, true);
-			if ($derivedClass = $this->getOption('handler_class_profits', null, '')) {
+			if ($derivedClass = $this->getOption('handler_class_profits', $config, '')) {
 				if ($derivedClass = $this->modx->loadClass('profits.' . $derivedClass, $this->config['handlersPath'], true, true)) {
 					$profitsClass = $derivedClass;
 				}
@@ -290,6 +294,9 @@ class MlmSystem
 		}
 		return !empty($this->Profits) AND $this->Profits instanceof MlmSystemProfitsInterface;
 	}
+
+
+	//$paymentClass = ''
 
 	/**
 	 * Shorthand for the call of processor

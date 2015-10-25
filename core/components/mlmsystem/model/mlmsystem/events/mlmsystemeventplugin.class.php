@@ -18,6 +18,7 @@ abstract class MlmSystemEventPlugin
 		if (!is_object($this->MlmSystem)) {
 			$this->MlmSystem = $this->modx->getService('mlmsystem');
 		}
+
 	}
 
 	abstract public function run();

@@ -1,6 +1,6 @@
 <?php
 
-class MlmSystemmsOnChangeOrderStatus extends MlmSystemEventPlugin
+class MlmSystemEventmsOnChangeOrderStatus extends MlmSystemEventPlugin
 {
 	public function run()
 	{

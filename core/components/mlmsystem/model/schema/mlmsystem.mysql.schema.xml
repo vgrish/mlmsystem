@@ -138,6 +138,7 @@
 	<object class="MlmSystemProfit" table="mlmsystem_profits" extends="xPDOSimpleObject">
 		<field key="event" dbtype="varchar" precision="100" phptype="string" null="false" />
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
 		<field key="description" dbtype="text" phptype="string" null="true" />
 
 		<field key="profit" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
@@ -159,8 +160,31 @@
 		<index alias="active" name="active" primary="false" unique="false" type="BTREE" >
 			<column key="active" length="" collation="A" null="false" />
 		</index>
+
+		<composite alias="Groups" class="MlmSystemProfitGroup" local="id" foreign="identifier" owner="local" cardinality="many" />
 		<aggregate alias="Event" class="modEvent" local="event" foreign="name" cardinality="one" owner="local" />
 
+	</object>
+
+
+	<object class="MlmSystemProfitGroup" table="mlmsystem_profit_groups" extends="xPDOSimpleObject">
+		<field key="identifier" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
+		<field key="group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" />
+		<field key="type" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" />
+
+		<index alias="unique_key" name="unique_key" primary="false" unique="true" type="BTREE">
+			<column key="identifier" length="" collation="A" null="false" />
+			<column key="class" length="" collation="A" null="false" />
+			<column key="group" length="" collation="A" null="false" />
+		</index>
+
+		<index alias="type" name="type" primary="false" unique="false" type="BTREE" >
+			<column key="type" length="" collation="A" null="false" />
+		</index>
+
+		<aggregate alias="Profit" class="MlmSystemProfit" local="identifier" foreign="id" cardinality="one" owner="foreign" />
 	</object>
 
 

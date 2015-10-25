@@ -25,6 +25,8 @@ interface MlmSystemToolsInterface
 
 	public function getClientWindowUpdateTabs();
 
+	public function getProfitWindowUpdateTabs();
+
 	public function getMenuActions();
 
 	public function getClientStatus();
@@ -49,6 +51,8 @@ interface MlmSystemToolsInterface
 	public function dateFormat($date, $dateFormat = null);
 
 	public function sumFormat($sum = '0', array $pf = array(), $noZeros = true);
+
+	public function percentFormat($sum = '0');
 
 	public function formatHashReferrer($id = 0);
 
@@ -334,7 +338,7 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getProfitFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('profit_grid_fields', null,
-			'id,name,event,profit', true)));
+			'id,name,event,class,profit', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
 			'id', 'event', 'active', 'description', 'properties', 'actions'))));
 		return $gridFields;
@@ -357,6 +361,16 @@ class SystemTools implements MlmSystemToolsInterface
 			'client,story_client,story_balance,story_operation', true)));
 		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
 			'client'))));
+		return $windowTabs;
+	}
+
+	/** @return array Profit Window Update Tabs */
+	public function getProfitWindowUpdateTabs()
+	{
+		$windowTabs = array_map('trim', explode(',', $this->MlmSystem->getOption('profit_window_update_tabs', null,
+			'profit,user_group,resorce_group,product_group', true)));
+		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
+			'main'))));
 		return $windowTabs;
 	}
 
@@ -609,6 +623,20 @@ class SystemTools implements MlmSystemToolsInterface
 		return $sum;
 	}
 
+	public function percentFormat($sum = '0')
+	{
+		$sum = preg_replace(array('/[^0-9%\-,\.]/', '/,/'), array('', '.'), $sum);
+		if (strpos($sum, '%') !== false) {
+			$sum = str_replace('%', '', $sum) . '%';
+		}
+		if (strpos($sum, '-') !== false) {
+			$sum = '-' . str_replace('-', '', $sum);
+		}
+		if (empty($sum)) {
+			$sum = '0';
+		}
+		return $sum;
+	}
 
 	/*
 	 * FORMAT

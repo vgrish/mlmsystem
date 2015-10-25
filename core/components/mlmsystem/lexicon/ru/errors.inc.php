@@ -15,6 +15,7 @@ $_lang['mlmsystem_err_execution_operation'] = 'Ошибка выполнения
 $_lang['mlmsystem_err_action_ns'] = 'Не указан ключ (action).';
 $_lang['mlmsystem_err_form_key_ns'] = 'Не указан ключ формы (form_key).';
 $_lang['mlmsystem_err_properties_ns'] = 'Не указаны свойства (properties).';
+$_lang['mlmsystem_err_class_ns'] = 'Не указан класс (class).';
 $_lang['mlmsystem_err_action_un'] = 'Неизвестный ключ (action).';
 $_lang['mlmsystem_err_chunk_ns'] = 'Не указан чанк для обработки.';
 $_lang['mlmsystem_err_chunk_nf'] = 'Не могу найти указанный чанк "[[+name]]"';

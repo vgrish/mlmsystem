@@ -3,7 +3,7 @@
 $corePath = $modx->getOption('mlmsystem_core_path', null, $modx->getOption('core_path', null, MODX_CORE_PATH) . 'components/mlmsystem/');
 $MlmSystem = $modx->getService('mlmsystem', 'MlmSystem', $corePath . 'model/mlmsystem/', array('core_path' => $corePath));
 
-$className = 'MlmSystem' . $modx->event->name;
+$className = 'MlmSystemEvent' . $modx->event->name;
 $modx->loadClass('MlmSystemEventPlugin', $MlmSystem->getOption('modelPath') . 'mlmsystem/events/', true, true);
 $modx->loadClass($className, $MlmSystem->getOption('modelPath') . 'mlmsystem/events/', true, true);
 if (class_exists($className)) {

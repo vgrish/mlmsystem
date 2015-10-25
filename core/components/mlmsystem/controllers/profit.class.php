@@ -30,17 +30,21 @@ class MlmSystemProfitManagerController extends MlmSystemMainController
 		$this->addJavascript(MODX_MANAGER_URL . 'assets/modext/util/datetime.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.utils.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.combo.js');
-		
+
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/group/profitgroup.grid.js');
+
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/profit/profit.window.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/profit/profit.grid.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/profit/profit.panel.js');
 
 		$gridFields = $this->MlmSystem->Tools->getProfitFields();
+		$windowUpdateTabs = $this->MlmSystem->Tools->getProfitWindowUpdateTabs();
 
 		$this->addHtml(str_replace('			', '', '
 			<script type="text/javascript">
 				Ext.onReady(function() {
 					mlmsystem.config.profit_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
+					mlmsystem.config.profit_window_update_tabs = ' . $this->modx->toJSON($windowUpdateTabs) . ';
 					MODx.load({ xtype: "mlmsystem-page-profit"});
 				});
 			</script>'

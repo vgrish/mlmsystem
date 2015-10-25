@@ -156,12 +156,21 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
                     allowBlank: false
                 }
             },
+            class: {
+                width: 30,
+                sortable: true,
+                editor: {
+                    xtype: 'textfield',
+                    allowBlank: false
+                }
+            },
             profit: {
                 width: 15,
                 sortable: true,
                 editor: {
                     xtype: 'numberfield',
-                    allowBlank: false
+                    allowBlank: false,
+                    maskRe: /[0123456789\.\-%]/
                 }
             },
             actions: {

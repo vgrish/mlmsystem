@@ -17,6 +17,9 @@ mlmsystem.window.CreateProfit = function(config) {
         }]
     });
     mlmsystem.window.CreateProfit.superclass.constructor.call(this, config);
+    if (!config.update) {
+        config.update = false;
+    }
 };
 Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
 
@@ -44,10 +47,26 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
             profit: {
                 layout: 'form',
                 items: this.getProfit(config)
-            }
+            },
+            user_group: {
+                layout: 'form',
+                items: this.getUserGroup(config),
+                disabled: !config.update
+            },
+            resorce_group: {
+                layout: 'form',
+                items: this.getResourceGroup(config),
+                disabled: !config.update
+            },
+            //product_group: {
+            //    layout: 'form',
+            //    items: this.getProfit(config),
+            //    disabled: !config.update
+            //}
         };
 
-        for (var tab in add) {
+        for (var i = 0; i < mlmsystem.config.profit_window_update_tabs.length; i++) {
+            var tab = mlmsystem.config.profit_window_update_tabs[i];
             if (add[tab]) {
                 Ext.applyIf(add[tab], {
                     title: _('mlmsystem_' + tab)
@@ -59,12 +78,63 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
         return tabs;
     },
 
+    getUserGroup: function(config) {
+        return [{
+            items: {
+                xtype: 'mlmsystem-grid-profit-group',
+                identifier: config.record.id,
+                class: 'modUserGroup',
+                record: config.record
+            }
+        }];
+    },
+
+    getResourceGroup: function(config) {
+        return [{
+            items: {
+                xtype: 'mlmsystem-grid-profit-group',
+                identifier: config.record.id,
+                class: 'modResourceGroup',
+                record: config.record
+            }
+        }];
+    },
+
     getProfit: function(config) {
         return [{
             items: [{
                 layout: 'form',
                 cls: 'modx-panel',
                 items: [{
+                    layout: 'column',
+                    border: false,
+                    items: [{
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        items: [{
+                            xtype: 'textfield',
+                            fieldLabel: _('mlmsystem_name'),
+                            name: 'name',
+                            anchor: '99%',
+                            allowBlank: false
+                        }]
+                    }, {
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        cls: 'right-column',
+                        items: [{
+                            xtype: 'mlmsystem-combo-event',
+                            custm: true,
+                            clear: true,
+                            fieldLabel: _('mlmsystem_event'),
+                            name: 'event',
+                            anchor: '99%',
+                            allowBlank: false
+                        }]
+                    }]
+                }, {
                     layout: 'column',
                     border: false,
                     items: [{

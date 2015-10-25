@@ -138,18 +138,28 @@ $_lang['mlmsystem_story_client'] = 'История';
 $_lang['mlmsystem_story_balance'] = 'Баланс';
 $_lang['mlmsystem_story_operation'] = 'Операции';
 
+$_lang['mlmsystem_user_group'] = 'Группа пользователей';
+$_lang['mlmsystem_resorce_group'] = 'Группа ресурсов';
+$_lang['mlmsystem_product_group'] = 'Группа продуктов';
+
 /* action */
 $_lang['mlmsystem_action_active'] = 'Включить';
 $_lang['mlmsystem_action_inactive'] = 'Выключить';
 $_lang['mlmsystem_action_remove'] = 'Удалить';
 $_lang['mlmsystem_action_create'] = 'Создать';
 $_lang['mlmsystem_action_update'] = 'Обновить';
+$_lang['mlmsystem_action_create_group'] = 'Создать группу';
+$_lang['mlmsystem_action_update_group'] = 'Обновить группу';
 $_lang['mlmsystem_action_edit'] = 'Редактировать';
 $_lang['mlmsystem_action_notice'] = 'Уведомить';
 $_lang['mlmsystem_action_change_balance'] = 'Изменить баланс';
 $_lang['mlmsystem_action_change_parent'] = 'Изменить родителя';
+$_lang['mlmsystem_action_change_type'] = 'Изменить тип';
 
 
+//
+$_lang['mlmsystem_combo_select'] = 'Выберите';
+$_lang['mlmsystem_combo_select_group'] = 'Выберите группу';
 
 /* confirm */
 $_lang['mlmsystem_confirm_remove'] = 'Вы уверены, что хотите удалить это?';
@@ -165,3 +175,7 @@ $_lang['mlmsystem_class_MlmSystemStatus'] = 'Статус';
 $_lang['mlmsystem_target_balance'] = 'Баланс';
 $_lang['mlmsystem_target_put'] = 'Пополнение';
 $_lang['mlmsystem_target_take'] = 'Списание';
+
+$_lang['mlmsystem_group_in'] = 'Включает';
+$_lang['mlmsystem_group_out'] = 'Исключает';
+

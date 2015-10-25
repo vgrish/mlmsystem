@@ -1265,3 +1265,107 @@ mlmsystem.combo.Event = function(config) {
 };
 Ext.extend(mlmsystem.combo.Event, MODx.combo.ComboBox);
 Ext.reg('mlmsystem-combo-event', mlmsystem.combo.Event);
+
+
+mlmsystem.combo.ProfitGroup = function(config) {
+    config = config || {};
+
+    if (config.custm) {
+        config.triggerConfig = [{
+            tag: 'div',
+            cls: 'x-field-search-btns',
+            style: String.format('width: {0}px;', config.clear ? 62 : 31),
+            cn: [{
+                tag: 'div',
+                cls: 'x-form-trigger x-field-mlmsystem-profit-group-go'
+            }]
+        }];
+        if (config.clear) {
+            config.triggerConfig[0].cn.push({
+                tag: 'div',
+                cls: 'x-form-trigger x-field-mlmsystem-profit-group-clear'
+            });
+        }
+
+        config.initTrigger = function() {
+            var ts = this.trigger.select('.x-form-trigger', true);
+            this.wrap.setStyle('overflow', 'hidden');
+            var triggerField = this;
+            ts.each(function(t, all, index) {
+                t.hide = function() {
+                    var w = triggerField.wrap.getWidth();
+                    this.dom.style.display = 'none';
+                    triggerField.el.setWidth(w - triggerField.trigger.getWidth());
+                };
+                t.show = function() {
+                    var w = triggerField.wrap.getWidth();
+                    this.dom.style.display = '';
+                    triggerField.el.setWidth(w - triggerField.trigger.getWidth());
+                };
+                var triggerIndex = 'Trigger' + (index + 1);
+
+                if (this['hide' + triggerIndex]) {
+                    t.dom.style.display = 'none';
+                }
+                t.on('click', this['on' + triggerIndex + 'Click'], this, {
+                    preventDefault: true
+                });
+                t.addClassOnOver('x-form-trigger-over');
+                t.addClassOnClick('x-form-trigger-click');
+            }, this);
+            this.triggers = ts.elements;
+        };
+    }
+    Ext.applyIf(config, {
+        name: config.name || 'group',
+        hiddenName: config.name || 'group',
+        displayField: 'name',
+        valueField: 'name',
+        editable: true,
+        fields: ['id', 'name'],
+        pageSize: 10,
+        emptyText: _('mlmsystem_combo_select_group'),
+        hideMode: 'offsets',
+        allowBlank: true,
+        url: mlmsystem.config.connector_url,
+        baseParams: {
+            action: 'mgr/misc/group/getlist',
+            identifier: config.identifier,
+            class: config.class,
+            combo: true
+        },
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="x-combo-list-item">',
+            '<small>({id})</small> <b>{name}</b></span>',
+            '</div></tpl>', {
+                compiled: true
+            }),
+        cls: 'input-combo-mlmsystem-profit-group',
+        clearValue: function() {
+            if (this.hiddenField) {
+                this.hiddenField.value = '';
+            }
+            this.setRawValue('');
+            this.lastSelectionText = '';
+            this.applyEmptyText();
+            this.value = '';
+            this.fireEvent('select', this, null, 0);
+        },
+
+        getTrigger: function(index) {
+            return this.triggers[index];
+        },
+
+        onTrigger1Click: function() {
+            this.onTriggerClick();
+        },
+
+        onTrigger2Click: function() {
+            this.clearValue();
+        }
+    });
+    mlmsystem.combo.ProfitGroup.superclass.constructor.call(this, config);
+
+};
+Ext.extend(mlmsystem.combo.ProfitGroup, MODx.combo.ComboBox);
+Ext.reg('mlmsystem-combo-profit-group', mlmsystem.combo.ProfitGroup);

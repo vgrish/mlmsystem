@@ -4,6 +4,9 @@
 interface MlmSystemProfitsInterface
 {
 
+	public function getProfit(MlmSystemProfit $instance, $cost = 0);
+
+	public function getProfitIds($event = '', $active = 1);
 
 	public function runProcessor($action = '', $data = array(), $json = false);
 
@@ -42,8 +45,34 @@ class SystemProfits implements MlmSystemProfitsInterface
 		echo __METHOD__ . ' says: ' . $n;
 	}
 
+	/** @inheritdoc} */
+	public function getProfit(MlmSystemProfit $instance, $cost = 0)
+	{
+
+		$profit = $instance->get('profit');
+		$addProfit = $instance->get('add_profit');
+		if (preg_match('/%$/', $addProfit)) {
+			$addProfit = str_replace('%', '', $addProfit);
+			$addProfit = $profit / 100 * $addProfit;
+		}
+		$profit += $addProfit;
+
+		return $profit;
+	}
 
 
+	/** @inheritdoc} */
+	public function getProfitIds($event = '', $active = 1)
+	{
+		$ids = array();
+		$q = $this->modx->newQuery('MlmSystemProfit', array('event' => $event, 'active' => $active));
+		$q->sortby('rank', 'ASC');
+		$q->select('id');
+		if ($q->prepare() && $q->stmt->execute()) {
+			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
+		}
+		return $ids;
+	}
 
 	/** @inheritdoc} */
 	public function runProcessor($action = '', $data = array(), $json = false)
