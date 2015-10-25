@@ -47,7 +47,7 @@ class modMlmSystemProfitUpdateProcessor extends modObjectUpdateProcessor
 		}
 
 		if ($this->modx->getCount($this->classKey, array(
-			'event' => $event,
+			'name' => $event,
 			'id:!=' => $id
 		))
 		) {
@@ -70,14 +70,16 @@ class modMlmSystemProfitUpdateProcessor extends modObjectUpdateProcessor
 	public function afterSave()
 	{
 		/* удаляем старый event */
-		if ($this->object->get('event') != $this->event) {
+		if (
+			$this->object->get('event') != $this->event AND
+			!$this->modx->getCount($this->classKey, array('event' => $this->event))
+		) {
 			$this->MlmSystem->setPluginEvent($this->event, 'remove');
 		}
 
 		if ($this->object->get('active')) {
 			$this->MlmSystem->setPluginEvent($this->object->get('event'), 'create');
-		}
-		else {
+		} elseif (!$this->modx->getCount($this->classKey, array('event' => $this->object->get('event'), 'active' => 1))) {
 			$this->MlmSystem->setPluginEvent($this->object->get('event'), 'remove');
 		}
 

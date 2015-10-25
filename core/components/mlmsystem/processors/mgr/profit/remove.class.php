@@ -39,7 +39,10 @@ class modMlmSystemProfitRemoveProcessor extends modObjectRemoveProcessor
 	/** {@inheritDoc} */
 	public function afterRemove()
 	{
-		$this->MlmSystem->setPluginEvent($this->object->get('event'), 'remove');
+		/* удаляем event */
+		if (!$this->modx->getCount($this->classKey, array('event' => $this->object->get('event')))) {
+			$this->MlmSystem->setPluginEvent($this->object->get('event'), 'remove');
+		}
 
 		return true;
 	}

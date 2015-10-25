@@ -37,10 +37,10 @@ class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor
 		}
 
 		if ($this->modx->getCount($this->classKey, array(
-			'event' => $event,
+			'name' => $event,
 		))
 		) {
-			$this->modx->error->addField('event', $this->modx->lexicon('mlmsystem_err_ae'));
+			$this->modx->error->addField('name', $this->modx->lexicon('mlmsystem_err_ae'));
 		}
 
 		if ($this->getProperty('tree_active')) {

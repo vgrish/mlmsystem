@@ -124,15 +124,7 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                         border: false,
                         layout: 'form',
                         cls: 'right-column',
-                        items: [{
-                            xtype: 'mlmsystem-combo-event',
-                            custm: true,
-                            clear: true,
-                            fieldLabel: _('mlmsystem_event'),
-                            name: 'event',
-                            anchor: '99%',
-                            allowBlank: false
-                        }]
+                        items: []
                     }]
                 }, {
                     layout: 'column',
@@ -143,10 +135,10 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                         layout: 'form',
                         items: [{
                             xtype: 'textfield',
-                            fieldLabel: _('mlmsystem_name'),
-                            name: 'name',
+                            fieldLabel: _('mlmsystem_class'),
+                            name: 'class',
                             anchor: '99%',
-                            allowBlank: false
+                            allowBlank: true
                         }]
                     }, {
                         columnWidth: .5,

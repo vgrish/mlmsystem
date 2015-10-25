@@ -281,7 +281,7 @@ class MlmSystem
 		if (!empty($class)) {
 			$config['handler_class_profits'] = $class;
 		}
-		if (!is_object($this->Profits) OR !($this->Profits instanceof MlmSystemProfitsInterface)) {
+		if (!is_object($this->Profits) OR !($this->Profits instanceof MlmSystemProfitsInterface) OR !empty($class)) {
 			$profitsClass = $this->modx->loadClass('profits.SystemProfits', $this->config['handlersPath'], true, true);
 			if ($derivedClass = $this->getOption('handler_class_profits', $config, '')) {
 				if ($derivedClass = $this->modx->loadClass('profits.' . $derivedClass, $this->config['handlersPath'], true, true)) {
