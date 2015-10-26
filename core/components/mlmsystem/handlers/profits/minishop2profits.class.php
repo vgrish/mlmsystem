@@ -69,7 +69,7 @@ class MiniShop2Profits extends SystemProfits implements MlmSystemProfitsInterfac
 				}
 			}
 			$ids = array_unique($ids);
-			
+
 			$q = $this->modx->newQuery('modResourceGroupResource', array('document:IN' => $ids));
 			$q->leftJoin('MlmSystemProfitGroup', 'MlmSystemProfitGroup', 'MlmSystemProfitGroup.group = modResourceGroupResource.document_group');
 			$q->where(array('MlmSystemProfitGroup.class' => 'modResourceGroup'));

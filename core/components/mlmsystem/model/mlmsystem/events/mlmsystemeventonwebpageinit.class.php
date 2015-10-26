@@ -12,7 +12,7 @@ class MlmSystemEventOnWebPageInit extends MlmSystemEventPlugin
 		$this->MlmSystem->initialize($this->modx->context->key);
 		$ids = $this->MlmSystem->Profits->getProfitIds($this->modx->event->name);
 
-		$this->MlmSystem->Profits->printLog($ids, 1);
+		//$this->MlmSystem->Profits->printLog($ids, 1);
 
 
 		foreach ($ids as $id) {
@@ -24,21 +24,21 @@ class MlmSystemEventOnWebPageInit extends MlmSystemEventPlugin
 
 				$initiator = $this->MlmSystem->Profits->getInitiator($this->scriptProperties);
 
-				if ($initiator) {
-					$this->MlmSystem->Profits->printLog($initiator->toArray(), 1);
-
-
-					$groups = $this->MlmSystem->Profits->getProfitUserGroups(26);
-
-					print_r($groups);
-
-				}
-
-
-				print_r(
-
-					$this->MlmSystem->Profits->getProfitResourceGroups(3)
-				);
+//				if ($initiator) {
+//					$this->MlmSystem->Profits->printLog($initiator->toArray(), 1);
+//
+//
+//					$groups = $this->MlmSystem->Profits->getProfitUserGroups(26);
+//
+//					print_r($groups);
+//
+//				}
+//
+//
+//				print_r(
+//
+//					$this->MlmSystem->Profits->getProfitResourceGroups(3)
+//				);
 
 
 

@@ -479,7 +479,7 @@ class MlmSystem
 
 	public function printLog($message = '', $show = false)
 	{
-		if (($show OR !empty($this->config['showLog'])) AND !empty($message)) {
+		if (($show OR !empty($this->config['showLog'])) AND !is_null($message)) {
 			$this->modx->log(modX::LOG_LEVEL_ERROR, print_r('[' . $this->namespace . '] ' . (($show) ? 'show' : ''), 1));
 			$this->modx->log(modX::LOG_LEVEL_ERROR, print_r($message, 1));
 		}

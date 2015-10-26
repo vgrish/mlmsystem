@@ -40,12 +40,13 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 		}
 		//$valid = $this->object->validate();
 
+		$this->modx->log(1, print_r('beforeSet' ,1));
+
 		return parent::beforeSet();
 	}
 
 	public function beforeSave()
 	{
-
 		/* проверка на кружева */
 		if (
 			$this->parent != $this->getProperty('parent', $this->object->get('parent'))
