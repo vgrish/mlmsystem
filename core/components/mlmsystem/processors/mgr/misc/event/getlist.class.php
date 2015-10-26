@@ -8,7 +8,7 @@ class modEventGetListProcessor extends modObjectGetListProcessor {
 
 	/** {@inheritDoc} */
 	public function prepareQueryBeforeCount(xPDOQuery $c) {
-		$exclude = array('virtualpage');
+		$exclude = array('mlmsystem');
 		$exclude = array_merge($exclude, array_map('trim', explode(',', $this->modx->getOption('mlmsystem_exclude_event_groupname'))));
 
 		$eventColumns = $this->modx->getSelectColumns('modEvent', 'modEvent', '', array(), true);

@@ -51,8 +51,10 @@ $BUILD_RESOLVERS = array(
 	'tables',
 	'setup',
 
-	'statuses',
+
 
 	//'chunks',
-	'setup',
+
+	'statuses',
+	'profits'
 );
