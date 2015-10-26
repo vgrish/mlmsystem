@@ -94,6 +94,12 @@ $tmp = array(
 	),
 
 
+	'profit_leader' => array(
+		'value' => '10%',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_profit'
+	),
+
 
 
 	'date_format' => array(

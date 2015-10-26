@@ -35,6 +35,18 @@ class MlmSystemEventmsOnChangeOrderStatus extends MlmSystemEventPlugin
 				continue;
 			}
 
+			$profitLeader = $this->MlmSystem->Profits->getProfitLeader($profitObject);
+			if (!empty($profitLeader)) {
+				/* get leaders */
+				$leaders = $this->MlmSystem->Profits->getLeaderIds();
+				foreach ($leaders as $leader) {
+					if (!$leaderObject = $this->modx->getObject('MlmSystemClient', array('id' => $leader))) {
+						continue;
+					}
+					$leaderObject->leaderSum($profitLeader); // ???
+				}
+			}
+
 
 
 		}

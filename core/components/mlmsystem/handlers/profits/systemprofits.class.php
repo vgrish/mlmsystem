@@ -3,15 +3,26 @@
 
 interface MlmSystemProfitsInterface
 {
+	/** @inheritdoc} */
 	public function getInitiator(array $scriptProperties = array());
 
-	public function getProfit(MlmSystemProfit $instance, $cost = 0);
+	/** @inheritdoc} */
+	public function getProfit(MlmSystemProfit $instance);
 
+	/** @inheritdoc} */
+	public function getProfitLeader(MlmSystemProfit $instance);
+
+	/** @inheritdoc} */
 	public function setProfit(MlmSystemClient $client, $profit = 0);
 
+	/** @inheritdoc} */
 	public function setDeposit(MlmSystemClient $client, $deposit = 0);
 
+	/** @inheritdoc} */
 	public function getProfitIds($event = '', $active = 1);
+
+	/** @inheritdoc} */
+	public function getLeaderIds($active = 1);
 
 	/** @inheritdoc} */
 	public function getProfitUserGroups($id = 0);
@@ -19,12 +30,16 @@ interface MlmSystemProfitsInterface
 	/** @inheritdoc} */
 	public function getProfitResourceGroups($id = 0);
 
+	/** @inheritdoc} */
 	public function runProcessor($action = '', $data = array(), $json = false);
 
+	/** @inheritdoc} */
 	public function failure($message = '', $data = array(), $placeholders = array());
 
+	/** @inheritdoc} */
 	public function success($message = '', $data = array(), $placeholders = array());
 
+	/** @inheritdoc} */
 	public function printLog($message = '', $show = false);
 
 }
@@ -67,10 +82,19 @@ class SystemProfits implements MlmSystemProfitsInterface
 	}
 
 	/** @inheritdoc} */
-	public function getProfit(MlmSystemProfit $instance, $cost = 0)
+	public function getProfit(MlmSystemProfit $instance)
 	{
 		$profit = $instance->get('profit');
 		return $profit;
+	}
+
+	/** @inheritdoc} */
+	public function getProfitLeader(MlmSystemProfit $instance)
+	{
+		$profit = $this->getProfit($instance);
+		$profitLeader = $this->MlmSystem->getOption('profit_leader', null, 0);
+		$profitLeader = $this->MlmSystem->Tools->getPercent($profit, $profitLeader);
+		return $profitLeader;
 	}
 
 	/** @inheritdoc} */
@@ -104,6 +128,19 @@ class SystemProfits implements MlmSystemProfitsInterface
 	{
 		$ids = array();
 		$q = $this->modx->newQuery('MlmSystemProfit', array('event' => $event, 'active' => $active));
+		$q->sortby('rank', 'ASC');
+		$q->select('id');
+		if ($q->prepare() && $q->stmt->execute()) {
+			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
+		}
+		return $ids;
+	}
+
+	/** @inheritdoc} */
+	public function getLeaderIds($active = 1)
+	{
+		$ids = array();
+		$q = $this->modx->newQuery('MlmSystemClient', array('leader' => 1, 'active' => $active));
 		$q->sortby('rank', 'ASC');
 		$q->select('id');
 		if ($q->prepare() && $q->stmt->execute()) {

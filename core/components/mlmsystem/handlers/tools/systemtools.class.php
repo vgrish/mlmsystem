@@ -638,6 +638,17 @@ class SystemTools implements MlmSystemToolsInterface
 		return $sum;
 	}
 
+	public function getPercent($sum = '0', $percent = '0')
+	{
+		$percent = $this->percentFormat($percent);
+		if (preg_match('/%$/', $percent)) {
+			$percent = str_replace('%', '', $percent);
+			$percent = $sum / 100 * $percent;
+		}
+		$sum += $percent;
+		return $sum;
+	}
+
 	/*
 	 * FORMAT
 	 */

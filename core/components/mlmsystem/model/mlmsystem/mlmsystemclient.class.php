@@ -258,7 +258,20 @@ class MlmSystemClient extends xPDOObject {
 		$this->set('incoming', $incoming);
 		return $this->set('balance', $balance);
 	}
-	
+
+	/** @inheritdoc} */
+	public function leaderSum($sum = 0)
+	{
+		$sum = abs($sum);
+		$balance = $this->get('balance');
+		$incoming = abs($this->get('incoming'));
+		$balance += $sum;
+		$incoming += $sum;
+		//$this->set('leader', $sum);
+		$this->set('incoming', $incoming);
+		return $this->set('balance', $balance);
+	}
+
 	/** @inheritdoc} */
 	public function log($target = '', $value = '')
 	{
