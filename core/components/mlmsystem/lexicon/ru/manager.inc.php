@@ -132,7 +132,8 @@ $_lang['mlmsystem_profit'] = 'Начисления';
 $_lang['mlmsystem_add_profit'] = 'Начисления доп.';
 $_lang['mlmsystem_order_profit'] = 'Начисления заказа';
 $_lang['mlmsystem_initiator_profit'] = 'Начисления иниц.';
-$_lang['mlmsystem_tree_profit'] = 'Начисления дерева';
+$_lang['mlmsystem_profit_parent'] = 'Начисления родителям';
+$_lang['mlmsystem_profit_children'] = 'Начисления детям';
 
 
 

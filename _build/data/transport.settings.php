@@ -87,6 +87,11 @@ $tmp = array(
 		'xtype' => 'textfield',
 		'area' => 'mlmsystem_handler'
 	),
+	'handler_class_profit_validator' => array(
+		'value' => 'ProfitValidator',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_handler'
+	),
 
 
 

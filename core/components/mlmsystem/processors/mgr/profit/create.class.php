@@ -43,15 +43,6 @@ class modMlmSystemProfitCreateProcessor extends modObjectCreateProcessor
 			$this->modx->error->addField('name', $this->modx->lexicon('mlmsystem_err_ae'));
 		}
 
-		if ($this->getProperty('tree_active')) {
-			$treeProfit = $this->modx->fromJSON(trim($this->getProperty('tree_profit', '{}')));
-			if (empty($treeProfit)) {
-				$this->modx->error->addField('tree_profit', $this->modx->lexicon('mlmsystem_err_ns'));
-			} else {
-				$this->setProperty('tree_profit', $this->modx->toJSON($treeProfit));
-			}
-		}
-
 		return parent::beforeSet();
 	}
 

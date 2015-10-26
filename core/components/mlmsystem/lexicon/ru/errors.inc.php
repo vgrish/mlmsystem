@@ -43,6 +43,8 @@ $_lang['mlmsystem_err_context'] = 'Неправильный контекст.';
 $_lang['mlmsystem_err_purpose'] = 'Неправильное назначение.';
 $_lang['mlmsystem_err_balance'] = 'Неправильное значение баланса.';
 $_lang['mlmsystem_err_parent'] = 'Неправильный родитель.';
+$_lang['mlmsystem_err_parent_profit'] = 'Неправильное значение. Используйте формат JSON.';
+$_lang['mlmsystem_err_children_profit'] = 'Неправильное значение. Используйте формат JSON.';
 
 
 /* error */
@@ -60,3 +62,6 @@ $_lang['MlmSystemStatus_err_ns'] = 'Объект "Статус" обязател
 $_lang['MlmSystemStatus_err_nfs'] = 'Объект "Статус" не найден.';
 $_lang['MlmSystemLog_err_ns'] = 'Объект "Лог" обязателен.';
 $_lang['MlmSystemLog_err_nfs'] = 'Объект "Лог" не найден.';
+$_lang['MlmSystemProfit_err_ns'] = 'Объект "Начисление" обязателен.';
+$_lang['MlmSystemProfit_err_nfs'] = 'Объект "Начисление" не найден.';
+$_lang['MlmSystemProfit_err_save'] = 'Объект "Начисление" не сохранен.';

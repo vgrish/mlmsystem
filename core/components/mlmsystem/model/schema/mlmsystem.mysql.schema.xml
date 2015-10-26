@@ -146,8 +146,10 @@
 		<field key="order_profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
 		<field key="initiator_profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
 
-		<field key="tree_active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
-		<field key="tree_profit" dbtype="varchar" phptype="string" precision="500" null="true" />
+		<field key="parent_active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+		<field key="parent_profit" dbtype="varchar" phptype="string" precision="500" null="true" />
+		<field key="children_active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+		<field key="children_profit" dbtype="varchar" phptype="string" precision="500" null="true" />
 
 		<field key="rank" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
 		<field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />

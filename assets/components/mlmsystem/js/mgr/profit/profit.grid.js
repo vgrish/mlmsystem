@@ -289,8 +289,9 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
             add_profit: 0,
             order_profit: 0,
             initiator_profit: 0,
-            tree_active: 1,
-            tree_profit: '{}'
+
+            parent_profit: '{}',
+            children_profit: '{}'
         };
 
         w = MODx.load({

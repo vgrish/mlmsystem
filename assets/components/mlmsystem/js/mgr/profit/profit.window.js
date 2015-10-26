@@ -211,24 +211,58 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
             }, {
                 layout: 'form',
                 items: [{
-                    xtype: 'xcheckbox',
-                    hideLabel: true,
-                    boxLabel: _('mlmsystem_tree_profit'),
-                    description: _('mlmsystem_tree_profit_decs'),
-                    name: 'tree_active',
-                    checked: false,
-                    listeners: {
-                        check: mlmsystem.utils.handleChecked,
-                        afterrender: mlmsystem.utils.handleChecked
-                    }
-                }, {
-                    xtype: 'textarea',
-                    fieldLabel: '',
-                    msgTarget: 'under',
-                    name: 'tree_profit',
-                    anchor: '99.5%',
-                    height: 50,
-                    allowBlank: true
+                    layout: 'column',
+                    border: false,
+                    items: [{
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        items: [{
+                            xtype: 'xcheckbox',
+                            hideLabel: true,
+                            boxLabel: _('mlmsystem_profit_parent'),
+                            description: _('mlmsystem_profit_parent_decs'),
+                            name: 'parent_active',
+                            checked: false,
+                            listeners: {
+                                check: mlmsystem.utils.handleChecked,
+                                afterrender: mlmsystem.utils.handleChecked
+                            }
+                        }, {
+                            xtype: 'textarea',
+                            fieldLabel: '',
+                            msgTarget: 'under',
+                            name: 'parent_profit',
+                            anchor: '99.5%',
+                            height: 50,
+                            allowBlank: true
+                        }]
+                    }, {
+                        columnWidth: .5,
+                        border: false,
+                        layout: 'form',
+                        cls: 'right-column',
+                        items: [{
+                            xtype: 'xcheckbox',
+                            hideLabel: true,
+                            boxLabel: _('mlmsystem_profit_children'),
+                            description: _('mlmsystem_profit_children_decs'),
+                            name: 'children_active',
+                            checked: false,
+                            listeners: {
+                                check: mlmsystem.utils.handleChecked,
+                                afterrender: mlmsystem.utils.handleChecked
+                            }
+                        }, {
+                            xtype: 'textarea',
+                            fieldLabel: '',
+                            msgTarget: 'under',
+                            name: 'children_profit',
+                            anchor: '99.5%',
+                            height: 50,
+                            allowBlank: true
+                        }]
+                    }]
                 }, {
                     xtype: 'xcheckbox',
                     hideLabel: true,
