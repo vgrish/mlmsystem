@@ -163,7 +163,7 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                         border: false,
                         layout: 'form',
                         items: [{
-                            xtype: 'textfield',
+                            xtype: 'numberfield',
                             fieldLabel: _('mlmsystem_profit'),
                             description: _('mlmsystem_profit_decs'),
                             name: 'profit',
@@ -176,11 +176,12 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                         layout: 'form',
                         items: [{
                             xtype: 'textfield',
-                            fieldLabel: _('mlmsystem_add_profit'),
-                            description: _('mlmsystem_add_profit_decs'),
-                            name: 'add_profit',
+                            fieldLabel: _('mlmsystem_profit1'),
+                            description: _('mlmsystem_profit1_decs'),
+                            name: 'profit1',
                             anchor: '99%',
-                            allowBlank: false
+                            allowBlank: false,
+                            maskRe: /[0123456789\.\-%]/
                         }]
                     }, {
                         columnWidth: .249,
@@ -188,11 +189,12 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                         layout: 'form',
                         items: [{
                             xtype: 'textfield',
-                            fieldLabel: _('mlmsystem_order_profit'),
-                            description: _('mlmsystem_order_profit_decs'),
-                            name: 'order_profit',
+                            fieldLabel: _('mlmsystem_profit2'),
+                            description: _('mlmsystem_profit2_decs'),
+                            name: 'profit2',
                             anchor: '99%',
-                            allowBlank: false
+                            allowBlank: false,
+                            maskRe: /[0123456789\.\-%]/
                         }]
                     }, {
                         columnWidth: .25,
@@ -200,11 +202,12 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
                         layout: 'form',
                         items: [{
                             xtype: 'textfield',
-                            fieldLabel: _('mlmsystem_initiator_profit'),
-                            description: _('mlmsystem_initiator_profit_decs'),
-                            name: 'initiator_profit',
+                            fieldLabel: _('mlmsystem_profit3'),
+                            description: _('mlmsystem_profit3_decs'),
+                            name: 'profit3',
                             anchor: '99%',
-                            allowBlank: false
+                            allowBlank: false,
+                            maskRe: /[0123456789\.\-%]/
                         }]
                     }]
                 }]

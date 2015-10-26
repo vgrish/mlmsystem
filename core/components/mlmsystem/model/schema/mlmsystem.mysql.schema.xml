@@ -142,9 +142,9 @@
 		<field key="description" dbtype="text" phptype="string" null="true" />
 
 		<field key="profit" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
-		<field key="add_profit" dbtype="decimal" precision="12,2" phptype="float" null="false" default="0" />
-		<field key="order_profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
-		<field key="initiator_profit" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
+		<field key="profit1" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
+		<field key="profit2" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
+		<field key="profit3" dbtype="varchar" precision="11" phptype="string" null="true" default="0" />
 
 		<field key="parent_active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
 		<field key="parent_profit" dbtype="varchar" phptype="string" precision="500" null="true" />

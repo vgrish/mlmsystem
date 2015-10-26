@@ -129,6 +129,11 @@ $_lang['mlmsystem_timestamp'] = 'Метка';
 $_lang['mlmsystem_event'] = 'Событие';
 $_lang['mlmsystem_properties'] = 'Свойства';
 $_lang['mlmsystem_profit'] = 'Начисления';
+$_lang['mlmsystem_profit1'] = 'Начисления #1';
+$_lang['mlmsystem_profit2'] = 'Начисления #2';
+$_lang['mlmsystem_profit3'] = 'Начисления #3';
+
+
 $_lang['mlmsystem_add_profit'] = 'Начисления доп.';
 $_lang['mlmsystem_order_profit'] = 'Начисления заказа';
 $_lang['mlmsystem_initiator_profit'] = 'Начисления иниц.';
