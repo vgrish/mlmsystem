@@ -31,5 +31,14 @@ class MiniShop2Profits extends SystemProfits implements MlmSystemProfitsInterfac
 		}
 	}
 
+	/** @inheritdoc} */
+	public function getInitiator(array $scriptProperties = array())
+	{
+		$initiator = null;
+		if ($order = $this->MlmSystem->getOption('order', $scriptProperties, null)) {
+			$initiator = $order->getOne('User')->getOne('MlmSystemClient');
+		}
+		return $initiator;
+	}
 
 }
