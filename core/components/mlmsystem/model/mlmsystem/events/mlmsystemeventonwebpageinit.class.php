@@ -26,7 +26,19 @@ class MlmSystemEventOnWebPageInit extends MlmSystemEventPlugin
 
 				if ($initiator) {
 					$this->MlmSystem->Profits->printLog($initiator->toArray(), 1);
+
+
+					$groups = $this->MlmSystem->Profits->getProfitUserGroups(26);
+
+					print_r($groups);
+
 				}
+
+
+				print_r(
+
+					$this->MlmSystem->Profits->getProfitResourceGroups(3)
+				);
 
 
 
