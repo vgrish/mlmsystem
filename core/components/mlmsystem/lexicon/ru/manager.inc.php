@@ -163,7 +163,8 @@ $_lang['mlmsystem_action_notice'] = 'Уведомить';
 $_lang['mlmsystem_action_change_balance'] = 'Изменить баланс';
 $_lang['mlmsystem_action_change_parent'] = 'Изменить родителя';
 $_lang['mlmsystem_action_change_type'] = 'Изменить тип';
-
+$_lang['mlmsystem_action_active_leader'] = 'Назначить в руководство';
+$_lang['mlmsystem_action_inactive_leader'] = 'Снять с руководства';
 
 //
 $_lang['mlmsystem_combo_select'] = 'Выберите';

@@ -330,7 +330,7 @@ class SystemTools implements MlmSystemToolsInterface
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('client_grid_fields', null,
 			'id,username,balance,status,level,children,createdon,updatedon,disabled', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
-			'id', 'username', 'disabled', 'deleted', 'properties', 'actions'))));
+			'id', 'username', 'disabled', 'deleted', 'leader', 'properties', 'actions'))));
 		return $gridFields;
 	}
 

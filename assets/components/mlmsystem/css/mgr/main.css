@@ -258,3 +258,8 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-profit-group-clear:before {content: '\f00d' !important;}
 .x-field-mlmsystem-profit-group-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-profit-group-go:before {content: '\f0fe' !important;}
+
+
+.mlmsystem-row-leader .user-link {
+	color: #F00!important;
+}

@@ -217,6 +217,7 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                 width: 50,
                 sortable: true,
                 renderer: function (value, metaData, record) {
+                    metaData.tdCls = 'male-cell';
                     return mlmsystem.utils.userLink(value, record['data']['id'])
                 }
             },
@@ -308,6 +309,15 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
             render: {
                 fn: this.dd,
                 scope: this
+            },
+            beforerender: function(grid, rowIndex, e) {
+                this.view.getRowClass = function(rec, ri, row, store) {
+                    var cls = [];
+                    if (rec.data.leader) {
+                        cls.push('mlmsystem-row-leader');
+                    }
+                    return cls.join(' ');
+                };
             }
         };
     },
@@ -318,7 +328,6 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
         var menu = mlmsystem.utils.getMenu(row.data['actions'], this, ids);
         this.addContextMenuItem(menu);
     },
-
 
     onClick: function (e) {
         var elem = e.getTarget();
@@ -381,6 +390,14 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
             },
             this
         );
+    },
+
+    activeLeader: function(btn, e) {
+        this.setAction('setproperty', 'leader', 1);
+    },
+
+    inactiveLeader: function(btn, e) {
+        this.setAction('setproperty', 'leader', 0);
     },
 
     updateClient: function (btn, e) {

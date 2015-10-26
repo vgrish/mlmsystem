@@ -121,6 +121,16 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			'menu' => true,
 		);
 
+		// sep
+		$array['actions'][] = array(
+			'cls' => '',
+			'icon' => '',
+			'title' => '',
+			'action' => 'sep',
+			'button' => false,
+			'menu' => true,
+		);
+
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => "$icon $icon-users",
@@ -137,6 +147,28 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			'button' => true,
 			'menu' => true,
 		);
+
+
+		if (!$array['leader']) {
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => "$icon $icon-user-secret green",
+				'title' => $this->modx->lexicon('mlmsystem_action_active_leader'),
+				'action' => 'activeLeader',
+				'button' => false,
+				'menu' => true,
+			);
+		}
+		else {
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => "$icon $icon-user-secret red",
+				'title' => $this->modx->lexicon('mlmsystem_action_inactive_leader'),
+				'action' => 'inactiveLeader',
+				'button' => false,
+				'menu' => true,
+			);
+		}
 
 		// sep
 		$array['actions'][] = array(
