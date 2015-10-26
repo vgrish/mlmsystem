@@ -22,6 +22,14 @@ class MlmSystemEventOnWebPageInit extends MlmSystemEventPlugin
 					$this->MlmSystem->loadProfits();
 				}
 
+				$initiator = $this->MlmSystem->Profits->getInitiator($this->scriptProperties);
+
+				if ($initiator) {
+					$this->MlmSystem->Profits->printLog($initiator->toArray(), 1);
+				}
+
+
+
 				/* work */
 
 

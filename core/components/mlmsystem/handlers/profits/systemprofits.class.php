@@ -60,6 +60,15 @@ class SystemProfits implements MlmSystemProfitsInterface
 		return $profit;
 	}
 
+	/** @inheritdoc} */
+	public function getInitiator(array $scriptProperties = array())
+	{
+		$initiator = null;
+		if ($user = $this->MlmSystem->getOption('user', $scriptProperties, $this->modx->user)) {
+			$initiator = $user->getOne('MlmSystemClient');
+		}
+		return $initiator;
+	}
 
 	/** @inheritdoc} */
 	public function getProfitIds($event = '', $active = 1)

@@ -201,7 +201,8 @@ mlmsystem.combo.Client = function(config) {
         baseParams: {
             action: 'mgr/client/getlist',
             combo: true,
-            client: config.client || 0
+            client: config.client || 0,
+            addno: config.addno || 0
         },
         tpl: new Ext.XTemplate(
             '<tpl for="."><div class="x-combo-list-item">',

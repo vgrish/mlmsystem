@@ -423,6 +423,7 @@ Ext.extend(mlmsystem.window.ChangeParent, MODx.Window, {
             clear: true,
             class: config.class,
             client: config.record.id,
+            addno: true,
             fieldLabel: _('mlmsystem_parent'),
             hiddenName: 'parent',
             anchor: '99%',

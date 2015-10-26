@@ -74,6 +74,8 @@ $_lang['mlmsystem_tooltip_profit'] = 'Начисления';
 
 
 /* fields */
+
+$_lang['mlmsystem_no'] = 'Нет';
 $_lang['mlmsystem_name'] = 'Имя';
 $_lang['mlmsystem_email'] = 'Почта';
 $_lang['mlmsystem_notify'] = 'Уведомить';

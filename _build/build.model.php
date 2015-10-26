@@ -35,10 +35,10 @@ $manager = $modx->getManager();
 $generator = $manager->getGenerator();
 
 // Remove old model
-rrmdir($sources['model'] . PKG_NAME_LOWER . '/mysql');
+//rrmdir($sources['model'] . PKG_NAME_LOWER . '/mysql');
 
 // Generate a new one
-$generator->parseSchema($sources['xml'], $sources['model']);
+//$generator->parseSchema($sources['xml'], $sources['model']);
 
 $modx->log(modX::LOG_LEVEL_INFO, 'Model generated.');
 if (!XPDO_CLI_MODE) {

@@ -161,6 +161,18 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 		return $array;
 	}
 
+	/** {@inheritDoc} */
+	public function outputArray(array $array, $count = false)
+	{
+		if ($this->getProperty('addno')) {
+			$array = array_merge_recursive(array(array(
+				'id' => 0,
+				'username' => $this->modx->lexicon('mlmsystem_no')
+			)), $array);
+		}
+		return parent::outputArray($array, $count);
+	}
+
 }
 
 return 'modMlmSystemClientGetListProcessor';

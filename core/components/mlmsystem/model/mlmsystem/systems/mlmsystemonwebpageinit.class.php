@@ -17,17 +17,17 @@ class MlmSystemOnWebPageInit extends MlmSystemPlugin
 				setcookie($clientKey, $_REQUEST[$clientKey], time() + $cookieTime);
 			}
 		} elseif ($this->modx->user->isAuthenticated() AND !empty($_COOKIE[$clientKey])) {
-			if ($parent = $this->modx->getObject('MlmSystemClient', (int)$_REQUEST[$clientKey])) {
+			if ($parent = $this->modx->getObject('MlmSystemClient', array('id' => (int)$_REQUEST[$clientKey]))) {
 				$defaultReferrerId = $parent->get('id');
 			}
-			if ($client = $this->modx->getObject('MlmSystemClient', $userId)) {
+			if ($client = $this->modx->getObject('MlmSystemClient', array('id' => $userId))) {
 				if (!$client->get('parent') AND $defaultReferrerId != $userId) {
 					$this->MlmSystem->Tools->changeClientParent($client, $defaultReferrerId);
 				}
 			}
 			setcookie($clientKey, '', time() - $cookieTime);
 		} elseif ($this->modx->user->isAuthenticated() AND empty($_COOKIE[$clientKey]) AND !empty($defaultReferrerId)) {
-			if ($client = $this->modx->getObject('MlmSystemClient', $userId)) {
+			if ($client = $this->modx->getObject('MlmSystemClient', array('id' => $userId))) {
 				if (!$client->get('parent') AND $defaultReferrerId != $userId) {
 					$this->MlmSystem->Tools->changeClientParent($client, $defaultReferrerId);
 				}

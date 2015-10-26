@@ -15,3 +15,11 @@ $xpdo_meta_map = array (
     4 => 'MlmSystemProfitGroup',
   ),
 );
+
+$this->map['modUser']['aggregates']['MlmSystemClient'] = array(
+    'class' => 'MlmSystemClient',
+    'local' => 'id',
+    'foreign' => 'id',
+    'cardinality' => 'one',
+    'owner' => 'foreign',
+);
