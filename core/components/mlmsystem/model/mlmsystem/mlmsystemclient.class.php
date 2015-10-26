@@ -8,11 +8,11 @@ class MlmSystemClient extends xPDOObject {
 	const STATUS_REMOVED = 4;
 
 	protected $logFields = array(
-		'parent', 'balance', 'leader', 'status',
+		'parent', 'leader', 'status',
 	);
 
 	protected $logFieldsToo = array(
-		'put',	'take'
+		'put',	'take', 'profit', 'deposit'
 	);
 
 	/**
@@ -233,6 +233,32 @@ class MlmSystemClient extends xPDOObject {
 		return $this->set('balance', $balance);
 	}
 
+	/** @inheritdoc} */
+	public function profitSum($sum = 0)
+	{
+		$sum = abs($sum);
+		$balance = $this->get('balance');
+		$incoming = abs($this->get('incoming'));
+		$balance += $sum;
+		$incoming += $sum;
+		$this->set('profit', $sum);
+		$this->set('incoming', $incoming);
+		return $this->set('balance', $balance);
+	}
+
+	/** @inheritdoc} */
+	public function depositSum($sum = 0)
+	{
+		$sum = abs($sum);
+		$balance = $this->get('balance');
+		$incoming = abs($this->get('incoming'));
+		$balance += $sum;
+		$incoming += $sum;
+		$this->set('deposit', $sum);
+		$this->set('incoming', $incoming);
+		return $this->set('balance', $balance);
+	}
+	
 	/** @inheritdoc} */
 	public function log($target = '', $value = '')
 	{

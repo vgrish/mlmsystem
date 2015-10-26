@@ -3,10 +3,15 @@
 
 interface MlmSystemProfitsInterface
 {
+	public function getInitiator(array $scriptProperties = array());
 
 	public function getProfit(MlmSystemProfit $instance, $cost = 0);
 
 	public function getProfitIds($event = '', $active = 1);
+
+	public function setProfit(MlmSystemClient $client, $profit = 0);
+
+	public function setDeposit(MlmSystemClient $client, $deposit = 0);
 
 	public function runProcessor($action = '', $data = array(), $json = false);
 
@@ -46,21 +51,6 @@ class SystemProfits implements MlmSystemProfitsInterface
 	}
 
 	/** @inheritdoc} */
-	public function getProfit(MlmSystemProfit $instance, $cost = 0)
-	{
-
-		$profit = $instance->get('profit');
-		$addProfit = $instance->get('add_profit');
-		if (preg_match('/%$/', $addProfit)) {
-			$addProfit = str_replace('%', '', $addProfit);
-			$addProfit = $profit / 100 * $addProfit;
-		}
-		$profit += $addProfit;
-
-		return $profit;
-	}
-
-	/** @inheritdoc} */
 	public function getInitiator(array $scriptProperties = array())
 	{
 		$initiator = null;
@@ -68,6 +58,13 @@ class SystemProfits implements MlmSystemProfitsInterface
 			$initiator = $user->getOne('MlmSystemClient');
 		}
 		return $initiator;
+	}
+
+	/** @inheritdoc} */
+	public function getProfit(MlmSystemProfit $instance, $cost = 0)
+	{
+		$profit = $instance->get('profit');
+		return $profit;
 	}
 
 	/** @inheritdoc} */
@@ -81,6 +78,32 @@ class SystemProfits implements MlmSystemProfitsInterface
 			$ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
 		}
 		return $ids;
+	}
+
+	/** @inheritdoc} */
+	public function setProfit(MlmSystemClient $client, $profit = 0)
+	{
+		if (
+			empty($profit) OR
+			in_array($client->getOne('status'), array($client->getStatusBlocked(), $client->getStatusRemoved()))
+		) {
+			return false;
+		}
+		$client->profitSum($profit);
+		return $client->save();
+	}
+
+	/** @inheritdoc} */
+	public function setDeposit(MlmSystemClient $client, $deposit = 0)
+	{
+		if (
+			empty($deposit) OR
+			in_array($client->getOne('status'), array($client->getStatusRemoved()))
+		) {
+			return false;
+		}
+		$client->depositSum($deposit);
+		return $client->save();
 	}
 
 	/** @inheritdoc} */
