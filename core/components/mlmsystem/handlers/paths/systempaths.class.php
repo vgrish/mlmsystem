@@ -15,6 +15,12 @@ interface MlmSystemPathsInterface
 	/** Get count children */
 	public static function getChildrenCount($id);
 
+	/** Get all parent */
+	public static function getParent($id);
+
+	/** Get count parent */
+	public static function getParentCount($id);
+
 	/** Get level */
 	public static function getLevel($id);
 
@@ -95,6 +101,24 @@ class SystemPaths implements MlmSystemPathsInterface
 	public static function getChildrenCount($id)
 	{
 		$sql = "SELECT count(*) FROM " . self::$PathTable . " WHERE parent={$id}";
+		$stmt = self::query($sql);
+		return ($stmt) ? $stmt[0]['count(*)'] : false;
+	}
+
+	/** Get all parent */
+	public static function getParent($id)
+	{
+		$sql = "SELECT c.*, p.level, p.order "
+			. "FROM " . self::$PathTable . " p "
+			. "JOIN " . self::$ClientTable . " c ON c.`id`=p.`parent` "
+			. "WHERE p.`id`={$id} ORDER BY p.`level`, p.`order`";
+		return self::query($sql);
+	}
+
+	/** Get count parent */
+	public static function getParentCount($id)
+	{
+		$sql = "SELECT count(*) FROM " . self::$PathTable . " WHERE id={$id}";
 		$stmt = self::query($sql);
 		return ($stmt) ? $stmt[0]['count(*)'] : false;
 	}
