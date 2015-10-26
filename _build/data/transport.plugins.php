@@ -7,6 +7,7 @@ $tmp = array(
 		'file' => 'systems',
 		'description' => '',
 		'events' => array(
+			'OnUserSave' => array(),
 			'OnUserRemove' => array(),
 			'OnWebPageInit' => array(),
 		)

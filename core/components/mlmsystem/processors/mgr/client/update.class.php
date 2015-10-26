@@ -40,8 +40,6 @@ class modMlmSystemClientUpdateProcessor extends modObjectUpdateProcessor
 		}
 		//$valid = $this->object->validate();
 
-		$this->modx->log(1, print_r('beforeSet' ,1));
-
 		return parent::beforeSet();
 	}
 
