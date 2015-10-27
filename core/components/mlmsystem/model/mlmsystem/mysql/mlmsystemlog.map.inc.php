@@ -113,6 +113,22 @@ $xpdo_meta_map['MlmSystemLog']= array (
         ),
       ),
     ),
+    'type' => 
+    array (
+      'alias' => 'type',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'type' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
     'user' => 
     array (
       'alias' => 'user',
@@ -184,6 +200,14 @@ $xpdo_meta_map['MlmSystemLog']= array (
     array (
       'class' => 'MlmSystemClient',
       'local' => 'user',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+    ),
+    'Type' => 
+    array (
+      'class' => 'MlmSystemTypeChanges',
+      'local' => 'type',
       'foreign' => 'id',
       'owner' => 'foreign',
       'cardinality' => 'one',

@@ -30,14 +30,18 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 		if (!$this->getProperty('combo')) {
 			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemLog.user');
 			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemLog.user');
-			$c->leftJoin('MlmSystemClient', 'MlmSystemClient', 'MlmSystemClient.id = MlmSystemLog.user');
+			$c->leftJoin('MlmSystemTypeChanges', 'MlmSystemTypeChanges', 'MlmSystemTypeChanges.id = MlmSystemLog.type');
 
 			$c->select($this->modx->getSelectColumns('MlmSystemLog', 'MlmSystemLog'));
-			$c->select($this->modx->getSelectColumns('modUserProfile', 'modUserProfile', 'profile_', array('id', 'internalKey'), true));
 			$c->select(array(
 				'username' => 'modUser.username',
 				'fullname' => 'modUserProfile.fullname',
 				'email' => 'modUserProfile.email',
+				'mode' => 'MlmSystemTypeChanges.mode',
+				'description' => 'MlmSystemTypeChanges.description',
+				'name' => 'MlmSystemTypeChanges.name',
+				'object' => 'MlmSystemTypeChanges.class',
+				'type_field' => 'MlmSystemTypeChanges.field',
 			));
 		}
 		else {
@@ -54,27 +58,20 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 			$c->where(array('target' => $target));
 		}
 
+		$type = $this->getProperty('type');
+		if ($type) {
+			$c->where(array('type' => $type));
+		}
 
-//		if ($this->getProperty('combo')) {
-//			$c->select('id,name');
-//			if ($instance_id = $this->getProperty('instance_id')) {
-//				if ($instance = $this->modx->getObject($class, $instance_id)) {
-//					$status = $instance->getOne('Status');
-//					if ($status->get('final') == 1) {
-//						$c->where(array('id' => $status->get('id')));
-//					}
-//					else if ($status->get('fixed') == 1) {
-//						$c->where(array('rank:>=' => $status->get('rank')));
-//					}
-//				}
-//			}
-//		}
+		$mode = $this->getProperty('mode');
+		if ($mode) {
+			$c->where(array('MlmSystemTypeChanges.mode' => $mode));
+		}
 
 		$query = trim($this->getProperty('query'));
 		if ($query) {
 			$c->where(array(
-				'name:LIKE' => "%{$query}%",
-				'OR:description:LIKE' => "%{$query}%",
+				'value:LIKE' => "%{$query}%",
 			));
 		}
 

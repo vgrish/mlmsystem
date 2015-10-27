@@ -363,9 +363,9 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getLogFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('log_grid_fields', null,
-			'id,identifier,class,username,target,value,timestamp,ip', true)));
+			'id,identifier,object,name,username,target,value,timestamp,ip', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
-			'id', 'username', 'identifier', 'class', 'user', 'target', 'actions'))));
+			'id', 'username', 'identifier', 'class', 'type', 'user', 'target', 'actions', 'type_name' ,'description', 'type_mode'))));
 		return $gridFields;
 	}
 

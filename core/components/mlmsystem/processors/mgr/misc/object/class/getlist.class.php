@@ -1,9 +1,9 @@
 <?php
 
-class modMlmSystemLogLevelGetListProcessor extends modObjectGetListProcessor
+class modMlmSystemObjectClassGetListProcessor extends modObjectGetListProcessor
 {
 	public $classKey = 'MlmSystemLog';
-	public $defaultSortField = 'target';
+	public $defaultSortField = 'class';
 	public $languageTopics = array('mlmsystem');
 
 	/** {@inheritDoc} */
@@ -11,7 +11,7 @@ class modMlmSystemLogLevelGetListProcessor extends modObjectGetListProcessor
 	{
 		if ($this->getProperty('combo')) {
 			$c->limit(0);
-			$c->groupby('target');
+			$c->groupby('class');
 		}
 
 		return $c;
@@ -21,8 +21,8 @@ class modMlmSystemLogLevelGetListProcessor extends modObjectGetListProcessor
 	public function prepareRow(xPDOObject $object) {
 		if ($this->getProperty('combo')) {
 			$array = array(
-				'name' => $this->modx->lexicon('mlmsystem_target_'.$object->get('target')),
-				'value' => $object->get('target'),
+				'name' => $this->modx->lexicon('mlmsystem_class_'.$object->get('class')),
+				'value' => $object->get('class'),
 			);
 		}
 		else {
@@ -45,4 +45,4 @@ class modMlmSystemLogLevelGetListProcessor extends modObjectGetListProcessor
 
 }
 
-return 'modMlmSystemLogLevelGetListProcessor';
+return 'modMlmSystemObjectClassGetListProcessor';

@@ -66,8 +66,8 @@ mlmsystem.grid.Log = function(config) {
 
         sm: this.sm,
         plugins: this.exp,
-        ddGroup: 'dd',
-        enableDragDrop: true,
+        /*ddGroup: 'dd',
+        enableDragDrop: true,*/
 
         autoHeight: true,
         paging: true,
@@ -105,17 +105,17 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
         var tbar = [];
         tbar.push({
             text: '<i class="fa fa-cogs"></i> ', // + _('mlmsystem_actions'),
-            menu: [{
+            menu: [/*{
                 text: '<i class="fa fa-plus"></i> ' + _('mlmsystem_action_create'),
                 cls: 'mlmsystem-cogs',
                 handler: this.create,
                 scope: this
-            }, {
+            },*/ {
                 text: '<i class="fa fa-trash-o red"></i> ' + _('mlmsystem_action_remove'),
                 cls: 'mlmsystem-cogs',
                 handler: this.remove,
                 scope: this
-            }, '-', {
+            }/*, '-', {
                 text: '<i class="fa fa-toggle-on green"></i> ' + _('mlmsystem_action_active'),
                 cls: 'mlmsystem-cogs',
                 handler: this.active,
@@ -125,7 +125,7 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
                 cls: 'mlmsystem-cogs',
                 handler: this.inactive,
                 scope: this
-            }]
+            }*/]
         });
 
         tbar.push({
@@ -136,7 +136,7 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
 
         tbar.push('->');
         tbar.push({
-            xtype: 'mlmsystem-combo-log-class',
+            xtype: 'mlmsystem-combo-object-class',
             width: 210,
             custm: true,
             clear: true,
@@ -151,7 +151,7 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
             }
         });
         tbar.push({
-            xtype: 'mlmsystem-combo-log-target',
+            xtype: 'mlmsystem-combo-type-change',
             width: 210,
             custm: true,
             clear: true,
@@ -165,6 +165,42 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
                 }
             }
         });
+       /* tbar.push({
+            xtype: 'mlmsystem-combo-mode-change',
+            width: 210,
+            custm: true,
+            clear: true,
+            addall: true,
+            value: 0,
+            class: '',
+            listeners: {
+                select: {
+                    fn: this._filterByCombo,
+                    scope: this
+                }
+            }
+        });*/
+        if (1 != MODx.config.mlmsystem_log_field_search_disable) {
+            tbar.push({
+                xtype: 'mlmsystem-field-search',
+                width: 210,
+                listeners: {
+                    search: {
+                        fn: function (field) {
+                            this._doSearch(field);
+                        },
+                        scope: this
+                    },
+                    clear: {
+                        fn: function (field) {
+                            field.setValue('');
+                            this._clearSearch();
+                        },
+                        scope: this
+                    }
+                }
+            });
+        }
 
         return tbar;
     },
@@ -174,6 +210,17 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
         var add = {
             id: {
                 width: 15,
+                sortable: true
+            },
+            object: {
+                width: 20,
+                sortable: true,
+                renderer: function (value, metaData, record) {
+                    return _('mlmsystem_class_'+value);
+                }
+            },
+            name: {
+                width: 20,
                 sortable: true
             },
             username: {

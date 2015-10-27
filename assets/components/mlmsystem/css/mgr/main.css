@@ -226,24 +226,6 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-balance-change-type-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-balance-change-type-go:before {content: '\f03a' !important;}
 
-/* mlmsystem-log-class field */
-.x-field-mlmsystem-log-class-clear,
-.x-field-mlmsystem-log-class-go {border-left: 1px solid #e4e4e4 !important;}
-.x-field-mlmsystem-log-class-clear:hover,
-.x-field-mlmsystem-log-class-go:hover {border-left-color: transparent !important;}
-.x-field-mlmsystem-log-class-clear:before {content: '\f00d' !important;}
-.x-field-mlmsystem-log-class-go {right: 31px !important; border-radius: 0 !important;}
-.x-field-mlmsystem-log-class-go:before {content: '\f0dc' !important;}
-
-/* mlmsystem-log-target field */
-.x-field-mlmsystem-log-target-clear,
-.x-field-mlmsystem-log-target-go {border-left: 1px solid #e4e4e4 !important;}
-.x-field-mlmsystem-log-target-clear:hover,
-.x-field-mlmsystem-log-target-go:hover {border-left-color: transparent !important;}
-.x-field-mlmsystem-log-target-clear:before {content: '\f00d' !important;}
-.x-field-mlmsystem-log-target-go {right: 31px !important; border-radius: 0 !important;}
-.x-field-mlmsystem-log-target-go:before {content: '\f0dc' !important;}
-
 /* mlmsystem-event field */
 .x-field-mlmsystem-event-clear,
 .x-field-mlmsystem-event-go {border-left: 1px solid #e4e4e4 !important;}
@@ -271,7 +253,16 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-object-field-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-object-field-go:before {content: '\f069' !important;}
 
-/* mlmsystem-method-change field */
+/* mlmsystem-object-class field */
+.x-field-mlmsystem-object-class-clear,
+.x-field-mlmsystem-object-class-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-object-class-clear:hover,
+.x-field-mlmsystem-object-class-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-object-class-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-object-class-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-object-class-go:before {content: '\f1b2' !important;}
+
+/* mlmsystem-mode-change field */
 .x-field-mlmsystem-mode-change-clear,
 .x-field-mlmsystem-mode-change-go {border-left: 1px solid #e4e4e4 !important;}
 .x-field-mlmsystem-mode-change-clear:hover,
@@ -280,3 +271,21 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-mode-change-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-mode-change-go:before {content: '\f013' !important;}
 
+/* mlmsystem-type-change field */
+.x-field-mlmsystem-type-change-clear,
+.x-field-mlmsystem-type-change-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-type-change-clear:hover,
+.x-field-mlmsystem-type-change-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-type-change-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-type-change-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-type-change-go:before {content: '\f013' !important;}
+
+
+/* mlmsystem-log-target field */
+.x-field-mlmsystem-log-target-clear,
+.x-field-mlmsystem-log-target-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-log-target-clear:hover,
+.x-field-mlmsystem-log-target-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-log-target-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-log-target-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-log-target-go:before {content: '\f0dc' !important;}

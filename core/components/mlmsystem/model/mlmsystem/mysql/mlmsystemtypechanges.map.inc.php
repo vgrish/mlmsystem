@@ -150,4 +150,15 @@ $xpdo_meta_map['MlmSystemTypeChanges']= array (
       ),
     ),
   ),
+  'aggregates' => 
+  array (
+    'Mode' => 
+    array (
+      'class' => 'MlmSystemModeChanges',
+      'local' => 'mode',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+    ),
+  ),
 );

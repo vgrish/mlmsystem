@@ -38,6 +38,10 @@ $_lang['mlmsystem_header_children'] = '<i class="fa fa-users"></i>';
 $_lang['mlmsystem_header_event'] = '<i class="fa fa-fire"></i>';
 $_lang['mlmsystem_header_profit'] = '<i class="fa fa-money"></i>';
 $_lang['mlmsystem_header_field'] = '<i class="fa fa-asterisk"></i>';
+$_lang['mlmsystem_header_target'] = '<i class="fa fa-dot-circle-o"></i>';
+$_lang['mlmsystem_header_value'] = '<i class="fa fa-info"></i>';
+$_lang['mlmsystem_header_timestamp'] = '<i class="fa fa-calendar"></i>';
+$_lang['mlmsystem_header_object'] = '<i class="fa fa-cube"></i>';
 
 
 /* tooltip */
@@ -78,6 +82,10 @@ $_lang['mlmsystem_tooltip_children'] = 'Дети';
 $_lang['mlmsystem_tooltip_event'] = 'События';
 $_lang['mlmsystem_tooltip_profit'] = 'Начисления';
 $_lang['mlmsystem_tooltip_field'] = 'Поле';
+$_lang['mlmsystem_tooltip_target'] = 'Цель';
+$_lang['mlmsystem_tooltip_value'] = 'Значение';
+$_lang['mlmsystem_tooltip_timestamp'] = 'Метка';
+$_lang['mlmsystem_tooltip_object'] = 'Объект';
 
 
 /* fields */
@@ -142,7 +150,9 @@ $_lang['mlmsystem_profit1'] = 'Начисления #1';
 $_lang['mlmsystem_profit2'] = 'Начисления #2';
 $_lang['mlmsystem_profit3'] = 'Начисления #3';
 $_lang['mlmsystem_field'] = 'Поле';
-
+$_lang['mlmsystem_target'] = 'Цель';
+$_lang['mlmsystem_value'] = 'Значение';
+$_lang['mlmsystem_object'] = 'Объект';
 
 
 $_lang['mlmsystem_add_profit'] = 'Начисления доп.';
@@ -192,8 +202,6 @@ $_lang['mlmsystem_confirm_send'] = 'Вы уверены, что хотите о�
 $_lang['mlmsystem_balance_take'] = 'Списать';
 $_lang['mlmsystem_balance_put'] = 'Пополнить';
 
-$_lang['mlmsystem_class_MlmSystemClient'] = 'Клиент';
-$_lang['mlmsystem_class_MlmSystemStatus'] = 'Статус';
 
 $_lang['mlmsystem_target_balance'] = 'Баланс';
 $_lang['mlmsystem_target_put'] = 'Пополнение';
@@ -202,3 +210,9 @@ $_lang['mlmsystem_target_take'] = 'Списание';
 $_lang['mlmsystem_group_in'] = 'Включает';
 $_lang['mlmsystem_group_out'] = 'Исключает';
 
+
+/* class object */
+$_lang['mlmsystem_class_MlmSystemClient'] = 'Клиент';
+$_lang['mlmsystem_class_MlmSystemStatus'] = 'Статус';
+$_lang['mlmsystem_class_MlmSystemLog'] = 'Лог';
+$_lang['mlmsystem_class_MlmSystemProfit'] = 'Начисление';
