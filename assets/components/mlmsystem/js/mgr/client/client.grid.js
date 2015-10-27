@@ -217,8 +217,15 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                 width: 50,
                 sortable: true,
                 renderer: function (value, metaData, record) {
-                    metaData.tdCls = 'male-cell';
                     return mlmsystem.utils.userLink(value, record['data']['id'])
+                }
+            },
+            parent_username: {
+                width: 50,
+                sortable: true,
+                hidden: true,
+                renderer: function (value, metaData, record) {
+                    return mlmsystem.utils.userLink(value, record['data']['parent'])
                 }
             },
             email: {
@@ -398,6 +405,14 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
 
     inactiveLeader: function(btn, e) {
         this.setAction('setproperty', 'leader', 0);
+    },
+
+    activeBlocked: function(btn, e) {
+        this.setAction('setproperty', 'status', mlmsystem.config.client_status[2]);
+    },
+
+    inactiveBlocked: function(btn, e) {
+        this.setAction('setproperty', 'status', mlmsystem.config.client_status[1]);
     },
 
     updateClient: function (btn, e) {

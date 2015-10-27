@@ -16,12 +16,17 @@ interface MlmSystemToolsInterface
 
 	public function checkClientParent(MlmSystemClient $client, $parent = 0);
 
+	/** @return array Client fields */
 	public function getClientFields();
 
 	/** @return array Profit fields */
 	public function getProfitFields();
 
-	public function getStoryFields();
+	/** @return array Operation fields */
+	public function getOperationFields();
+
+	/** @return array Log fields */
+	public function getLogFields();
 
 	public function getClientWindowUpdateTabs();
 
@@ -328,9 +333,9 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getClientFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('client_grid_fields', null,
-			'id,username,balance,status,level,children,createdon,updatedon,disabled', true)));
+			'id,username,parent_username,balance,status,level,children,createdon,updatedon,disabled', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
-			'id', 'username', 'disabled', 'deleted', 'leader', 'properties', 'actions'))));
+			'id', 'parent', 'username', 'disabled', 'deleted', 'leader', 'properties', 'actions'))));
 		return $gridFields;
 	}
 
@@ -344,10 +349,20 @@ class SystemTools implements MlmSystemToolsInterface
 		return $gridFields;
 	}
 
-	/** @return array Story fields */
-	public function getStoryFields()
+	/** @return array Operation fields */
+	public function getOperationFields()
 	{
-		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('story_grid_fields', null,
+		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('profit_grid_fields', null,
+			'id,name,event,class,profit', true)));
+		$gridFields = array_values(array_unique(array_merge($gridFields, array(
+			'id', 'event', 'active', 'description', 'properties', 'actions'))));
+		return $gridFields;
+	}
+
+	/** @return array Story fields */
+	public function getLogFields()
+	{
+		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('log_grid_fields', null,
 			'id,identifier,class,username,target,value,timestamp,ip', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
 			'id', 'username', 'identifier', 'class', 'user', 'target', 'actions'))));
@@ -444,7 +459,6 @@ class SystemTools implements MlmSystemToolsInterface
 		}
 		return $properties;
 	}
-
 
 	/** @inheritdoc} */
 	public function runProcessor($action = '', $data = array(), $json = false)

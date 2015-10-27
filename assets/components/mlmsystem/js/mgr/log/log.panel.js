@@ -1,18 +1,18 @@
-mlmsystem.page.Story = function(config) {
+mlmsystem.page.Log = function(config) {
 	config = config || {};
 	Ext.applyIf(config, {
 		components: [{
-			xtype: 'mlmsystem-panel-story',
-			renderTo: 'mlmsystem-panel-story-div',
+			xtype: 'mlmsystem-panel-log',
+			renderTo: 'mlmsystem-panel-log-div',
 			baseCls: 'mlmsystem-formpanel'
 		}]
 	});
-	mlmsystem.page.Story.superclass.constructor.call(this, config);
+	mlmsystem.page.Log.superclass.constructor.call(this, config);
 };
-Ext.extend(mlmsystem.page.Story, MODx.Component);
-Ext.reg('mlmsystem-page-story', mlmsystem.page.Story);
+Ext.extend(mlmsystem.page.Log, MODx.Component);
+Ext.reg('mlmsystem-page-log', mlmsystem.page.Log);
 
-mlmsystem.panel.Story = function(config) {
+mlmsystem.panel.Log = function(config) {
 	if (!config.class) {
 		config.class = '';
 	}
@@ -22,13 +22,13 @@ mlmsystem.panel.Story = function(config) {
 		layout: 'anchor',
 		/*
 		 stateful: true,
-		 stateId: 'mlmsystem-panel-story',
+		 stateId: 'mlmsystem-panel-log',
 		 stateEvents: ['tabchange'],
 		 getState:function() {return {activeTab:this.items.indexOf(this.getActiveTab())};},
 		 */
 		hideMode: 'offclient',
 		items: [{
-			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_stories') + '</h2>',
+			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_logs') + '</h2>',
 			cls: '',
 			style: {
 				margin: '15px 0'
@@ -42,20 +42,20 @@ mlmsystem.panel.Story = function(config) {
 			border: true,
 			hideMode: 'offclient',
 			items: [{
-				title: _('mlmsystem_stories'),
+				title: _('mlmsystem_logs'),
 				layout: 'anchor',
 				items: [{
-					html: _('mlmsystem_stories_intro'),
+					html: _('mlmsystem_logs_intro'),
 					cls: 'panel-desc'
 				}, {
-					xtype: 'mlmsystem-grid-story',
+					xtype: 'mlmsystem-grid-log',
 					class: config.class,
 					cls: 'main-wrapper'
 				}]
 			}]
 		}]
 	});
-	mlmsystem.panel.Story.superclass.constructor.call(this, config);
+	mlmsystem.panel.Log.superclass.constructor.call(this, config);
 };
-Ext.extend(mlmsystem.panel.Story, MODx.Panel);
-Ext.reg('mlmsystem-panel-story', mlmsystem.panel.Story);
+Ext.extend(mlmsystem.panel.Log, MODx.Panel);
+Ext.reg('mlmsystem-panel-log', mlmsystem.panel.Log);

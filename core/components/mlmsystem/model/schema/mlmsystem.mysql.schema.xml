@@ -91,35 +91,6 @@
 	</object>
 
 
-	<object class="MlmSystemLog" table="mlmsystem_logs" extends="xPDOSimpleObject">
-		<field key="identifier" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-		<field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" />
-		<field key="target" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-		<field key="value" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-		<field key="timestamp" dbtype="datetime" phptype="datetime" null="true" />
-		<field key="ip" dbtype="text" phptype="json" null="false" />
-		<index alias="identifier" name="identifier" primary="false" unique="false" type="BTREE" >
-			<column key="identifier" length="" collation="A" null="false" />
-		</index>
-		<index alias="class" name="class" primary="false" unique="false" type="BTREE" >
-			<column key="class" length="" collation="A" null="false" />
-		</index>
-		<index alias="user" name="user" primary="false" unique="false" type="BTREE" >
-			<column key="user" length="" collation="A" null="false" />
-		</index>
-		<index alias="target" name="target" primary="false" unique="false" type="BTREE" >
-			<column key="target" length="" collation="A" null="false" />
-		</index>
-		<index alias="value" name="value" primary="false" unique="false" type="BTREE" >
-			<column key="value" length="" collation="A" null="false" />
-		</index>
-		<aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
-		<aggregate alias="UserProfile" class="modUserProfile" local="user" foreign="internalKey" owner="foreign" cardinality="one" />
-		<aggregate alias="Client" class="MlmSystemClient" local="user" foreign="id" owner="foreign" cardinality="one" />
-	</object>
-
-
 	<object class="MlmSystemPath" table="mlmsystem_paths" extends="xPDOObject">
 		<field key="id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" index="pk" />
 		<field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" index="pk" />
@@ -189,5 +160,74 @@
 		<aggregate alias="Profit" class="MlmSystemProfit" local="identifier" foreign="id" cardinality="one" owner="foreign" />
 	</object>
 
+
+	<object class="MlmSystemLog" table="mlmsystem_logs" extends="xPDOSimpleObject">
+		<field key="identifier" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="type" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" />
+		<field key="target" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="value" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="timestamp" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="ip" dbtype="text" phptype="json" null="false" />
+		<index alias="identifier" name="identifier" primary="false" unique="false" type="BTREE" >
+			<column key="identifier" length="" collation="A" null="false" />
+		</index>
+		<index alias="class" name="class" primary="false" unique="false" type="BTREE" >
+			<column key="class" length="" collation="A" null="false" />
+		</index>
+		<index alias="user" name="user" primary="false" unique="false" type="BTREE" >
+			<column key="user" length="" collation="A" null="false" />
+		</index>
+		<index alias="target" name="target" primary="false" unique="false" type="BTREE" >
+			<column key="target" length="" collation="A" null="false" />
+		</index>
+		<index alias="value" name="value" primary="false" unique="false" type="BTREE" >
+			<column key="value" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
+		<aggregate alias="UserProfile" class="modUserProfile" local="user" foreign="internalKey" owner="foreign" cardinality="one" />
+		<aggregate alias="Client" class="MlmSystemClient" local="user" foreign="id" owner="foreign" cardinality="one" />
+	</object>
+
+
+	<object class="MlmSystemTypeChanges" table="mlmsystem_types_changes" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="true" />
+		<field key="class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="mode" dbtype="tinyint" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" />
+		<field key="rank" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+		<field key="editable" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+
+		<index alias="class" name="class" primary="false" unique="false" type="BTREE" >
+			<column key="class" length="" collation="A" null="false" />
+		</index>
+		<index alias="field" name="field" primary="false" unique="false" type="BTREE" >
+			<column key="field" length="" collation="A" null="false" />
+		</index>
+		<index alias="mode" name="mode" primary="false" unique="false" type="BTREE" >
+			<column key="mode" length="" collation="A" null="false" />
+		</index>
+		<index alias="active" name="active" primary="false" unique="false" type="BTREE" >
+			<column key="active" length="" collation="A" null="false" />
+		</index>
+
+	</object>
+
+
+	<object class="MlmSystemModeChanges" table="mlmsystem_modes_changes" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" />
+		<field key="description" dbtype="text" phptype="string" null="true" />
+		<field key="rank" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
+		<field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+		<field key="editable" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+
+		<index alias="active" name="active" primary="false" unique="false" type="BTREE" >
+			<column key="active" length="" collation="A" null="false" />
+		</index>
+
+	</object>
 
 </model>

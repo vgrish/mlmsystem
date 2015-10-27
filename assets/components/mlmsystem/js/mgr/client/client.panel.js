@@ -63,6 +63,17 @@ mlmsystem.panel.Client = function(config) {
 					class: config.class,
 					cls: 'main-wrapper'
 				}]
+			}, {
+				title: _('mlmsystem_type_changes_client'),
+				layout: 'anchor',
+				items: [{
+					html: _('mlmsystem_type_changes_client_intro'),
+					cls: 'panel-desc'
+				}, {
+					xtype: 'mlmsystem-grid-type-change',
+					class: config.class,
+					cls: 'main-wrapper'
+				}]
 			}]
 		}]
 	});

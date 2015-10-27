@@ -11,12 +11,16 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 	public $languageTopics = array('default', 'mlmsystem');
 	public $permission = '';
 
+	public $statusBlocked;
+
 	/** {@inheritDoc} */
 	public function initialize()
 	{
 		if (!$this->modx->hasPermission($this->permission)) {
 			return $this->modx->lexicon('access_denied');
 		}
+		$clientObject = $this->modx->newObject('MlmSystemClient');
+		$this->statusBlocked = $clientObject->getStatusBlocked();
 
 		return parent::initialize();
 	}
@@ -30,6 +34,8 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 
 			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemClient.id');
 			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemClient.id');
+			$c->leftJoin('modUser', 'modUserParent', 'modUserParent.id = MlmSystemClient.parent');
+			$c->leftJoin('modUserProfile', 'modUserProfileParent', 'modUserProfileParent.internalKey = MlmSystemClient.parent');
 			$c->leftJoin('MlmSystemStatus', 'MlmSystemStatus', 'MlmSystemStatus.id = MlmSystemClient.status');
 			$c->leftJoin('MlmSystemPath', 'MlmSystemPath', 'MlmSystemPath.id = MlmSystemClient.id');
 			$c->leftJoin('MlmSystemClient', 'MlmSystemClientParent', 'MlmSystemClientParent.parent = MlmSystemClient.id');
@@ -40,6 +46,11 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 				'username' => 'modUser.username',
 				'fullname' => 'modUserProfile.fullname',
 				'email' => 'modUserProfile.email',
+
+				'parent_username' => 'modUserParent.username',
+				'parent_fullname' => 'modUserProfileParent.fullname',
+				'parent_email' => 'modUserProfileParent.email',
+
 				'status_name' => 'MlmSystemStatus.name',
 				'status_color' => 'MlmSystemStatus.color',
 				'level' => 'MlmSystemPath.level',
@@ -133,7 +144,7 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 
 		$array['actions'][] = array(
 			'cls' => '',
-			'icon' => "$icon $icon-users",
+			'icon' => "$icon $icon-street-view",
 			'title' => $this->modx->lexicon('mlmsystem_action_change_parent'),
 			'action' => 'changeParent',
 			'button' => false,
@@ -141,34 +152,12 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 		);
 		$array['actions'][] = array(
 			'cls' => '',
-			'icon' => "$icon $icon-balance-scale",
+			'icon' => "$icon $icon-money ",
 			'title' => $this->modx->lexicon('mlmsystem_action_change_balance'),
 			'action' => 'changeBalance',
 			'button' => true,
 			'menu' => true,
 		);
-
-
-		if (!$array['leader']) {
-			$array['actions'][] = array(
-				'cls' => '',
-				'icon' => "$icon $icon-user-secret green",
-				'title' => $this->modx->lexicon('mlmsystem_action_active_leader'),
-				'action' => 'activeLeader',
-				'button' => false,
-				'menu' => true,
-			);
-		}
-		else {
-			$array['actions'][] = array(
-				'cls' => '',
-				'icon' => "$icon $icon-user-secret red",
-				'title' => $this->modx->lexicon('mlmsystem_action_inactive_leader'),
-				'action' => 'inactiveLeader',
-				'button' => false,
-				'menu' => true,
-			);
-		}
 
 		// sep
 		$array['actions'][] = array(
@@ -179,6 +168,52 @@ class modMlmSystemClientGetListProcessor extends modObjectGetListProcessor
 			'button' => false,
 			'menu' => true,
 		);
+
+		//Blocked status
+		if ($array['status'] != $this->statusBlocked) {
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => "$icon $icon-unlock-alt red",
+				'title' => $this->modx->lexicon('mlmsystem_action_active_blocked'),
+				'action' => 'activeBlocked',
+				'button' => false,
+				'menu' => true,
+			);
+		}
+		else {
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => "$icon $icon-unlock green",
+				'title' => $this->modx->lexicon('mlmsystem_action_inactive_blocked'),
+				'action' => 'inactiveBlocked',
+				'button' => false,
+				'menu' => true,
+			);
+		}
+
+
+		if (!$array['leader']) {
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => "$icon $icon-shield green",
+				'title' => $this->modx->lexicon('mlmsystem_action_active_leader'),
+				'action' => 'activeLeader',
+				'button' => false,
+				'menu' => true,
+			);
+		}
+		else {
+			$array['actions'][] = array(
+				'cls' => '',
+				'icon' => "$icon $icon-shield red",
+				'title' => $this->modx->lexicon('mlmsystem_action_inactive_leader'),
+				'action' => 'inactiveLeader',
+				'button' => false,
+				'menu' => true,
+			);
+		}
+
+
 
 		// Remove
 		$array['actions'][] = array(

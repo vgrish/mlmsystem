@@ -2,17 +2,17 @@
 
 require_once dirname(dirname(__FILE__)) . '/index.class.php';
 
-class ControllersStoryManagerController extends MlmSystemMainController
+class ControllersLogManagerController extends MlmSystemMainController
 {
 
 	public static function getDefaultController()
 	{
-		return 'story';
+		return 'log';
 	}
 
 }
 
-class MlmSystemStoryManagerController extends MlmSystemMainController
+class MlmSystemLogManagerController extends MlmSystemMainController
 {
 
 	public function getPageTitle()
@@ -31,41 +31,41 @@ class MlmSystemStoryManagerController extends MlmSystemMainController
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.utils.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.combo.js');
 
-		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/story/story.grid.js');
-		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/story/story.panel.js');
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.grid.js');
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.panel.js');
 
-		$gridFields = $this->MlmSystem->Tools->getStoryFields();
+		$gridFields = $this->MlmSystem->Tools->getLogFields();
 
 		$this->addHtml(str_replace('			', '', '
 			<script type="text/javascript">
 				Ext.onReady(function() {
-					mlmsystem.config.story_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
-					MODx.load({ xtype: "mlmsystem-page-story"});
+					mlmsystem.config.log_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
+					MODx.load({ xtype: "mlmsystem-page-log"});
 				});
 			</script>'
 		));
-		$this->modx->invokeEvent('MlmSystemOnManagerCustomCssJs', array('controller' => &$this, 'page' => 'story'));
+		$this->modx->invokeEvent('MlmSystemOnManagerCustomCssJs', array('controller' => &$this, 'page' => 'log'));
 	}
 
 	public function getTemplateFile()
 	{
-		return $this->MlmSystem->config['templatesPath'] . 'story.tpl';
+		return $this->MlmSystem->config['templatesPath'] . 'log.tpl';
 	}
 
 }
 
 // MODX 2.3
-class ControllersMgrStoryManagerController extends ControllersStoryManagerController
+class ControllersMgrLogManagerController extends ControllersLogManagerController
 {
 
 	public static function getDefaultController()
 	{
-		return 'story';
+		return 'log';
 	}
 
 }
 
-class MlmSystemMgrStoryManagerController extends MlmSystemStoryManagerController
+class MlmSystemMgrLogManagerController extends MlmSystemLogManagerController
 {
 
 }

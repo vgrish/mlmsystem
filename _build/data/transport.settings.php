@@ -102,6 +102,14 @@ $tmp = array(
 
 
 
+	'log_fields_MlmSystemClient' => array(
+		'value' => '',
+		'xtype' => 'textfield',
+		'area' => 'mlmsystem_logs'
+	),
+
+
+
 	'date_format' => array(
 		'xtype' => 'textfield',
 		'value' => '%d.%m.%y <small>%H:%M</small>',

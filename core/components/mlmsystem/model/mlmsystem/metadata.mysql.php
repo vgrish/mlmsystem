@@ -10,9 +10,11 @@ $xpdo_meta_map = array (
   array (
     0 => 'MlmSystemStatus',
     1 => 'MlmSystemEmail',
-    2 => 'MlmSystemLog',
-    3 => 'MlmSystemProfit',
-    4 => 'MlmSystemProfitGroup',
+    2 => 'MlmSystemProfit',
+    3 => 'MlmSystemProfitGroup',
+    4 => 'MlmSystemLog',
+    5 => 'MlmSystemTypeChanges',
+    6 => 'MlmSystemModeChanges',
   ),
 );
 
@@ -23,3 +25,4 @@ $this->map['modUser']['aggregates']['MlmSystemClient'] = array(
     'cardinality' => 'one',
     'owner' => 'foreign',
 );
+

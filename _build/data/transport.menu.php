@@ -25,13 +25,20 @@ $tmp = array(
 			'controller' => 'controllers/profit'
 		)
 	),
-
-	'mlmsystem_stories' => array(
-		'description' => 'mlmsystem_stories_desc',
+//	'mlmsystem_operations' => array(
+//		'description' => 'mlmsystem_operations_desc',
+//		'parent' => 'mlmsystem',
+//		'menuindex' => 3,
+//		'action' => array(
+//			'controller' => 'controllers/operation'
+//		)
+//	),
+	'mlmsystem_logs' => array(
+		'description' => 'mlmsystem_logs_desc',
 		'parent' => 'mlmsystem',
-		'menuindex' => 3,
+		'menuindex' => 4,
 		'action' => array(
-			'controller' => 'controllers/story'
+			'controller' => 'controllers/log'
 		)
 	),
 

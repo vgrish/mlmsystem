@@ -15,14 +15,17 @@ if ($object->xpdo) {
 			$objects = array(
 				'MlmSystemClient',
 
+				'MlmSystemProfit',
+				'MlmSystemProfitGroup',
+
+				'MlmSystemTypeChanges',
+				'MlmSystemModeChanges',
+
 				'MlmSystemStatus',
 				'MlmSystemEmail',
 				'MlmSystemLog',
 
-				'MlmSystemProfit',
-				'MlmSystemProfitGroup',
-
-				'MlmSystemPath'
+				'MlmSystemPath',
 			);
 
 			foreach ($objects as $tmp) {

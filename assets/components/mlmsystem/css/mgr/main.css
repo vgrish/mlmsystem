@@ -123,6 +123,9 @@ span.mlmsystem-grid-color {
 	border-radius: 3px;
 }
 
+.mlmsystem-row-leader .user-link {
+	color: #F00!important;
+}
 
 /* search field */
 .x-field-search-clear,
@@ -259,7 +262,21 @@ span.mlmsystem-grid-color {
 .x-field-mlmsystem-profit-group-go {right: 31px !important; border-radius: 0 !important;}
 .x-field-mlmsystem-profit-group-go:before {content: '\f0fe' !important;}
 
+/* mlmsystem-object-field field */
+.x-field-mlmsystem-object-field-clear,
+.x-field-mlmsystem-object-field-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-object-field-clear:hover,
+.x-field-mlmsystem-object-field-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-object-field-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-object-field-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-object-field-go:before {content: '\f069' !important;}
 
-.mlmsystem-row-leader .user-link {
-	color: #F00!important;
-}
+/* mlmsystem-method-change field */
+.x-field-mlmsystem-mode-change-clear,
+.x-field-mlmsystem-mode-change-go {border-left: 1px solid #e4e4e4 !important;}
+.x-field-mlmsystem-mode-change-clear:hover,
+.x-field-mlmsystem-mode-change-go:hover {border-left-color: transparent !important;}
+.x-field-mlmsystem-mode-change-clear:before {content: '\f00d' !important;}
+.x-field-mlmsystem-mode-change-go {right: 31px !important; border-radius: 0 !important;}
+.x-field-mlmsystem-mode-change-go:before {content: '\f013' !important;}
+

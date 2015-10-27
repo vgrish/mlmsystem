@@ -31,7 +31,7 @@ if ($object->xpdo) {
 				),
 				'2' => array(
 					'name' => !$lang ? 'Новый' : 'New',
-					'color' => '993300',
+					'color' => '008000',
 					'email_user' => 1,
 					'email_manager' => 0,
 					'tpl_user' => 0,
@@ -42,7 +42,7 @@ if ($object->xpdo) {
 				),
 				'3' => array(
 					'name' => !$lang ? 'Блокирован' : 'Blocked',
-					'color' => '008000',
+					'color' => '993300',
 					'email_user' => 1,
 					'email_manager' => 0,
 					'tpl_user' => 0,
@@ -53,7 +53,7 @@ if ($object->xpdo) {
 				),
 				'4' => array(
 					'name' => !$lang ? 'Удален' : 'Removed',
-					'color' => '008000',
+					'color' => 'FFCC99',
 					'email_user' => 1,
 					'email_manager' => 0,
 					'tpl_user' => 0,

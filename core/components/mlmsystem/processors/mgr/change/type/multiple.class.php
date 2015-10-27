@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Multiple a MlmSystemClient
+ * Multiple a MlmSystemTypeChanges
  */
-class modMlmSystemClientMultipleProcessor extends modProcessor
+class modMlmSystemTypeChangesMultipleProcessor extends modProcessor
 {
-	public $classKey = 'MlmSystemClient';
+	public $classKey = 'MlmSystemTypeChanges';
 
 	public function process()
 	{
@@ -48,4 +48,4 @@ class modMlmSystemClientMultipleProcessor extends modProcessor
 	}
 }
 
-return 'modMlmSystemClientMultipleProcessor';
+return 'modMlmSystemTypeChangesMultipleProcessor';

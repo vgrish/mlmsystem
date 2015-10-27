@@ -446,7 +446,7 @@ Ext.reg('mlmsystem-client-window-change-parent', mlmsystem.window.ChangeParent);
 
 /* ------------------------------------------------------- */
 
-mlmsystem.window.CorrectBalance = function (config) {
+mlmsystem.window.ChangeBalance = function (config) {
     config = config || {};
     Ext.applyIf(config, {
         title: _('create'),
@@ -458,12 +458,12 @@ mlmsystem.window.CorrectBalance = function (config) {
         keys: this.getKeys(config),
         buttons: this.getButtons(config)
     });
-    mlmsystem.window.CorrectBalance.superclass.constructor.call(this, config);
+    mlmsystem.window.ChangeBalance.superclass.constructor.call(this, config);
     if (!config.update) {
         config.update = false;
     }
 };
-Ext.extend(mlmsystem.window.CorrectBalance, MODx.Window, {
+Ext.extend(mlmsystem.window.ChangeBalance, MODx.Window, {
 
     getKeys: function () {
         return [{
@@ -544,7 +544,7 @@ Ext.extend(mlmsystem.window.CorrectBalance, MODx.Window, {
 
     getRightFields: function(config) {
         return [{
-            xtype: 'numberfield',
+            xtype: 'textfield',
             fieldLabel: _('mlmsystem_balance'),
             msgTarget: 'under',
             name: 'balance',
@@ -577,7 +577,7 @@ Ext.extend(mlmsystem.window.CorrectBalance, MODx.Window, {
                 success: {
                     fn: function(r) {
                         var record = r.object;
-                        balance.setValue(record.balance);
+                        balance.setValue(mlmsystem.utils.renderMoney(record.balance));
                     },
                     scope: this
                 }
@@ -586,4 +586,4 @@ Ext.extend(mlmsystem.window.CorrectBalance, MODx.Window, {
     }
 
 });
-Ext.reg('mlmsystem-client-window-change-balance', mlmsystem.window.CorrectBalance);
+Ext.reg('mlmsystem-client-window-change-balance', mlmsystem.window.ChangeBalance);

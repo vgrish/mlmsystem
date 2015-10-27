@@ -5,7 +5,8 @@ $_lang['mlmsystem_header_id'] = '<i class="fa fa-sort-numeric-desc"></i>';
 $_lang['mlmsystem_header_resource'] = '<i class="fa fa-folder-o"></i>';
 $_lang['mlmsystem_header_file'] = '<i class="fa fa-file"></i>';
 $_lang['mlmsystem_header_type'] = '<i class="fa fa-info"></i>';
-$_lang['mlmsystem_header_method'] = '<i class="fa fa-info"></i>';
+$_lang['mlmsystem_header_mode'] = '<i class="fa fa-cog"></i>';
+$_lang['mlmsystem_header_method'] = '<i class="fa fa-cog"></i>';
 $_lang['mlmsystem_header_createdon'] = '<i class="fa fa-calendar"></i>';
 $_lang['mlmsystem_header_updatedon'] = '<i class="fa fa-calendar"></i>';
 $_lang['mlmsystem_header_createdby'] = '<i class="fa fa-user"></i>';
@@ -15,6 +16,7 @@ $_lang['mlmsystem_header_row'] = '<i class="fa fa-file-code-o"></i>';
 $_lang['mlmsystem_header_wrapper'] = '<i class="fa fa-file-code-o"></i>';
 $_lang['mlmsystem_header_format'] = '<i class="fa fa-expand"></i>';
 $_lang['mlmsystem_header_username'] = '<i class="fa fa-user green"></i>';
+$_lang['mlmsystem_header_parent_username'] = '<i class="fa fa-street-view green"></i>';
 $_lang['mlmsystem_header_email'] = '<i class="fa fa-envelope "></i>';
 $_lang['mlmsystem_header_tax'] = '<i class="fa fa-money red"></i>';
 $_lang['mlmsystem_header_sum'] = '<i class="fa fa-money green"></i>';
@@ -35,12 +37,15 @@ $_lang['mlmsystem_header_level'] = '<i class="fa fa-sort-amount-asc"></i>';
 $_lang['mlmsystem_header_children'] = '<i class="fa fa-users"></i>';
 $_lang['mlmsystem_header_event'] = '<i class="fa fa-fire"></i>';
 $_lang['mlmsystem_header_profit'] = '<i class="fa fa-money"></i>';
+$_lang['mlmsystem_header_field'] = '<i class="fa fa-asterisk"></i>';
+
 
 /* tooltip */
 $_lang['mlmsystem_tooltip_id'] = 'Id';
 $_lang['mlmsystem_tooltip_resource'] = 'Ресурс';
 $_lang['mlmsystem_tooltip_file'] = 'Файл';
 $_lang['mlmsystem_tooltip_type'] = 'Тип';
+$_lang['mlmsystem_tooltip_mode'] = 'Метод';
 $_lang['mlmsystem_tooltip_method'] = 'Метод';
 $_lang['mlmsystem_tooltip_createdon'] = 'Дата создания';
 $_lang['mlmsystem_tooltip_updatedon'] = 'Дата обновления';
@@ -51,6 +56,7 @@ $_lang['mlmsystem_tooltip_row'] = 'Чанк оформления';
 $_lang['mlmsystem_tooltip_wrapper'] = 'Чанк-обёртка';
 $_lang['mlmsystem_tooltip_format'] = 'Формат';
 $_lang['mlmsystem_tooltip_username'] = 'Пользователь';
+$_lang['mlmsystem_tooltip_parent_username'] = 'Родитель';
 $_lang['mlmsystem_tooltip_email'] = 'Почта';
 $_lang['mlmsystem_tooltip_tax'] = 'Комиссия';
 $_lang['mlmsystem_tooltip_sum'] = 'Сумма';
@@ -71,6 +77,7 @@ $_lang['mlmsystem_tooltip_level'] = 'Уровень';
 $_lang['mlmsystem_tooltip_children'] = 'Дети';
 $_lang['mlmsystem_tooltip_event'] = 'События';
 $_lang['mlmsystem_tooltip_profit'] = 'Начисления';
+$_lang['mlmsystem_tooltip_field'] = 'Поле';
 
 
 /* fields */
@@ -93,18 +100,21 @@ $_lang['mlmsystem_active'] = 'Включен';
 $_lang['mlmsystem_class'] = 'Класс-обработчик';
 $_lang['mlmsystem_tax'] = 'Комиссия';
 $_lang['mlmsystem_type'] = 'Тип';
+$_lang['mlmsystem_mode'] = 'Метод';
 $_lang['mlmsystem_method'] = 'Метод';
 $_lang['mlmsystem_all'] = 'Все';
 $_lang['mlmsystem_color'] = 'Цвет';
 $_lang['mlmsystem_context'] = 'Контекст';
 $_lang['mlmsystem_status'] = 'Статус';
 $_lang['mlmsystem_logo'] = 'Логотип';
-$_lang['mlmsystem_money_unit'] = 'уе.';
+$_lang['mlmsystem_money_unit'] = 'у.е.';
 $_lang['mlmsystem_balance'] = 'Баланс';
 $_lang['mlmsystem_incoming'] = 'Приход';
 $_lang['mlmsystem_outcoming'] = 'Расход';
 $_lang['mlmsystem_handler'] = 'Обработчик';
 $_lang['mlmsystem_user'] = 'Пользователь';
+$_lang['mlmsystem_parent'] = 'Родитель';
+$_lang['mlmsystem_parent_username'] = 'Родитель';
 $_lang['mlmsystem_client'] = 'Клиент';
 $_lang['mlmsystem_num'] = 'Номер';
 $_lang['mlmsystem_email_user'] = 'Письмо клиенту';
@@ -117,7 +127,6 @@ $_lang['mlmsystem_status_final'] = 'Итоговый';
 $_lang['mlmsystem_status_fixed'] = 'Фиксирует';
 $_lang['mlmsystem_leader_inactive'] = 'Клиент';
 $_lang['mlmsystem_leader_active'] = 'Руководитель';
-$_lang['mlmsystem_parent'] = 'Родитель';
 $_lang['mlmsystem_level'] = 'Уровень';
 $_lang['mlmsystem_children'] = 'Дети';
 $_lang['mlmsystem_type_change'] = 'Тип изменений';
@@ -132,6 +141,8 @@ $_lang['mlmsystem_profit'] = 'Начисления';
 $_lang['mlmsystem_profit1'] = 'Начисления #1';
 $_lang['mlmsystem_profit2'] = 'Начисления #2';
 $_lang['mlmsystem_profit3'] = 'Начисления #3';
+$_lang['mlmsystem_field'] = 'Поле';
+
 
 
 $_lang['mlmsystem_add_profit'] = 'Начисления доп.';
@@ -163,8 +174,11 @@ $_lang['mlmsystem_action_notice'] = 'Уведомить';
 $_lang['mlmsystem_action_change_balance'] = 'Изменить баланс';
 $_lang['mlmsystem_action_change_parent'] = 'Изменить родителя';
 $_lang['mlmsystem_action_change_type'] = 'Изменить тип';
-$_lang['mlmsystem_action_active_leader'] = 'Назначить в руководство';
+$_lang['mlmsystem_action_active_leader'] = 'Назначить руководителем';
 $_lang['mlmsystem_action_inactive_leader'] = 'Снять с руководства';
+$_lang['mlmsystem_action_active_blocked'] = 'Заблокировать';
+$_lang['mlmsystem_action_inactive_blocked'] = 'Разблокировать';
+
 
 //
 $_lang['mlmsystem_combo_select'] = 'Выберите';

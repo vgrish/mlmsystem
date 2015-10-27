@@ -11,11 +11,13 @@ $xpdo_meta_map['MlmSystemProfit']= array (
     'class' => '',
     'description' => NULL,
     'profit' => 0,
-    'add_profit' => 0,
-    'order_profit' => '0',
-    'initiator_profit' => '0',
-    'tree_active' => 1,
-    'tree_profit' => NULL,
+    'profit1' => '0',
+    'profit2' => '0',
+    'profit3' => '0',
+    'parent_active' => 0,
+    'parent_profit' => NULL,
+    'children_active' => 0,
+    'children_profit' => NULL,
     'rank' => 0,
     'active' => 1,
     'editable' => 1,
@@ -59,15 +61,7 @@ $xpdo_meta_map['MlmSystemProfit']= array (
       'null' => false,
       'default' => 0,
     ),
-    'add_profit' => 
-    array (
-      'dbtype' => 'decimal',
-      'precision' => '12,2',
-      'phptype' => 'float',
-      'null' => false,
-      'default' => 0,
-    ),
-    'order_profit' => 
+    'profit1' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '11',
@@ -75,7 +69,7 @@ $xpdo_meta_map['MlmSystemProfit']= array (
       'null' => true,
       'default' => '0',
     ),
-    'initiator_profit' => 
+    'profit2' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '11',
@@ -83,16 +77,40 @@ $xpdo_meta_map['MlmSystemProfit']= array (
       'null' => true,
       'default' => '0',
     ),
-    'tree_active' => 
+    'profit3' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '11',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '0',
+    ),
+    'parent_active' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
       'phptype' => 'boolean',
       'attributes' => 'unsigned',
       'null' => false,
-      'default' => 1,
+      'default' => 0,
     ),
-    'tree_profit' => 
+    'parent_profit' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '500',
+      'null' => true,
+    ),
+    'children_active' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
+    'children_profit' => 
     array (
       'dbtype' => 'varchar',
       'phptype' => 'string',

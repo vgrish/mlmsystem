@@ -1,5 +1,7 @@
 <?php
-class MlmSystemClient extends xPDOObject {
+
+class MlmSystemClient extends xPDOObject
+{
 
 
 	const STATUS_CREATE = 1;
@@ -7,13 +9,31 @@ class MlmSystemClient extends xPDOObject {
 	const STATUS_BLOCKED = 3;
 	const STATUS_REMOVED = 4;
 
-	protected $logFields = array(
-		'parent', 'leader', 'status',
-	);
+	protected $logFields = array();
 
-	protected $logFieldsToo = array(
-		'put',	'take', 'profit', 'deposit'
-	);
+	/** @inheritdoc} */
+	public function getStatusCreate()
+	{
+		return self::STATUS_CREATE;
+	}
+
+	/** @inheritdoc} */
+	public function getStatusNew()
+	{
+		return self::STATUS_NEW;
+	}
+
+	/** @inheritdoc} */
+	public function getStatusBlocked()
+	{
+		return self::STATUS_BLOCKED;
+	}
+
+	/** @inheritdoc} */
+	public function getStatusRemoved()
+	{
+		return self::STATUS_REMOVED;
+	}
 
 	/**
 	 * Get the xPDOValidator class configured for this instance.
@@ -99,9 +119,10 @@ class MlmSystemClient extends xPDOObject {
 	 *
 	 * @return bool
 	 */
-	public function save($cacheFlag= null)
+	public function save($cacheFlag = null)
 	{
 		$isNew = $this->isNew();
+		$this->logFields = $this->xpdo->fromJSON($this->xpdo->getOption('mlmsystem_log_fields_' . __CLASS__, null, '{}'));
 
 		if ($isNew) {
 			$this->set('createdon', time());
@@ -116,20 +137,16 @@ class MlmSystemClient extends xPDOObject {
 			));
 		}
 
-		/* log fields too */
-		foreach ($this->logFieldsToo as $field) {
-			if ($v = $this->get($field)) {
-				$this->log($field, $v);
-			}
-		}
-
-		/* log fields */
-		foreach ($this->logFields as $field) {
+		/* log fields  */
+		foreach ($this->logFields as $field => $type) {
 			if (!array_key_exists($field, $this->_fieldMeta)) {
 				continue;
 			}
-			if ($this->isDirty($field)) {
-				$this->log($field, $this->get($field));
+			if (!$this->isDirty($field)) {
+				continue;
+			}
+			if ($value = $this->get($field)) {
+				$this->log($field, $value, $type);
 			}
 		}
 
@@ -171,37 +188,14 @@ class MlmSystemClient extends xPDOObject {
 		return $removed;
 	}
 
-	/** @inheritdoc} */
-	public function getStatusCreate()
-	{
-		return self::STATUS_CREATE;
-	}
-
-	/** @inheritdoc} */
-	public function getStatusNew()
-	{
-		return self::STATUS_NEW;
-	}
-
-	/** @inheritdoc} */
-	public function getStatusBlocked()
-	{
-		return self::STATUS_BLOCKED;
-	}
-
-	/** @inheritdoc} */
-	public function getStatusRemoved()
-	{
-		return self::STATUS_REMOVED;
-	}
-
 	/**
 	 * Set the leader field explicitly
 	 *
 	 * @param boolean $$leader
 	 * @return bool
 	 */
-	public function setLeader($leader) {
+	public function setLeader($leader)
+	{
 		$this->_fields['leader'] = (boolean)$leader;
 		$this->setDirty('leader');
 		return true;
@@ -215,7 +209,6 @@ class MlmSystemClient extends xPDOObject {
 		$incoming = abs($this->get('incoming'));
 		$balance += $sum;
 		$incoming += $sum;
-		$this->set('put', $sum);
 		$this->set('incoming', $incoming);
 		return $this->set('balance', $balance);
 	}
@@ -228,56 +221,17 @@ class MlmSystemClient extends xPDOObject {
 		$outcoming = abs($this->get('outcoming'));
 		$balance -= $sum;
 		$outcoming += $sum;
-		$this->set('take', $sum);
 		$this->set('outcoming', $outcoming);
 		return $this->set('balance', $balance);
 	}
 
 	/** @inheritdoc} */
-	public function profitSum($sum = 0)
-	{
-		$sum = abs($sum);
-		$balance = $this->get('balance');
-		$incoming = abs($this->get('incoming'));
-		$balance += $sum;
-		$incoming += $sum;
-		$this->set('profit', $sum);
-		$this->set('incoming', $incoming);
-		return $this->set('balance', $balance);
-	}
-
-	/** @inheritdoc} */
-	public function depositSum($sum = 0)
-	{
-		$sum = abs($sum);
-		$balance = $this->get('balance');
-		$incoming = abs($this->get('incoming'));
-		$balance += $sum;
-		$incoming += $sum;
-		$this->set('deposit', $sum);
-		$this->set('incoming', $incoming);
-		return $this->set('balance', $balance);
-	}
-
-	/** @inheritdoc} */
-	public function leaderSum($sum = 0)
-	{
-		$sum = abs($sum);
-		$balance = $this->get('balance');
-		$incoming = abs($this->get('incoming'));
-		$balance += $sum;
-		$incoming += $sum;
-		//$this->set('leader', $sum);
-		$this->set('incoming', $incoming);
-		return $this->set('balance', $balance);
-	}
-
-	/** @inheritdoc} */
-	public function log($target = '', $value = '')
+	public function log($target = '', $value = '', $type = '')
 	{
 		$this->Log = $this->xpdo->newObject('MlmSystemLog', array(
 			'target' => $target,
 			'value' => $value,
+			'type' => $type,
 			'class' => __CLASS__,
 		));
 		return true;
@@ -290,7 +244,8 @@ class MlmSystemClient extends xPDOObject {
 	 * @param array $options An array of options for the lock.
 	 * @return boolean True if the lock was successful.
 	 */
-	public function addLock(array $options = array()) {
+	public function addLock(array $options = array())
+	{
 		$locked = false;
 		if ($this->xpdo instanceof modX) {
 			$lockedBy = $this->getLock();
@@ -309,7 +264,8 @@ class MlmSystemClient extends xPDOObject {
 	 * @access public
 	 * @return int
 	 */
-	public function getLock() {
+	public function getLock()
+	{
 		$lock = 0;
 		if ($this->xpdo instanceof modX) {
 			if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
@@ -331,7 +287,8 @@ class MlmSystemClient extends xPDOObject {
 	 * @access public
 	 * @return boolean True if locks were removed.
 	 */
-	public function removeLock() {
+	public function removeLock()
+	{
 		$removed = false;
 		if ($this->xpdo instanceof modX) {
 			//$lockedBy = $this->getLock();
@@ -345,5 +302,5 @@ class MlmSystemClient extends xPDOObject {
 		}
 		return $removed;
 	}
-	
+
 }

@@ -8,6 +8,7 @@ $xpdo_meta_map['MlmSystemLog']= array (
   array (
     'identifier' => 0,
     'class' => '',
+    'type' => '',
     'user' => NULL,
     'target' => '',
     'value' => '',
@@ -26,6 +27,14 @@ $xpdo_meta_map['MlmSystemLog']= array (
       'default' => 0,
     ),
     'class' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'type' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '100',

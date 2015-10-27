@@ -10,6 +10,7 @@ class modMlmSystemClientCreateProcessor extends modUserCreateProcessor
 	public $beforeSaveEvent = 'OnBeforeUserFormSave';
 	public $afterSaveEvent = 'OnUserFormSave';
 
+	/** @var MlmSystem $MlmSystem */
 	public $MlmSystem;
 
 	/** {@inheritDoc} */

@@ -56,5 +56,8 @@ $BUILD_RESOLVERS = array(
 	//'chunks',
 
 	'statuses',
-	'profits'
+	'profits',
+
+	'modes',
+	'types',
 );
