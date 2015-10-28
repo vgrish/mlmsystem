@@ -325,6 +325,12 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                     }
                     return cls.join(' ');
                 };
+            },
+            afterrender: function(grid) {
+                var params = mlmsystem.utils.Hash.get();
+                if (!!params['clients']) {
+                    this.update(grid, Ext.EventObject, {data: {id: params['clients']}});
+                }
             }
         };
     },
@@ -471,6 +477,12 @@ Ext.extend(mlmsystem.grid.Client, MODx.grid.Grid, {
                                 success: {
                                     fn: this.refresh,
                                     scope: this
+                                },
+                                afterrender: function() {
+                                    mlmsystem.utils.Hash.add('clients', r.object['id']);
+                                },
+                                hide: function() {
+                                    mlmsystem.utils.Hash.remove('clients');
                                 }
                             }
                         });

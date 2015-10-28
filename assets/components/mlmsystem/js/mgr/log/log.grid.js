@@ -216,14 +216,14 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
                 width: 20,
                 sortable: true,
                 renderer: function (value, metaData, record) {
-                    return _('mlmsystem_class_'+value);
+                    return mlmsystem.utils.objectLink(_('mlmsystem_class_' + value), record['data']['identifier'], value);
                 }
             },
             name: {
                 width: 20,
                 sortable: true
             },
-            username: {
+            username_action: {
                 width: 50,
                 sortable: true,
                 renderer: function (value, metaData, record) {
@@ -271,6 +271,12 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
             render: {
                 fn: this.dd,
                 scope: this
+            },
+            afterrender: function(grid) {
+                var params = mlmsystem.utils.Hash.get();
+                if (!!params['logs']) {
+                    this.update(grid, Ext.EventObject, {data: {id: params['logs']}});
+                }
             }
         };
     },
@@ -356,7 +362,9 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
             url: mlmsystem.config.connector_url,
             params: {
                 action: 'mgr/log/get',
-                id: id
+                id: id,
+                process: true,
+                aliases: Ext.util.JSON.encode(['ActionUser', 'ActionUserProfile', 'Type'])
             },
             listeners: {
                 success: {
@@ -364,12 +372,17 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
                         var record = r.object;
                         var w = MODx.load({
                             xtype: 'mlmsystem-log-window-view',
-                            title: _('mlmsystem_action_view'),
                             record: record,
                             listeners: {
                                 success: {
                                     fn: this.refresh,
                                     scope: this
+                                },
+                                afterrender: function() {
+                                    mlmsystem.utils.Hash.add('logs', r.object['id']);
+                                },
+                                hide: function() {
+                                    mlmsystem.utils.Hash.remove('logs');
                                 }
                             }
                         });

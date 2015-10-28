@@ -28,15 +28,17 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 	public function prepareQueryBeforeCount(xPDOQuery $c) {
 
 		if (!$this->getProperty('combo')) {
-			$c->leftJoin('modUser', 'modUser', 'modUser.id = MlmSystemLog.user');
-			$c->leftJoin('modUserProfile', 'modUserProfile', 'modUserProfile.internalKey = MlmSystemLog.user');
+			$c->leftJoin('modUser', 'ActionUser', 'ActionUser.id = MlmSystemLog.user');
+			$c->leftJoin('modUserProfile', 'ActionProfile', 'ActionProfile.internalKey = MlmSystemLog.user');
+
 			$c->leftJoin('MlmSystemTypeChanges', 'MlmSystemTypeChanges', 'MlmSystemTypeChanges.id = MlmSystemLog.type');
 
 			$c->select($this->modx->getSelectColumns('MlmSystemLog', 'MlmSystemLog'));
 			$c->select(array(
-				'username' => 'modUser.username',
-				'fullname' => 'modUserProfile.fullname',
-				'email' => 'modUserProfile.email',
+				'username_action' => 'ActionUser.username',
+				'fullname_action' => 'ActionProfile.fullname',
+				'email_action' => 'ActionProfile.email',
+
 				'mode' => 'MlmSystemTypeChanges.mode',
 				'description' => 'MlmSystemTypeChanges.description',
 				'name' => 'MlmSystemTypeChanges.name',

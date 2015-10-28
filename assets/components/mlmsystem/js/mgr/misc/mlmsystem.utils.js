@@ -425,31 +425,6 @@ mlmsystem.utils.handleColor = function(palette, color) {
 };
 
 
-mlmsystem.utils.userLink = function(value, id) {
-    if (!value) {
-        return '';
-    } else if (!id) {
-        return value;
-    }
-    var action = MODx.action ? MODx.action['security/user/update'] : 'security/user/update';
-    var url = 'index.php?a=' + action + '&id=' + id;
-
-    return String.format('<a href="{0}" target="_blank" class="user-link green">{1}</a>', url, value);
-};
-
-
-mlmsystem.utils.Link = function(url, value) {
-    if (!url) {
-        return '';
-    }
-    if (!value) {
-        value = _('mlmsystem_url');
-    }
-
-    return String.format('<a href="{0}" target="_blank" class="easy-link green">{1}</a>', url, value);
-};
-
-
 mlmsystem.utils.renderColor = function(value, props, row) {
     return String.format('<span class="mlmsystem-grid-color" style="background: #{0}"></span>', value);
 };
@@ -465,4 +440,55 @@ mlmsystem.utils.renderReplace = function(value, replace, color) {
         return String.format('<span>{0}</span>', replace);
     }
     return String.format('<span class="mlmsystem-render-color" style="color: #{1}">{0}</span>', replace, color);
+};
+
+
+mlmsystem.utils.Link = function(url, value) {
+    if (!value) {
+        value = _('mlmsystem_url');
+    }
+    if (!url) {
+        return value;
+    }
+    return String.format('<a href="{0}" target="_blank" class="mlmsystem-link green">{1}</a>', url, value);
+};
+
+
+mlmsystem.utils.userLink = function(value, id) {
+    if (!value) {
+        return '';
+    } else if (!id) {
+        return value;
+    }
+    var action = MODx.action ? MODx.action['security/user/update'] : 'security/user/update';
+    var url = 'index.php?a=' + action + '&id=' + id;
+
+    return String.format('<a href="{0}" target="_blank" class="user-link green">{1}</a>', url, value);
+};
+
+
+mlmsystem.utils.objectLink = function (value, id, cls) {
+
+    switch (cls) {
+        case 'MlmSystemClient':
+            cls = 'clients';
+            break;
+        case 'MlmSystemProfit':
+            cls = 'profits';
+            break;
+        case 'MlmSystemLog':
+            cls = 'logs';
+            break;
+        default:
+            cls = '';
+            break;
+    }
+
+    var action = mlmsystem.config.menu_actions[cls];
+    if (!action || !id) {
+        return mlmsystem.utils.Link(null, value);
+    }
+    var url = 'index.php?a=' + action + '&' + cls + '=' + id;
+
+    return mlmsystem.utils.Link(url, value);
 };

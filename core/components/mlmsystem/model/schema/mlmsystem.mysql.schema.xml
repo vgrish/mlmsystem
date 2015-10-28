@@ -188,9 +188,11 @@
 		<index alias="value" name="value" primary="false" unique="false" type="BTREE" >
 			<column key="value" length="" collation="A" null="false" />
 		</index>
-		<aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
-		<aggregate alias="UserProfile" class="modUserProfile" local="user" foreign="internalKey" owner="foreign" cardinality="one" />
-		<aggregate alias="Client" class="MlmSystemClient" local="user" foreign="id" owner="foreign" cardinality="one" />
+
+		<aggregate alias="ActionUser" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
+		<aggregate alias="ActionUserProfile" class="modUserProfile" local="user" foreign="internalKey" owner="foreign" cardinality="one" />
+		<aggregate alias="ActionClient" class="MlmSystemClient" local="user" foreign="id" owner="foreign" cardinality="one" />
+
 		<aggregate alias="Type" class="MlmSystemTypeChanges" local="type" foreign="id" owner="foreign" cardinality="one" />
 	</object>
 

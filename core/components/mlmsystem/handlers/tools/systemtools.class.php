@@ -28,9 +28,14 @@ interface MlmSystemToolsInterface
 	/** @return array Log fields */
 	public function getLogFields();
 
+	/** @return array Client Window Update Tabs */
 	public function getClientWindowUpdateTabs();
 
+	/** @return array Profit Window Update Tabs */
 	public function getProfitWindowUpdateTabs();
+
+	/** @return array Log Window View Tabs */
+	public function getLogWindowViewTabs();
 
 	public function getMenuActions();
 
@@ -61,6 +66,8 @@ interface MlmSystemToolsInterface
 
 	public function formatHashReferrer($id = 0);
 
+	/** @inheritdoc} */
+	public function formatIp(array $array = array());
 
 }
 
@@ -103,17 +110,23 @@ class SystemTools implements MlmSystemToolsInterface
 				$pls['date_updatedon'] = $pls['updatedon'];
 				$pls['hash_referrer'] = $pls['id'];
 				$pls['url_referrer'] = $pls['id'];
-
 				$prefix = 'client_';
 				break;
+			case $instance instanceof MlmSystemProfit:
+				$prefix = 'profit_';
+				break;
 			case $instance instanceof MlmSystemStatus:
-
 				$prefix = 'status_';
+				break;
+			case $instance instanceof MlmSystemTypeChanges:
+				$prefix = 'type_changes_';
+				break;
+			case $instance instanceof MlmSystemModeChanges:
+				$prefix = 'mode_changes_';
 				break;
 			case $instance instanceof MlmSystemEmail:
 				break;
 			case $instance instanceof MlmSystemLog:
-
 				$prefix = 'log_';
 				break;
 			case $instance instanceof modUser:
@@ -126,11 +139,9 @@ class SystemTools implements MlmSystemToolsInterface
 					$pls['password'],
 					$pls['salt']
 				);
-
 				$prefix = 'user_';
 				break;
 			case $instance instanceof modUserProfile:
-
 				$prefix = 'profile_';
 				break;
 			default:
@@ -363,7 +374,7 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getLogFields()
 	{
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('log_grid_fields', null,
-			'id,identifier,object,name,username,target,value,timestamp,ip', true)));
+			'id,identifier,object,name,username,username_action,target,value,timestamp,ip', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
 			'id', 'username', 'identifier', 'class', 'type', 'user', 'target', 'actions', 'type_name' ,'description', 'type_mode'))));
 		return $gridFields;
@@ -376,6 +387,16 @@ class SystemTools implements MlmSystemToolsInterface
 			'client,log,story_balance,story_operation', true)));
 		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
 			'client'))));
+		return $windowTabs;
+	}
+
+	/** @return array Log Window View Tabs */
+	public function getLogWindowViewTabs()
+	{
+		$windowTabs = array_map('trim', explode(',', $this->MlmSystem->getOption('log_window_update_tabs', null,
+			'log,object,user', true)));
+		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
+			'log'))));
 		return $windowTabs;
 	}
 
@@ -734,4 +755,9 @@ class SystemTools implements MlmSystemToolsInterface
 		return $this->dateFormat($date);
 	}
 
+	/** @inheritdoc} */
+	public function formatIp(array $array = array())
+	{
+		return isset($array['ip']) ? $array['ip'] : '0.0.0.0';
+	}
 }

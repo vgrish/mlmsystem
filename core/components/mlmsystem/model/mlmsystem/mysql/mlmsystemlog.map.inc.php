@@ -180,7 +180,7 @@ $xpdo_meta_map['MlmSystemLog']= array (
   ),
   'aggregates' => 
   array (
-    'User' => 
+    'ActionUser' => 
     array (
       'class' => 'modUser',
       'local' => 'user',
@@ -188,7 +188,7 @@ $xpdo_meta_map['MlmSystemLog']= array (
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
-    'UserProfile' => 
+    'ActionUserProfile' => 
     array (
       'class' => 'modUserProfile',
       'local' => 'user',
@@ -196,7 +196,7 @@ $xpdo_meta_map['MlmSystemLog']= array (
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
-    'Client' => 
+    'ActionClient' => 
     array (
       'class' => 'MlmSystemClient',
       'local' => 'user',

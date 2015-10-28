@@ -43,6 +43,7 @@ $_lang['mlmsystem_header_target'] = '<i class="fa fa-dot-circle-o"></i>';
 $_lang['mlmsystem_header_value'] = '<i class="fa fa-info"></i>';
 $_lang['mlmsystem_header_timestamp'] = '<i class="fa fa-calendar"></i>';
 $_lang['mlmsystem_header_object'] = '<i class="fa fa-cube"></i>';
+$_lang['mlmsystem_header_username_action'] = '<i class="fa fa-user"></i>';
 
 
 /* tooltip */
@@ -87,7 +88,7 @@ $_lang['mlmsystem_tooltip_target'] = 'Цель';
 $_lang['mlmsystem_tooltip_value'] = 'Значение';
 $_lang['mlmsystem_tooltip_timestamp'] = 'Метка';
 $_lang['mlmsystem_tooltip_object'] = 'Объект';
-
+$_lang['mlmsystem_tooltip_username_action'] = 'Действующий пользователь';
 
 /* fields */
 $_lang['mlmsystem_no'] = 'Нет';
@@ -160,6 +161,7 @@ $_lang['mlmsystem_profit_parent'] = 'Начисления родителям';
 $_lang['mlmsystem_profit_children'] = 'Начисления детям';
 $_lang['mlmsystem_group_in'] = 'Включает';
 $_lang['mlmsystem_group_out'] = 'Исключает';
+$_lang['mlmsystem_username_action'] = 'Действующий пользователь';
 
 
 /* action */
@@ -183,6 +185,7 @@ $_lang['mlmsystem_action_balance_take'] = 'Списать';
 $_lang['mlmsystem_action_balance_put'] = 'Пополнить';
 
 
+
 /* class object */
 $_lang['mlmsystem_class_MlmSystemClient'] = 'Клиент';
 $_lang['mlmsystem_class_MlmSystemStatus'] = 'Статус';
@@ -193,6 +196,8 @@ $_lang['mlmsystem_class_MlmSystemProfit'] = 'Начисление';
 /* tab */
 $_lang['mlmsystem_tab_client'] = 'Клиент';
 $_lang['mlmsystem_tab_log'] = 'История';
+$_lang['mlmsystem_tab_object'] = 'Объект';
+$_lang['mlmsystem_tab_user'] = 'Пользователь';
 $_lang['mlmsystem_tab_operation'] = 'Операции';
 $_lang['mlmsystem_tab_profit'] = 'Начисления';
 $_lang['mlmsystem_tab_user_group'] = 'Группа пользователей';

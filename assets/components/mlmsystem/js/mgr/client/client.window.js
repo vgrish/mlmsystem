@@ -1,4 +1,4 @@
-mlmsystem.window.CreateUpdate = function (config) {
+mlmsystem.window.ClientUpdate = function (config) {
     config = config || {};
     Ext.applyIf(config, {
         title: _('create'),
@@ -10,13 +10,13 @@ mlmsystem.window.CreateUpdate = function (config) {
         keys: this.getKeys(config),
         buttons: this.getButtons(config)
     });
-    mlmsystem.window.CreateUpdate.superclass.constructor.call(this, config);
+    mlmsystem.window.ClientUpdate.superclass.constructor.call(this, config);
 
     if (!config.update) {
         config.update = false;
     }
 };
-Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
+Ext.extend(mlmsystem.window.ClientUpdate, MODx.Window, {
 
     getKeys: function (config) {
         return [{
@@ -204,7 +204,7 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
     }
 
 });
-Ext.reg('mlmsystem-client-window-update', mlmsystem.window.CreateUpdate);
+Ext.reg('mlmsystem-client-window-update', mlmsystem.window.ClientUpdate);
 
 /* ------------------------------------------------------- */
 

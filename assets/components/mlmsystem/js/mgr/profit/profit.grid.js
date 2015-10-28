@@ -201,6 +201,12 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
             render: {
                 fn: this.dd,
                 scope: this
+            },
+            afterrender: function(grid) {
+                var params = mlmsystem.utils.Hash.get();
+                if (!!params['profits']) {
+                    this.update(grid, Ext.EventObject, {data: {id: params['profits']}});
+                }
             }
         };
     },
@@ -338,6 +344,12 @@ Ext.extend(mlmsystem.grid.Profit, MODx.grid.Grid, {
                                 success: {
                                     fn: this.refresh,
                                     scope: this
+                                },
+                                afterrender: function() {
+                                    mlmsystem.utils.Hash.add('profits', r.object['id']);
+                                },
+                                hide: function() {
+                                    mlmsystem.utils.Hash.remove('profits');
                                 }
                             }
                         });

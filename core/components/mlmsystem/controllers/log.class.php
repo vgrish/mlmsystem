@@ -31,15 +31,18 @@ class MlmSystemLogManagerController extends MlmSystemMainController
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.utils.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/misc/mlmsystem.combo.js');
 
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.window.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.grid.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.panel.js');
 
 		$gridFields = $this->MlmSystem->Tools->getLogFields();
+		$windowViewTabs = $this->MlmSystem->Tools->getLogWindowViewTabs();
 
 		$this->addHtml(str_replace('			', '', '
 			<script type="text/javascript">
 				Ext.onReady(function() {
 					mlmsystem.config.log_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
+					mlmsystem.config.log_window_view_tabs = ' . $this->modx->toJSON($windowViewTabs) . ';
 					MODx.load({ xtype: "mlmsystem-page-log"});
 				});
 			</script>'
