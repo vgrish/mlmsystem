@@ -60,17 +60,13 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
                 layout: 'form',
                 items: this.getClient(config)
             },
-            story_client: {
+            log: {
                 layout: 'form',
-                items: this.getClientStory(config)
+                items: this.getClientLog(config)
             },
-            story_balance: {
+            operation: {
                 layout: 'form',
-                items: this.getBalanceStory(config)
-            },
-            story_operation: {
-                layout: 'form',
-                items: this.getOperationStory(config)
+                items: this.getClientOperation(config)
             }
         };
 
@@ -78,7 +74,7 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
             var tab = mlmsystem.config.client_window_update_tabs[i];
             if (add[tab]) {
                 Ext.applyIf(add[tab], {
-                    title: _('mlmsystem_' + tab)
+                    title: _('mlmsystem_tab_' + tab)
                 });
                 tabs.push(add[tab]);
             }
@@ -199,15 +195,11 @@ Ext.extend(mlmsystem.window.CreateUpdate, MODx.Window, {
         }*/];
     },
 
-    getClientStory: function(config) {
+    getClientLog: function(config) {
 
     },
 
-    getBalanceStory: function(config) {
-
-    },
-
-    getOperationStory: function(config) {
+    getClientOperation: function(config) {
 
     }
 

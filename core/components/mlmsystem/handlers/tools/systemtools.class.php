@@ -373,7 +373,7 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getClientWindowUpdateTabs()
 	{
 		$windowTabs = array_map('trim', explode(',', $this->MlmSystem->getOption('client_window_update_tabs', null,
-			'client,story_client,story_balance,story_operation', true)));
+			'client,log,story_balance,story_operation', true)));
 		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
 			'client'))));
 		return $windowTabs;

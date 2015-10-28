@@ -69,7 +69,7 @@ Ext.extend(mlmsystem.window.CreateProfit, MODx.Window, {
             var tab = mlmsystem.config.profit_window_update_tabs[i];
             if (add[tab]) {
                 Ext.applyIf(add[tab], {
-                    title: _('mlmsystem_' + tab)
+                    title: _('mlmsystem_tab_' + tab)
                 });
                 tabs.push(add[tab]);
             }

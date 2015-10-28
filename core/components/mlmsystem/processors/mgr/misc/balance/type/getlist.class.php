@@ -9,11 +9,11 @@ class modMlmSystemClientBalanceTypeGetListProcessor extends modObjectProcessor
 	{
 		$array = array(
 			0 => array(
-				'name' => $this->modx->lexicon('mlmsystem_balance_take'),
+				'name' => $this->modx->lexicon('mlmsystem_action_balance_take'),
 				'value' => 1
 			),
 			1 => array(
-				'name' => $this->modx->lexicon('mlmsystem_balance_put'),
+				'name' => $this->modx->lexicon('mlmsystem_action_balance_put'),
 				'value' => 2
 			),
 		);

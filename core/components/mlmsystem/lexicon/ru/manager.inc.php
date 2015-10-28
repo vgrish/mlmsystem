@@ -1,5 +1,6 @@
 <?php
 
+
 /* header */
 $_lang['mlmsystem_header_id'] = '<i class="fa fa-sort-numeric-desc"></i>';
 $_lang['mlmsystem_header_resource'] = '<i class="fa fa-folder-o"></i>';
@@ -89,7 +90,6 @@ $_lang['mlmsystem_tooltip_object'] = 'Объект';
 
 
 /* fields */
-
 $_lang['mlmsystem_no'] = 'Нет';
 $_lang['mlmsystem_name'] = 'Имя';
 $_lang['mlmsystem_email'] = 'Почта';
@@ -153,23 +153,14 @@ $_lang['mlmsystem_field'] = 'Поле';
 $_lang['mlmsystem_target'] = 'Цель';
 $_lang['mlmsystem_value'] = 'Значение';
 $_lang['mlmsystem_object'] = 'Объект';
-
-
 $_lang['mlmsystem_add_profit'] = 'Начисления доп.';
 $_lang['mlmsystem_order_profit'] = 'Начисления заказа';
 $_lang['mlmsystem_initiator_profit'] = 'Начисления иниц.';
 $_lang['mlmsystem_profit_parent'] = 'Начисления родителям';
 $_lang['mlmsystem_profit_children'] = 'Начисления детям';
+$_lang['mlmsystem_group_in'] = 'Включает';
+$_lang['mlmsystem_group_out'] = 'Исключает';
 
-
-
-$_lang['mlmsystem_story_client'] = 'История';
-$_lang['mlmsystem_story_balance'] = 'Баланс';
-$_lang['mlmsystem_story_operation'] = 'Операции';
-
-$_lang['mlmsystem_user_group'] = 'Группа пользователей';
-$_lang['mlmsystem_resorce_group'] = 'Группа ресурсов';
-$_lang['mlmsystem_product_group'] = 'Группа продуктов';
 
 /* action */
 $_lang['mlmsystem_action_active'] = 'Включить';
@@ -188,27 +179,8 @@ $_lang['mlmsystem_action_active_leader'] = 'Назначить руководи�
 $_lang['mlmsystem_action_inactive_leader'] = 'Снять с руководства';
 $_lang['mlmsystem_action_active_blocked'] = 'Заблокировать';
 $_lang['mlmsystem_action_inactive_blocked'] = 'Разблокировать';
-
-
-//
-$_lang['mlmsystem_combo_select'] = 'Выберите';
-$_lang['mlmsystem_combo_select_group'] = 'Выберите группу';
-
-/* confirm */
-$_lang['mlmsystem_confirm_remove'] = 'Вы уверены, что хотите удалить это?';
-$_lang['mlmsystem_confirm_send'] = 'Вы уверены, что хотите отправить?';
-
-
-$_lang['mlmsystem_balance_take'] = 'Списать';
-$_lang['mlmsystem_balance_put'] = 'Пополнить';
-
-
-$_lang['mlmsystem_target_balance'] = 'Баланс';
-$_lang['mlmsystem_target_put'] = 'Пополнение';
-$_lang['mlmsystem_target_take'] = 'Списание';
-
-$_lang['mlmsystem_group_in'] = 'Включает';
-$_lang['mlmsystem_group_out'] = 'Исключает';
+$_lang['mlmsystem_action_balance_take'] = 'Списать';
+$_lang['mlmsystem_action_balance_put'] = 'Пополнить';
 
 
 /* class object */
@@ -216,3 +188,33 @@ $_lang['mlmsystem_class_MlmSystemClient'] = 'Клиент';
 $_lang['mlmsystem_class_MlmSystemStatus'] = 'Статус';
 $_lang['mlmsystem_class_MlmSystemLog'] = 'Лог';
 $_lang['mlmsystem_class_MlmSystemProfit'] = 'Начисление';
+
+
+/* tab */
+$_lang['mlmsystem_tab_client'] = 'Клиент';
+$_lang['mlmsystem_tab_log'] = 'История';
+$_lang['mlmsystem_tab_operation'] = 'Операции';
+$_lang['mlmsystem_tab_profit'] = 'Начисления';
+$_lang['mlmsystem_tab_user_group'] = 'Группа пользователей';
+$_lang['mlmsystem_tab_resorce_group'] = 'Группа ресурсов';
+$_lang['mlmsystem_tab_product_group'] = 'Группа продуктов';
+
+
+/* confirm */
+$_lang['mlmsystem_confirm_remove'] = 'Вы уверены, что хотите удалить это?';
+$_lang['mlmsystem_confirm_send'] = 'Вы уверены, что хотите отправить?';
+
+
+/* combo */
+$_lang['mlmsystem_combo_select'] = 'Выберите';
+$_lang['mlmsystem_combo_select_group'] = 'Выберите группу';
+
+
+
+
+
+
+
+$_lang['mlmsystem_target_balance'] = 'Баланс';
+$_lang['mlmsystem_target_put'] = 'Пополнение';
+$_lang['mlmsystem_target_take'] = 'Списание';
