@@ -224,7 +224,7 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
                 sortable: true
             },
             username_action: {
-                width: 50,
+                width: 30,
                 sortable: true,
                 renderer: function (value, metaData, record) {
                     return mlmsystem.utils.userLink(value, record['data']['user'])
@@ -364,7 +364,7 @@ Ext.extend(mlmsystem.grid.Log, MODx.grid.Grid, {
                 action: 'mgr/log/get',
                 id: id,
                 process: true,
-                aliases: Ext.util.JSON.encode(['ActionUser', 'ActionUserProfile', 'Type'])
+                aliases: Ext.util.JSON.encode(['ActionUser', 'ActionUserProfile', 'ActionClient', 'Type'])
             },
             listeners: {
                 success: {

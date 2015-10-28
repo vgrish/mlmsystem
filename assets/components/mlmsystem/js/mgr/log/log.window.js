@@ -59,10 +59,6 @@ Ext.extend(mlmsystem.window.logView, MODx.Window, {
                 layout: 'form',
                 items: this.getLog(config)
             },
-            object: {
-                layout: 'form',
-                items: this.getObject(config)
-            },
             user: {
                 layout: 'form',
                 items: this.getUser(config)
@@ -83,18 +79,100 @@ Ext.extend(mlmsystem.window.logView, MODx.Window, {
     },
 
     getLog: function(config) {
+        return [{
+            layout: 'column',
+            defaults: {
+                msgTarget: 'under',
+                border: false
+            },
+            style: 'padding:10px 0px 0px 0px;text-align:center;',
+            items: [{
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    /*name: 'log_class_name',*/
+                    fieldLabel: _('mlmsystem_object'),
+                    anchor: '100%',
+                    html: mlmsystem.utils.objectLink(config.record.log_class_name, config.record.identifier, config.record.log_class)
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    /*name: 'type_changes_name',*/
+                    fieldLabel: config.record.type_changes_name || _('mlmsystem_name'),
+                    anchor: '100%',
+                    html: config.record.type_changes_description
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    name: 'log_target',
+                    fieldLabel: _('mlmsystem_field'),
+                    anchor: '100%',
+                    cls: 'green'
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    name: 'log_value',
+                    fieldLabel: _('mlmsystem_value'),
+                    anchor: '100%',
+                    cls: 'red'
+                }]
+            }]
+        }, {
+            layout: 'column',
+            defaults: {
+                msgTarget: 'under',
+                border: false
+            },
+            style: 'padding:10px 0px 0px 0px;text-align:center;',
+            items: [{
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    anchor: '100%'
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    /*name: 'user_username',*/
+                    fieldLabel: _('mlmsystem_user'),
+                    anchor: '100%',
+                    html: mlmsystem.utils.userLink(config.record.user_username, config.record.user_id)
+                }]
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    name: 'log_timestamp',
+                    fieldLabel: _('mlmsystem_createdon'),
+                    anchor: '100%'
+                }]
 
-    },
-
-    getObject: function(config) {
-
+            }, {
+                columnWidth: .25,
+                layout: 'form',
+                items: [{
+                    xtype: 'displayfield',
+                    anchor: '100%'
+                }]
+            }]
+        }];
     },
 
     getUser: function(config) {
-
-    },
-
-    getClient: function(config) {
         return [{
             layout: 'column',
             defaults: {
@@ -188,24 +266,8 @@ Ext.extend(mlmsystem.window.logView, MODx.Window, {
                     anchor: '100%'
                 }]
             }]
-        }, /*{
-            xtype: 'textfield',
-            fieldLabel: _('mlmsystem_name'),
-            name: 'username',
-            anchor: '99%',
-            allowBlank: true
-        }, {
-            xtype: 'mlmsystem-combo-log',
-            custm: true,
-            clear: true,
-            class: config.class,
-            fieldLabel: _('mlmsystem_parent'),
-            hiddenName: 'parent',
-            anchor: '99%',
-            allowBlank: true
-        }*/];
-    },
-
+        }];
+    }
 
 
 });

@@ -67,7 +67,13 @@ interface MlmSystemToolsInterface
 	public function formatHashReferrer($id = 0);
 
 	/** @inheritdoc} */
+	public function formatTimestamp($date);
+
+	/** @inheritdoc} */
 	public function formatIp(array $array = array());
+
+	/** @inheritdoc} */
+	public function formatClassName($class);
 
 }
 
@@ -127,6 +133,7 @@ class SystemTools implements MlmSystemToolsInterface
 			case $instance instanceof MlmSystemEmail:
 				break;
 			case $instance instanceof MlmSystemLog:
+				$pls['class_name'] = $pls['class'];
 				$prefix = 'log_';
 				break;
 			case $instance instanceof modUser:
@@ -376,7 +383,7 @@ class SystemTools implements MlmSystemToolsInterface
 		$gridFields = array_map('trim', explode(',', $this->MlmSystem->getOption('log_grid_fields', null,
 			'id,identifier,object,name,username,username_action,target,value,timestamp,ip', true)));
 		$gridFields = array_values(array_unique(array_merge($gridFields, array(
-			'id', 'username', 'identifier', 'class', 'type', 'user', 'target', 'actions', 'type_name' ,'description', 'type_mode'))));
+			'id', 'username', 'identifier', 'class', 'type', 'user', 'target', 'actions', 'type_name', 'description', 'type_mode'))));
 		return $gridFields;
 	}
 
@@ -394,7 +401,7 @@ class SystemTools implements MlmSystemToolsInterface
 	public function getLogWindowViewTabs()
 	{
 		$windowTabs = array_map('trim', explode(',', $this->MlmSystem->getOption('log_window_update_tabs', null,
-			'log,object,user', true)));
+			'log,user', true)));
 		$windowTabs = array_values(array_unique(array_merge($windowTabs, array(
 			'log'))));
 		return $windowTabs;
@@ -756,8 +763,21 @@ class SystemTools implements MlmSystemToolsInterface
 	}
 
 	/** @inheritdoc} */
+	public function formatTimestamp($date)
+	{
+		return $this->dateFormat($date);
+	}
+
+	/** @inheritdoc} */
 	public function formatIp(array $array = array())
 	{
 		return isset($array['ip']) ? $array['ip'] : '0.0.0.0';
 	}
+
+	/** @inheritdoc} */
+	public function formatClassName($class)
+	{
+		return $this->MlmSystem->lexicon('class_' . $class);
+	}
+
 }
