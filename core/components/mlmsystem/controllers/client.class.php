@@ -37,22 +37,18 @@ class MlmSystemClientManagerController extends MlmSystemMainController
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/change/type/type.window.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/change/type/type.grid.js');
 
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.window.js');
+		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/log/log.grid.js');
+
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.window.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.grid.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/client/client.panel.js');
 
-		$gridFields = $this->MlmSystem->Tools->getClientFields();
-		$windowUpdateTabs = $this->MlmSystem->Tools->getClientWindowUpdateTabs();
+		$script = 'Ext.onReady(function() {
+			MODx.load({ xtype: "mlmsystem-page-client"});
+		});';
+		$this->addHtml("<script type='text/javascript'>{$script}</script>");
 
-		$this->addHtml(str_replace('			', '', '
-			<script type="text/javascript">
-				Ext.onReady(function() {
-					mlmsystem.config.client_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
-					mlmsystem.config.client_window_update_tabs = ' . $this->modx->toJSON($windowUpdateTabs) . ';
-					MODx.load({ xtype: "mlmsystem-page-client"});
-				});
-			</script>'
-		));
 		$this->modx->invokeEvent('MlmSystemOnManagerCustomCssJs', array('controller' => &$this, 'page' => 'client'));
 	}
 

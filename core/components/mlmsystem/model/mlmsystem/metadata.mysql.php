@@ -26,4 +26,3 @@ $this->map['modUser']['aggregates']['MlmSystemClient'] = array(
     'owner' => 'foreign',
 );
 
- 

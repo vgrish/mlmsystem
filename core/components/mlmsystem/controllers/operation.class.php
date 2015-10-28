@@ -37,16 +37,11 @@ class MlmSystemOperationManagerController extends MlmSystemMainController
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/operation/operation.grid.js');
 		$this->addJavascript($this->MlmSystem->config['jsUrl'] . 'mgr/operation/operation.panel.js');
 
-		$gridFields = $this->MlmSystem->Tools->getOperationFields();
+		$script = 'Ext.onReady(function() {
+			MODx.load({ xtype: "mlmsystem-page-operation"});
+		});';
+		$this->addHtml("<script type='text/javascript'>{$script}</script>");
 
-		$this->addHtml(str_replace('			', '', '
-			<script type="text/javascript">
-				Ext.onReady(function() {
-					mlmsystem.config.operation_grid_fields = ' . $this->modx->toJSON($gridFields) . ';
-					MODx.load({ xtype: "mlmsystem-page-operation"});
-				});
-			</script>'
-		));
 		$this->modx->invokeEvent('MlmSystemOnManagerCustomCssJs', array('controller' => &$this, 'page' => 'operation'));
 	}
 

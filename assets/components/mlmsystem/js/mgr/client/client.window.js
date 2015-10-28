@@ -143,20 +143,20 @@ Ext.extend(mlmsystem.window.ClientUpdate, MODx.Window, {
                 layout: 'form',
                 items: [{
                     xtype: 'displayfield',
-                    /* name: 'parent_user_username',*/
-                    fieldLabel: _('mlmsystem_parent'),
+                    /* name: 'client_url_referrer',*/
+                    fieldLabel: _('mlmsystem_url_referrer'),
                     anchor: '100%',
-                    html: mlmsystem.utils.userLink(config.record.parent_user_username, config.record.parent_user_id)
+                    html: mlmsystem.utils.Link(config.record.client_url_referrer)
                 }]
             }, {
                 columnWidth: .25,
                 layout: 'form',
                 items: [{
                     xtype: 'displayfield',
-                    /* name: 'client_url_referrer',*/
-                    fieldLabel: _('mlmsystem_url_referrer'),
+                    /* name: 'parent_user_username',*/
+                    fieldLabel: _('mlmsystem_parent'),
                     anchor: '100%',
-                    html: mlmsystem.utils.Link(config.record.client_url_referrer)
+                    html: mlmsystem.utils.userLink(config.record.parent_user_username, config.record.parent_user_id)
                 }]
             }, {
                 columnWidth: .25,
@@ -196,7 +196,14 @@ Ext.extend(mlmsystem.window.ClientUpdate, MODx.Window, {
     },
 
     getClientLog: function(config) {
-
+        return [{
+            items: {
+                xtype: 'mlmsystem-grid-log',
+                compact: true,
+                class: config.class,
+                identifier: config.record.id
+            }
+        }];
     },
 
     getClientOperation: function(config) {

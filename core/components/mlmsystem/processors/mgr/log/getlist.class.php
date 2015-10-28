@@ -7,7 +7,7 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 	public $objectType = 'MlmSystemLog';
 	public $classKey = 'MlmSystemLog';
 	public $defaultSortField = 'id';
-	public $defaultSortDirection = 'ASC';
+	public $defaultSortDirection = 'DESC';
 	public $languageTopics = array('default', 'mlmsystem');
 	public $permission = '';
 
@@ -48,6 +48,11 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 		}
 		else {
 
+		}
+
+		$identifier = $this->getProperty('identifier');
+		if ($identifier) {
+			$c->where(array('identifier' => $identifier));
 		}
 
 		$class = $this->getProperty('class');
