@@ -25,6 +25,15 @@ ul.mlmsystem-row-actions .btn {
 	color: #555;
 }
 
+.mlmsystem-formpanel {
+	padding-top: 25px;
+}
+
+.mlmsystem-formpanel .panel-desc {
+	margin-top: 2px;
+	padding: 9px 20px 9px 10px!important;
+}
+
 /* color */
 .red {
 	color: red !important;
@@ -90,6 +99,7 @@ p.desc {
 	max-width: 350px;
 	color: #000;
 }
+
 
 /* grid color */
 span.mlmsystem-grid-color {

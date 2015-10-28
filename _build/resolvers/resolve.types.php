@@ -29,30 +29,6 @@ if ($object->xpdo) {
 
 				/* MlmSystemType */
 				'1' => array(
-					'name' => !$lang ? 'Изменение' : 'Change',
-					'field' => 'parent',
-					'description' => 'Изменение Родителя',
-					'mode' => 3,
-					'front' => 0,
-					'class' => 'MlmSystemClient'
-				),
-				'2' => array(
-					'name' => !$lang ? 'Изменение' : 'Change',
-					'field' => 'status',
-					'description' => 'Изменение Статуса Клиента',
-					'mode' => 3,
-					'front' => 0,
-					'class' => 'MlmSystemClient'
-				),
-				'3' => array(
-					'name' => !$lang ? 'Изменение' : 'Change',
-					'field' => 'leader',
-					'description' => 'Изменение Руководящего Статуса',
-					'mode' => 3,
-					'front' => 0,
-					'class' => 'MlmSystemClient'
-				),
-				'4' => array(
 					'name' => !$lang ? 'Пополнение' : 'Refill',
 					'field' => 'incoming',
 					'description' => 'Пополнение Баланса',
@@ -60,11 +36,79 @@ if ($object->xpdo) {
 					'front' => 0,
 					'class' => 'MlmSystemClient'
 				),
-				'5' => array(
+				'2' => array(
+					'name' => !$lang ? 'Пополнение' : 'Refill',
+					'field' => 'incoming',
+					'description' => 'Пополнение Администратором',
+					'mode' => 2,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+
+
+				'8' => array(
+					'name' => !$lang ? 'Начисление' : 'Profit',
+					'field' => 'incoming',
+					'description' => 'Комиммионное начисление',
+					'mode' => 2,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+				'9' => array(
+					'name' => !$lang ? 'Начисление' : 'Add Profit',
+					'field' => 'incoming',
+					'description' => 'Дополнительное начисление',
+					'mode' => 2,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+				'10' => array(
+					'name' => !$lang ? 'Начисление' : 'Add Profit',
+					'field' => 'incoming',
+					'description' => 'Процентное начисление',
+					'mode' => 2,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+
+				'11' => array(
 					'name' => !$lang ? 'Списание' : 'Withdrawal',
 					'field' => 'outcoming',
 					'description' => 'Списание Баланса',
 					'mode' => 1,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+				'12' => array(
+					'name' => !$lang ? 'Списание' : 'Withdrawal',
+					'field' => 'outcoming',
+					'description' => 'Списание Администратором',
+					'mode' => 1,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+
+				'21' => array(
+					'name' => !$lang ? 'Изменение' : 'Change',
+					'field' => 'parent',
+					'description' => 'Изменение Родителя',
+					'mode' => 3,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+				'22' => array(
+					'name' => !$lang ? 'Изменение' : 'Change',
+					'field' => 'status',
+					'description' => 'Изменение Статуса Клиента',
+					'mode' => 3,
+					'front' => 0,
+					'class' => 'MlmSystemClient'
+				),
+				'23' => array(
+					'name' => !$lang ? 'Изменение' : 'Change',
+					'field' => 'leader',
+					'description' => 'Изменение Руководящего Статуса',
+					'mode' => 3,
 					'front' => 0,
 					'class' => 'MlmSystemClient'
 				),

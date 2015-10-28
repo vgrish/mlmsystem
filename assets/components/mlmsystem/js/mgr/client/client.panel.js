@@ -4,7 +4,7 @@ mlmsystem.page.Client = function(config) {
 		components: [{
 			xtype: 'mlmsystem-panel-client',
 			renderTo: 'mlmsystem-panel-client-div',
-			baseCls: 'mlmsystem-formpanel'
+			cls: 'mlmsystem-formpanel'
 		}]
 	});
 	mlmsystem.page.Client.superclass.constructor.call(this, config);
@@ -27,13 +27,13 @@ mlmsystem.panel.Client = function(config) {
 		 getState:function() {return {activeTab:this.items.indexOf(this.getActiveTab())};},
 		 */
 		hideMode: 'offclient',
-		items: [{
-			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_clients') + '</h2>',
+		items: [/*{
+			html: '',//'<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_clients') + '</h2>',
 			cls: '',
 			style: {
-				margin: '15px 0'
+				margin: '10px 0'
 			}
-		}, {
+		}, */{
 			xtype: 'modx-tabs',
 			defaults: {
 				border: false,

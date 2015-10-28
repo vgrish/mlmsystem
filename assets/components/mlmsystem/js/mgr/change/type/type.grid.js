@@ -127,6 +127,22 @@ Ext.extend(mlmsystem.grid.TypeСhange, MODx.grid.Grid, {
                 scope: this
             }]
         });
+        tbar.push('->');
+        tbar.push({
+            xtype: 'mlmsystem-combo-mode-change',
+            width: 210,
+            custm: true,
+            clear: true,
+            addall: true,
+            value: 0,
+            class: '',
+            listeners: {
+                select: {
+                    fn: this._filterByCombo,
+                    scope: this
+                }
+            }
+        });
 
         return tbar;
     },

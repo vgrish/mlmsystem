@@ -4,7 +4,7 @@ mlmsystem.page.Operation = function(config) {
 		components: [{
 			xtype: 'mlmsystem-panel-operation',
 			renderTo: 'mlmsystem-panel-operation-div',
-			baseCls: 'mlmsystem-formpanel'
+			cls: 'mlmsystem-formpanel'
 		}]
 	});
 	mlmsystem.page.Operation.superclass.constructor.call(this, config);

@@ -4,7 +4,7 @@ mlmsystem.page.Log = function(config) {
 		components: [{
 			xtype: 'mlmsystem-panel-log',
 			renderTo: 'mlmsystem-panel-log-div',
-			baseCls: 'mlmsystem-formpanel'
+			cls: 'mlmsystem-formpanel'
 		}]
 	});
 	mlmsystem.page.Log.superclass.constructor.call(this, config);
@@ -27,13 +27,13 @@ mlmsystem.panel.Log = function(config) {
 		 getState:function() {return {activeTab:this.items.indexOf(this.getActiveTab())};},
 		 */
 		hideMode: 'offclient',
-		items: [{
+		items: [/*{
 			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_logs') + '</h2>',
 			cls: '',
 			style: {
 				margin: '15px 0'
 			}
-		}, {
+		},*/ {
 			xtype: 'modx-tabs',
 			defaults: {
 				border: false,

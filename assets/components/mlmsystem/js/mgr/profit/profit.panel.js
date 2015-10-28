@@ -4,7 +4,7 @@ mlmsystem.page.Profit = function(config) {
 		components: [{
 			xtype: 'mlmsystem-panel-profit',
 			renderTo: 'mlmsystem-panel-profit-div',
-			baseCls: 'mlmsystem-formpanel'
+			cls: 'mlmsystem-formpanel'
 		}]
 	});
 	mlmsystem.page.Profit.superclass.constructor.call(this, config);
@@ -27,13 +27,13 @@ mlmsystem.panel.Profit = function(config) {
 		 getState:function() {return {activeTab:this.items.indexOf(this.getActiveTab())};},
 		 */
 		hideMode: 'offclient',
-		items: [{
+		items: [/*{
 			html: '<h2>' + _('mlmsystem') + ' :: ' + _('mlmsystem_profits') + '</h2>',
 			cls: '',
 			style: {
 				margin: '15px 0'
 			}
-		}, {
+		}, */{
 			xtype: 'modx-tabs',
 			defaults: {
 				border: false,
