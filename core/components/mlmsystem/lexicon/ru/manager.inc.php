@@ -170,6 +170,7 @@ $_lang['mlmsystem_action_inactive'] = 'Выключить';
 $_lang['mlmsystem_action_remove'] = 'Удалить';
 $_lang['mlmsystem_action_create'] = 'Создать';
 $_lang['mlmsystem_action_update'] = 'Обновить';
+$_lang['mlmsystem_action_view'] = 'Просмотреть';
 $_lang['mlmsystem_action_create_group'] = 'Создать группу';
 $_lang['mlmsystem_action_update_group'] = 'Обновить группу';
 $_lang['mlmsystem_action_edit'] = 'Редактировать';

@@ -111,7 +111,7 @@ class modMlmSystemLogGetListProcessor extends modObjectGetListProcessor {
 		$array['actions'][] = array(
 			'cls' => '',
 			'icon' => "$icon $icon-eye green",
-			'title' => $this->modx->lexicon('mlmsystem_action_update'),
+			'title' => $this->modx->lexicon('mlmsystem_action_view'),
 			'action' => 'update',
 			'button' => true,
 			'menu' => true,

@@ -169,6 +169,9 @@ Ext.extend(mlmsystem.window.logView, MODx.Window, {
                     anchor: '100%'
                 }]
             }]
+        }, {
+            xtype: 'spacer',
+            style: 'width:1px;height:10px;'
         }];
     },
 

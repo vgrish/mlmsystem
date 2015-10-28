@@ -177,7 +177,10 @@ Ext.extend(mlmsystem.window.ClientUpdate, MODx.Window, {
                     anchor: '100%'
                 }]
             }]
-        }, /*{
+        }, {
+            xtype: 'spacer',
+            style: 'width:1px;height:10px;'
+        } /*{
             xtype: 'textfield',
             fieldLabel: _('mlmsystem_name'),
             name: 'username',
